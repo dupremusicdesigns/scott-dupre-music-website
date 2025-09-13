@@ -11,7 +11,7 @@ const theme: ExtendableTheme = {
             600: { value: '#2563eb' },
             700: { value: '#1d4ed8' },
             900: { value: '#1e3a8a' },
-          },
+          },  
           gray: {
             50: { value: '#f9fafb' },
             100: { value: '#f3f4f6' },
