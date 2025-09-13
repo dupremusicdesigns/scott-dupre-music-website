@@ -12,7 +12,7 @@ import './globals.css';
 // });
 
 export const metadata: Metadata = {
-  title: "Scott Dupre Music Designs",
+  title: "Scott Dupre | Arranger, Composer, Orchestrator",
   description: "",
 };
 
