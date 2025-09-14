@@ -1,7 +1,9 @@
 const MarchingBandPage = () => {
-  return (
-    <div>page</div>
-  )
-}
+    return (
+        <div>
+            page
+        </div>
+    );
+};
 
-export default MarchingBandPage
+export default MarchingBandPage;

@@ -1,7 +1,9 @@
 const OriginalCompositionsPage = () => {
-  return (
-    <div>page</div>
-  )
-}
+    return (
+        <div>
+            page
+        </div>
+    );
+};
 
-export default OriginalCompositionsPage
+export default OriginalCompositionsPage;

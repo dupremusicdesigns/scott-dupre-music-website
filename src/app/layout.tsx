@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata } from 'next';
 import './globals.css';
 
 // const geistSans = Geist({
@@ -12,22 +12,20 @@ import './globals.css';
 // });
 
 export const metadata: Metadata = {
-  title: "Scott Dupre | Arranger, Composer, Orchestrator",
-  description: "",
+    title: 'Scott Dupre | Arranger, Composer, Orchestrator'
+    , description: ''
 };
 
-export default function RootLayout({
-  children,
+export default function RootLayout ( {
+    children
 }: Readonly<{
   children: React.ReactNode;
-}>) {
-  return (
-    <html lang="en">
-      <body 
-        // className={`${geistSans.variable} ${geistMono.variable}`}
-      >
-        {children}
-      </body>
-    </html>
-  );
+}> ) {
+    return (
+        <html lang='en'>
+            <body>
+                { children }
+            </body>
+        </html>
+    );
 }

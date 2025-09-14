@@ -1,7 +1,9 @@
 const BuildYourOwnShowPage = () => {
-  return (
-    <div>page</div>
-  )
-}
+    return (
+        <div>
+            page
+        </div>
+    );
+};
 
-export default BuildYourOwnShowPage
+export default BuildYourOwnShowPage;
