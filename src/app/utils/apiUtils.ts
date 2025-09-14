@@ -45,6 +45,9 @@ export const makeApiCall = async <
         method = 'GET'
         , url
         , body = undefined
+        // AVJ: this is a dummy argument to allow type inference
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        , schema
         , queryParams
         , responseType = 'json'
         , options

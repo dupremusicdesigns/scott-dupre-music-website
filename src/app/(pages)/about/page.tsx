@@ -10,14 +10,10 @@ import {
 import { Markdown } from '@/app/components/Markdown';
 
 const AboutPage = async () => {
-    const data = await makeApiCall<ArticlesResponse>( {
+    const data = await makeApiCall( {
         url: `${ CMS_URL }/articles`
-        // @ts-expect-error - queryParams type needs to be updated in apiUtils
+        , schema: {} as ArticlesResponse
         , queryParams: { populate: '*' }
-        , options: {
-            cache: 'no-store'
-            , next: { revalidate: 0 }
-        }
     } );
 
     console.log( data );
