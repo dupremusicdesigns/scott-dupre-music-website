@@ -1,1 +1,1 @@
-export const CMS_URL = 'https://fearless-frogs-84740f282c.strapiapp.com/api';
+export const CMS_URL = 'https://thoughtful-splendor-6f87cc3087.strapiapp.com/api';
