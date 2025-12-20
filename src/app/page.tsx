@@ -119,6 +119,7 @@ export default function Home () {
                             nativeButton={ false }
                             variant='secondary'
                             size='md'
+                            className={ css( { width: '197px' } ) }
                         >
                             Contact
                         </Button>
@@ -134,6 +135,7 @@ export default function Home () {
                             nativeButton={ false }
                             variant='outline'
                             size='md'
+                            className={ css( { width: '197px' } ) }
                         >
                             Music
                         </Button>
@@ -438,7 +440,12 @@ export default function Home () {
                         nativeButton={ false }
                         variant='outlineDark'
                         size='md'
-                        className={ css( { marginTop: 'xl' } ) }
+                        className={
+                            css( {
+                                marginTop: 'xl'
+                                , width: '197px'
+                            } )
+                        }
                     >
                         Read More
                     </Button>
