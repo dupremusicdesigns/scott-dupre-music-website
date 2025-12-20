@@ -104,6 +104,7 @@ const buttonStyles = cva( {
                 , px: 'xl'
                 , fontSize: 'sm'
                 , minWidth: '200px'
+                , whiteSpace: 'nowrap'
             }
         }
         , rounded: {

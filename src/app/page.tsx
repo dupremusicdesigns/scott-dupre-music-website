@@ -345,7 +345,7 @@ export default function Home () {
                         className={
                             css( {
                                 objectFit: 'cover'
-                                , objectPosition: 'center'
+                                , objectPosition: 'right center'
                             } )
                         }
                     />

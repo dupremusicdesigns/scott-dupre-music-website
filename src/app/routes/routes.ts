@@ -15,7 +15,7 @@ export const navigationRoutes: readonly NavigationRoute[] = [
         , submenu: [
             {
                 label: 'Marching Band'
-                , href: '/original-compositions'
+                , href: '/marching-band'
             }
             , {
                 label: 'Build Your Own Show'

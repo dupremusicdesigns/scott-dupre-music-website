@@ -21,6 +21,7 @@ export const Header = () => {
                     , width: '100%'
                     , height: 'headerHeight'
                     , backgroundColor: 'background.primary'
+                    , zIndex: 100
                 } )
             }
         >
@@ -133,6 +134,7 @@ export const Header = () => {
                                                                 , transform: 'translateX(-50%)'
                                                                 , paddingTop: 'sm'
                                                                 , width: 'dropdownWidth'
+                                                                , zIndex: 200
                                                             } )
                                                         }
                                                     >
