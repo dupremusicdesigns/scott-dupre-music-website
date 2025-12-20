@@ -2,13 +2,13 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { css } from '../../../styled-system/css';
+import { css } from '../../../../styled-system/css';
 import {
     flex
     , hstack
-} from '../../../styled-system/patterns';
-import { Button } from './Button';
-import { navigationRoutes } from '../routes/routes';
+} from '../../../../styled-system/patterns';
+import { Button } from '../Button/Button';
+import { navigationRoutes } from '../../routes/routes';
 
 export const Header = () => {
     const [ musicMenuOpen, setMusicMenuOpen ] = useState( false );
@@ -19,7 +19,7 @@ export const Header = () => {
                 css( {
                     position: 'relative'
                     , width: '100%'
-                    , height: '100px'
+                    , height: 'headerHeight'
                     , backgroundColor: 'background.primary'
                 } )
             }
@@ -62,7 +62,7 @@ export const Header = () => {
                                     fontSize: 'md'
                                     , fontWeight: 'black'
                                     , color: 'text.primary'
-                                    , letterSpacing: '0.02em'
+                                    , letterSpacing: 'tight'
                                 } )
                             }
                         >
@@ -74,7 +74,7 @@ export const Header = () => {
                                     fontSize: 'xs'
                                     , fontWeight: 'semibold'
                                     , color: 'text.primary'
-                                    , letterSpacing: '0.02em'
+                                    , letterSpacing: 'tight'
                                 } )
                             }
                         >
@@ -132,7 +132,7 @@ export const Header = () => {
                                                                 , left: '50%'
                                                                 , transform: 'translateX(-50%)'
                                                                 , paddingTop: 'sm'
-                                                                , width: '280px'
+                                                                , width: 'dropdownWidth'
                                                             } )
                                                         }
                                                     >
@@ -147,7 +147,7 @@ export const Header = () => {
                                                                     , display: 'flex'
                                                                     , flexDirection: 'column'
                                                                     , gap: 'sm'
-                                                                    , boxShadow: '0 4px 16px rgba(0, 0, 0, 0.08)'
+                                                                    , boxShadow: 'dropdown'
                                                                     , animation: 'dropdownFadeIn 0.2s ease-out'
                                                                 } )
                                                             }

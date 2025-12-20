@@ -5,7 +5,7 @@ import { Button as BaseButton } from '@base-ui/react';
 import {
     cva
     , cx
-} from '../../../styled-system/css';
+} from '../../../../styled-system/css';
 
 const buttonStyles = cva( {
     base: {
@@ -13,7 +13,7 @@ const buttonStyles = cva( {
         , alignItems: 'center'
         , justifyContent: 'center'
         , gap: 'sm'
-        , borderRadius: 'md' // 20px per theme
+        , borderRadius: 'md'
         , textTransform: 'uppercase'
         , fontWeight: 'extrabold'
         , lineHeight: 'normal'
@@ -138,5 +138,3 @@ export const Button = ( {
         </BaseButton>
     );
 };
-
-Button.displayName = 'Button';

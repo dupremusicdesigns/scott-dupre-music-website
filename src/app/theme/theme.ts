@@ -102,6 +102,21 @@ const theme: ExtendableTheme = {
                 , normal: { value: 'normal' }
                 , list: { value: '24px' }
             }
+            , letterSpacings: {
+                tight: { value: '0.02em' }
+                , normal: { value: '0' }
+            }
+            , sizes: {
+                headerHeight: { value: '100px' }
+                , dropdownWidth: { value: '280px' }
+            }
+            , shadows: {
+                dropdown: { value: '0 4px 16px rgba(0, 0, 0, 0.08)' }
+            }
+            , durations: {
+                fast: { value: '0.2s' }
+                , normal: { value: '0.3s' }
+            }
         }
     }
 };
