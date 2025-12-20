@@ -27,10 +27,10 @@ export const Header = () => {
             <div
                 className={
                     css( {
-                        maxWidth: '1440px'
-                        , margin: '0 auto'
+                        width: '100%'
                         , height: '100%'
-                        , paddingX: 'lg'
+                        , paddingLeft: '7%'
+                        , paddingRight: '6%'
                         , position: 'relative'
                     } )
                 }
