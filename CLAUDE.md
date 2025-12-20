@@ -1,1 +1,1 @@
-Please do not every put comments unless there is a super good reason to
+Please do not ever put comments unless there is a super good reason to

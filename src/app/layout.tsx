@@ -1,15 +1,12 @@
 import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
 import './globals.css';
+import { Header } from './components/Header';
 
-// const geistSans = Geist({
-//   variable: "--font-geist-sans",
-//   subsets: ["latin"],
-// });
-
-// const geistMono = Geist_Mono({
-//   variable: "--font-geist-mono",
-//   subsets: ["latin"],
-// });
+const inter = Inter( {
+    variable: '--font-inter'
+    , subsets: [ 'latin' ]
+} );
 
 export const metadata: Metadata = {
     title: 'Scott Dupre | Arranger, Composer, Orchestrator'
@@ -23,7 +20,8 @@ export default function RootLayout ( {
 }> ) {
     return (
         <html lang='en'>
-            <body>
+            <body className={ inter.variable }>
+                <Header />
                 { children }
             </body>
         </html>

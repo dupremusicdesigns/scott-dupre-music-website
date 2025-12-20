@@ -95,6 +95,7 @@ const theme: ExtendableTheme = {
                 , semibold: { value: '600' }
                 , bold: { value: '700' }
                 , extrabold: { value: '800' }
+                , black: { value: '900' }
             }
             , lineHeights: {
                 tight: { value: '0.95' }
