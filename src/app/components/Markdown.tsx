@@ -1,7 +1,7 @@
 import ReactMarkdown from 'react-markdown';
 import { css } from '../../../styled-system/css';
 
-interface MarkdownProps {
+type MarkdownProps = {
     content?: string;
 }
 

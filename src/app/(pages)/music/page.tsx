@@ -1,4 +1,4 @@
-const MarchingBandPage = () => {
+const MusicPage = () => {
     return (
         <div>
             page
@@ -6,4 +6,4 @@ const MarchingBandPage = () => {
     );
 };
 
-export default MarchingBandPage;
+export default MusicPage;

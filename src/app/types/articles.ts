@@ -1,4 +1,4 @@
-export interface ImageFormat {
+export type ImageFormat = {
     ext: string;
     url: string;
     hash: string;
@@ -11,7 +11,7 @@ export interface ImageFormat {
     sizeInBytes: number;
 }
 
-export interface CoverImage {
+export type CoverImage = {
     id: number;
     documentId: string;
     name: string;
@@ -38,7 +38,7 @@ export interface CoverImage {
     publishedAt: string;
 }
 
-export interface Author {
+export type Author = {
     id: number;
     documentId: string;
     name: string;
@@ -48,7 +48,7 @@ export interface Author {
     publishedAt: string;
 }
 
-export interface Category {
+export type Category = {
     id: number;
     documentId: string;
     name: string;
@@ -59,14 +59,14 @@ export interface Category {
     publishedAt: string;
 }
 
-export interface ContentBlock {
+export type ContentBlock = {
     __component: string;
     id: number;
     title?: string;
     body?: string;
 }
 
-export interface Article {
+export type Article = {
     id: number;
     documentId: string;
     title: string;
@@ -81,7 +81,7 @@ export interface Article {
     blocks?: ContentBlock[];
 }
 
-export interface ArticlesResponse {
+export type ArticlesResponse = {
     data: Article[];
     meta: {
         pagination: {

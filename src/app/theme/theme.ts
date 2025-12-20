@@ -15,7 +15,6 @@ const theme: ExtendableTheme = {
                 brand: {
                     black: { value: colors.black }
                     , white: { value: colors.white }
-                    , olive: { value: colors.olive }
                 }
                 , gray: {
                     50: { value: colors.gray50 }
@@ -30,18 +29,12 @@ const theme: ExtendableTheme = {
                     , 900: { value: colors.gray900 }
                     , 950: { value: colors.gray950 }
                 }
-                , gradient: {
-                    pink: { value: colors.gradientPink }
-                    , purple: { value: colors.gradientPurple }
-                    , blue: { value: colors.gradientBlue }
-                    , orange: { value: colors.gradientOrange }
-                    , yellow: { value: colors.gradientYellow }
-                }
                 , background: {
                     primary: { value: colors.white }
                     , secondary: { value: colors.gray100 }
                     , dark: { value: colors.dark }
-                    , overlay: { value: 'rgba(21, 20, 20, 0.6)' }
+                    , placeholder: { value: colors.placeholder }
+                    , page: { value: colors.pageBackground }
                 }
                 , text: {
                     primary: { value: colors.black }
@@ -57,10 +50,14 @@ const theme: ExtendableTheme = {
                 , button: {
                     primary: { value: colors.black }
                     , primaryText: { value: colors.white }
+                    , primaryHover: { value: colors.overlayLight }
                     , secondary: { value: colors.white }
                     , secondaryText: { value: colors.black }
-                    , tertiary: { value: colors.olive }
-                    , tertiaryText: { value: colors.white }
+                    , secondaryHover: { value: colors.overlayLight }
+                    , outline: { value: 'transparent' }
+                    , outlineText: { value: colors.white }
+                    , outlineBorder: { value: colors.white }
+                    , outlineHover: { value: colors.overlayMedium }
                 }
             }
             , spacing: {
@@ -74,24 +71,23 @@ const theme: ExtendableTheme = {
             }
             , radii: {
                 none: { value: '0' }
-                , sm: { value: '0.25rem' }
-                , md: { value: '0.5rem' }
-                , lg: { value: '0.75rem' }
-                , xl: { value: '1rem' }
-                , '2xl': { value: '1.5rem' }
+                , sm: { value: '10px' }
+                , md: { value: '20px' }
+                , lg: { value: '100px' }
                 , full: { value: '9999px' }
             }
             , fontSizes: {
-                xs: { value: '0.75rem' }
-                , sm: { value: '0.875rem' }
-                , base: { value: '1rem' }
-                , lg: { value: '1.125rem' }
-                , xl: { value: '1.25rem' }
-                , '2xl': { value: '1.5rem' }
-                , '3xl': { value: '1.875rem' }
-                , '4xl': { value: '2.25rem' }
-                , '5xl': { value: '3rem' }
-                , '6xl': { value: '3.75rem' }
+                xs: { value: '11px' }
+                , sm: { value: '13px' }
+                , base: { value: '14px' }
+                , md: { value: '16px' }
+                , lg: { value: '18px' }
+                , xl: { value: '20px' }
+                , '2xl': { value: '24px' }
+                , '3xl': { value: '36px' }
+                , '4xl': { value: '48px' }
+                , '5xl': { value: '64px' }
+                , '6xl': { value: '82px' }
             }
             , fontWeights: {
                 normal: { value: '400' }
@@ -101,9 +97,9 @@ const theme: ExtendableTheme = {
                 , extrabold: { value: '800' }
             }
             , lineHeights: {
-                tight: { value: '1.25' }
-                , normal: { value: '1.5' }
-                , relaxed: { value: '1.75' }
+                tight: { value: '0.95' }
+                , normal: { value: 'normal' }
+                , list: { value: '24px' }
             }
         }
     }

@@ -1,4 +1,4 @@
-export interface ImageFormat {
+export type ImageFormat = {
     ext: string;
     url: string;
     hash: string;
@@ -11,7 +11,7 @@ export interface ImageFormat {
     sizeInBytes: number;
 }
 
-export interface ShowArtwork {
+export type ShowArtwork = {
     id: number;
     documentId: string;
     name: string;
@@ -38,22 +38,22 @@ export interface ShowArtwork {
     publishedAt: string;
 }
 
-export interface ShowSection {
+export type ShowSection = {
     id: number;
     sectionName: string;
 }
 
-export interface OtherCollaborator {
+export type OtherCollaborator = {
     id: number;
     collaboratorName: string;
 }
 
-export interface AudioPreview {
+export type AudioPreview = {
     id: number;
     trackName: string;
 }
 
-export interface MarchingShow {
+export type MarchingShow = {
     id: number;
     documentId: string;
     showTitle: string;
@@ -67,21 +67,21 @@ export interface MarchingShow {
     showArtwork: ShowArtwork;
 }
 
-export interface PaginationMeta {
+export type PaginationMeta = {
     page: number;
     pageSize: number;
     pageCount: number;
     total: number;
 }
 
-export interface MarchingShowsResponse {
+export type MarchingShowsResponse = {
     data: MarchingShow[];
     meta: {
         pagination: PaginationMeta;
     };
 }
 
-export interface SingleMarchingShowResponse {
+export type SingleMarchingShowResponse = {
     data: MarchingShow;
     meta: Record<string, unknown>;
 }

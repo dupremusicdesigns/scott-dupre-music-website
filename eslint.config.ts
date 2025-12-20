@@ -1,24 +1,23 @@
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
-import { FlatCompat } from '@eslint/eslintrc';
+import { createRequire } from 'module';
 import typescriptEslint from '@typescript-eslint/eslint-plugin';
 import typescriptParser from '@typescript-eslint/parser';
+// @ts-expect-error - no types available
 import importNewlines from 'eslint-plugin-import-newlines';
 import unusedImports from 'eslint-plugin-unused-imports';
+// @ts-expect-error - no types available
 import noAutofix from 'eslint-plugin-no-autofix';
+// @ts-expect-error - no types available
 import newlineDestructuring from 'eslint-plugin-newline-destructuring';
 import importPlugin from 'eslint-plugin-import';
-import react from 'eslint-plugin-react';
+import reactPlugin from 'eslint-plugin-react';
+import js from '@eslint/js';
+import typescriptEslintPlugin from 'typescript-eslint';
+import type { Linter } from 'eslint';
 
-const __filename = fileURLToPath( import.meta.url );
-const __dirname = dirname( __filename );
+const require = createRequire( import.meta.url );
+const nextConfig = require( 'eslint-config-next' );
 
-const compat = new FlatCompat( {
-    baseDirectory: __dirname
-    , recommendedConfig: {}
-} );
-
-const eslintConfig = [
+const eslintConfig: Linter.Config[] = [
     {
         ignores: [
             'node_modules/**'
@@ -30,11 +29,9 @@ const eslintConfig = [
             , 'styled-system/**'
         ]
     }
-    , ...compat.extends( 'next/core-web-vitals' )
-    , ...compat.extends( 'eslint:recommended' )
-    , ...compat.extends( 'plugin:@typescript-eslint/recommended' )
-    , ...compat.extends( 'plugin:react/recommended' )
-    , ...compat.extends( 'plugin:react/jsx-runtime' )
+    , js.configs.recommended
+    , ...nextConfig
+    , ...typescriptEslintPlugin.configs.recommended
     , {
         plugins: {
             '@typescript-eslint': typescriptEslint
@@ -43,7 +40,7 @@ const eslintConfig = [
             , 'no-autofix': noAutofix
             , 'newline-destructuring': newlineDestructuring
             , 'import': importPlugin
-            , 'react': react
+            , 'react': reactPlugin
         }
         , languageOptions: {
             parser: typescriptParser
@@ -59,7 +56,7 @@ const eslintConfig = [
             }
         }
         , rules: {
-            // Indent using 4 spaces and error on mixed tabs/spaces
+        // Indent using 4 spaces and error on mixed tabs/spaces
             'indent': [
                 'error'
                 , 4
@@ -317,6 +314,10 @@ const eslintConfig = [
             , '@typescript-eslint/no-unused-vars': 'warn'
             , '@typescript-eslint/ban-ts-comment': 'warn'
             , '@typescript-eslint/no-empty-function': 'warn'
+            , '@typescript-eslint/consistent-type-definitions': [ 'error', 'type' ]
+            // Prefer arrow functions over regular functions
+            , 'prefer-arrow-callback': 'error'
+            , 'func-style': [ 'error', 'expression' ]
             // Error on unused imports
             , 'no-autofix/unused-imports/no-unused-imports': 'error'
             // Enforce newlines for destructuring
@@ -425,6 +426,11 @@ const eslintConfig = [
         files: [ 'src/app/**/page.tsx', 'src/app/**/layout.tsx', 'src/app/**/loading.tsx', 'src/app/**/error.tsx', 'src/app/**/not-found.tsx' ]
         , rules: {
             'import/no-default-export': 'off'
+        }
+    }, {
+        files: [ 'src/app/api/**/route.ts' ]
+        , rules: {
+            'func-style': 'off'
         }
     }, {
         files: [ '**/*.spec.ts', '**/*.spec.tsx', '**/*.test.ts', '**/*.test.tsx' ]
