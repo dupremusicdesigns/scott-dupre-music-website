@@ -13,9 +13,8 @@ const buttonStyles = cva( {
         , alignItems: 'center'
         , justifyContent: 'center'
         , gap: 'sm'
-        , borderRadius: 'md'
         , textTransform: 'uppercase'
-        , fontWeight: 'extrabold'
+        , fontWeight: 'black'
         , lineHeight: 'normal'
         , cursor: 'pointer'
         , transition: 'all 0.2s'
@@ -36,8 +35,11 @@ const buttonStyles = cva( {
             primary: {
                 backgroundColor: 'button.primary'
                 , color: 'button.primaryText'
+                , border: '2px solid transparent'
                 , _hover: {
                     backgroundColor: 'button.primaryHover'
+                    , borderColor: 'border.dark'
+                    , color: 'text.primary'
                 }
                 , _active: {
                     transform: 'scale(0.98)'
@@ -46,8 +48,11 @@ const buttonStyles = cva( {
             , secondary: {
                 backgroundColor: 'button.secondary'
                 , color: 'button.secondaryText'
+                , border: '2px solid transparent'
                 , _hover: {
-                    backgroundColor: 'button.secondaryHover'
+                    backgroundColor: 'button.outlineHover'
+                    , borderColor: 'border.light'
+                    , color: 'text.inverse'
                 }
                 , _active: {
                     transform: 'scale(0.98)'
@@ -71,7 +76,7 @@ const buttonStyles = cva( {
                 , border: '2px solid'
                 , borderColor: 'border.dark'
                 , _hover: {
-                    backgroundColor: 'rgba(0, 0, 0, 0.05)'
+                    backgroundColor: 'button.primaryHover'
                 }
                 , _active: {
                     transform: 'scale(0.98)'
@@ -82,7 +87,7 @@ const buttonStyles = cva( {
             sm: {
                 height: '44px'
                 , px: 'md'
-                , fontSize: 'base'
+                , fontSize: 'sm'
             }
             , md: {
                 height: '51px'
@@ -94,6 +99,16 @@ const buttonStyles = cva( {
                 , px: 'xl'
                 , fontSize: 'lg'
             }
+            , footer: {
+                height: '58px'
+                , px: 'xl'
+                , fontSize: 'sm'
+                , minWidth: '200px'
+            }
+        }
+        , rounded: {
+            sm: { borderRadius: 'sm' }
+            , md: { borderRadius: 'md' }
         }
         , fullWidth: {
             true: { width: '100%' }
@@ -102,12 +117,14 @@ const buttonStyles = cva( {
     , defaultVariants: {
         variant: 'primary'
         , size: 'md'
+        , rounded: 'md'
     }
 } );
 
 export type ButtonProps = {
     variant?: 'primary' | 'secondary' | 'outline' | 'outlineDark';
-    size?: 'sm' | 'md' | 'lg';
+    size?: 'sm' | 'md' | 'lg' | 'footer';
+    rounded?: 'sm' | 'md';
     fullWidth?: boolean;
     className?: string;
     children?: React.ReactNode;
@@ -116,6 +133,7 @@ export type ButtonProps = {
 export const Button = ( {
     variant
     , size
+    , rounded
     , fullWidth
     , className
     , children
@@ -129,6 +147,7 @@ export const Button = ( {
                 cx( buttonStyles( {
                     variant
                     , size
+                    , rounded
                     , fullWidth
                 } ), className )
             }
