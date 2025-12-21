@@ -208,6 +208,31 @@ export const Footer = () => {
                             Dupremusicdesigns@gmail.com
                         </Link>
                     </div>
+                    <span
+                        className={
+                            css( {
+                                fontSize: '11px'
+                                , color: 'text.inverse'
+                                , opacity: 0.35
+                                , marginTop: 'md'
+                            } )
+                        }
+                    >
+                        © 2025 Website by{ ' ' }
+                        <Link
+                            href='https://alexjohnson.netlify.app'
+                            target='_blank'
+                            rel='noopener noreferrer'
+                            className={
+                                css( {
+                                    textDecoration: 'underline'
+                                    , _hover: { opacity: 0.7 }
+                                } )
+                            }
+                        >
+                            Alex Johnson Web Development
+                        </Link>
+                    </span>
                 </div>
             </div>
         </footer>
