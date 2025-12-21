@@ -1,18 +1,18 @@
-import { CMS_URL } from '../constants/apiContants';
+import {
+    CMS_URL
+    , AUTH_HEADERS
+} from '../constants/apiContants';
 import { makeApiCall } from '../utils/apiUtils';
-import { ServicesResponse, SingleServiceResponse } from '../types';
-
-const authHeaders = {
-    headers: {
-        Authorization: `Bearer ${ process.env.CMS_API_TOKEN }`
-    }
-};
+import {
+    ServicesResponse
+    , SingleServiceResponse
+} from '../types';
 
 export const getServices = async (): Promise<ServicesResponse> => {
     return makeApiCall<ServicesResponse, unknown, Record<string, string>>( {
         url: `${ CMS_URL }/services`
         , queryParams: { populate: '*' }
-        , options: authHeaders
+        , options: AUTH_HEADERS
     } );
 };
 
@@ -22,6 +22,6 @@ export const getServiceByDocumentId = async (
     return makeApiCall<SingleServiceResponse, unknown, Record<string, string>>( {
         url: `${ CMS_URL }/services/${ documentId }`
         , queryParams: { populate: '*' }
-        , options: authHeaders
+        , options: AUTH_HEADERS
     } );
 };
