@@ -1,14 +1,14 @@
 'use client';
 
 import Link from 'next/link';
-import { css } from '../../../../styled-system/css';
+import { css } from '../../../../../styled-system/css';
 import {
     flex
     , hstack
-} from '../../../../styled-system/patterns';
-import { Button } from '../Button/Button';
-import { FacebookIcon } from '../FacebookIcon/FacebookIcon';
-import { InstagramIcon } from '../InstagramIcon/InstagramIcon';
+} from '../../../../../styled-system/patterns';
+import { Button } from '../../Button/Button';
+import { FacebookIcon } from '../../icons/FacebookIcon/FacebookIcon';
+import { InstagramIcon } from '../../icons/InstagramIcon/InstagramIcon';
 
 const footerButtons = [
     {

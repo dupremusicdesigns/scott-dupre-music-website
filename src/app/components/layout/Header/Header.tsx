@@ -2,13 +2,13 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { css } from '../../../../styled-system/css';
+import { css } from '../../../../../styled-system/css';
 import {
     flex
     , hstack
-} from '../../../../styled-system/patterns';
-import { Button } from '../Button/Button';
-import { navigationRoutes } from '../../routes/routes';
+} from '../../../../../styled-system/patterns';
+import { Button } from '../../Button/Button';
+import { navigationRoutes } from '../../../routes/routes';
 
 export const Header = () => {
     const [ musicMenuOpen, setMusicMenuOpen ] = useState( false );
