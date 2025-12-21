@@ -17,9 +17,7 @@ export const getImageBlurURL = async (
 ): Promise<string> => {
     const thumbnailUrl = formats?.thumbnail?.url || formats?.small?.url;
 
-    if ( thumbnailUrl ) {
-        return getBlurDataURL( thumbnailUrl );
-    }
+    if ( thumbnailUrl ) return getBlurDataURL( thumbnailUrl );
 
     return getBlurDataURL( fallbackUrl );
 };
