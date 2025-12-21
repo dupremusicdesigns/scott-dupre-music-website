@@ -48,9 +48,32 @@ export type OtherCollaborator = {
     collaboratorName: string;
 }
 
+export type AudioFile = {
+    id: number;
+    documentId: string;
+    name: string;
+    alternativeText: string | null;
+    caption: string | null;
+    width: null;
+    height: null;
+    formats: null;
+    hash: string;
+    ext: string;
+    mime: string;
+    size: number;
+    url: string;
+    previewUrl: null;
+    provider: string;
+    provider_metadata: null;
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string;
+}
+
 export type AudioPreview = {
     id: number;
     trackName: string;
+    audioFile: AudioFile;
 }
 
 export type MarchingShow = {

@@ -11,7 +11,12 @@ import {
 export const getMarchingShows = async (): Promise<MarchingShowsResponse> => {
     return makeApiCall<MarchingShowsResponse, unknown, Record<string, string>>( {
         url: `${ CMS_URL }/marching-shows`
-        , queryParams: { populate: '*' }
+        , queryParams: {
+            'populate[0]': 'showArtwork'
+            , 'populate[1]': 'showSections'
+            , 'populate[2]': 'otherCollaborators'
+            , 'populate[3]': 'audioPreviews.audioFile'
+        }
         , options: AUTH_HEADERS
     } );
 };
@@ -21,7 +26,12 @@ export const getMarchingShowByDocumentId = async (
 ): Promise<SingleMarchingShowResponse> => {
     return makeApiCall<SingleMarchingShowResponse, unknown, Record<string, string>>( {
         url: `${ CMS_URL }/marching-shows/${ documentId }`
-        , queryParams: { populate: '*' }
+        , queryParams: {
+            'populate[0]': 'showArtwork'
+            , 'populate[1]': 'showSections'
+            , 'populate[2]': 'otherCollaborators'
+            , 'populate[3]': 'audioPreviews.audioFile'
+        }
         , options: AUTH_HEADERS
     } );
 };
