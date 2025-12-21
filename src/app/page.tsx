@@ -1,12 +1,22 @@
-'use client';
-
 import Image from 'next/image';
-import Link from 'next/link';
 import { css } from '../../styled-system/css';
 import { flex } from '../../styled-system/patterns';
-import { Button } from './components/Button/Button';
+import { LinkButton } from './components/LinkButton/LinkButton';
+import { getHome } from './api/home';
+import { getImageBlurURL } from './utils/imageUtils';
 
-export default function Home () {
+export default async function Home () {
+    const { data: home } = await getHome();
+
+    if ( !home ) {
+        throw new Error( 'Failed to fetch home data' );
+    }
+
+    const [ heroBlurURL, bioBlurURL ] = await Promise.all( [
+        getImageBlurURL( home.heroImage.formats, home.heroImage.url )
+        , getImageBlurURL( home.bioImage.formats, home.bioImage.url )
+    ] );
+
     return (
         <main
             className={
@@ -30,10 +40,12 @@ export default function Home () {
                 }
             >
                 <Image
-                    src='/images/hero-bg.jpg'
-                    alt='Marching band on football field'
+                    src={ home.heroImage.url }
+                    alt={ home.heroImage.alternativeText || 'Marching band on football field' }
                     fill
                     priority
+                    placeholder='blur'
+                    blurDataURL={ heroBlurURL }
                     className={
                         css( {
                             objectFit: 'cover'
@@ -107,38 +119,22 @@ export default function Home () {
                             } )
                         }
                     >
-                        <Button
-                            render={
-                                props => (
-                                    <Link
-                                        href='/contact'
-                                        { ...props }
-                                    />
-                                )
-                            }
-                            nativeButton={ false }
+                        <LinkButton
+                            href='/contact'
                             variant='secondary'
                             size='md'
                             className={ css( { width: '197px' } ) }
                         >
                             Contact
-                        </Button>
-                        <Button
-                            render={
-                                props => (
-                                    <Link
-                                        href='/music'
-                                        { ...props }
-                                    />
-                                )
-                            }
-                            nativeButton={ false }
+                        </LinkButton>
+                        <LinkButton
+                            href='/music'
                             variant='outline'
                             size='md'
                             className={ css( { width: '197px' } ) }
                         >
                             Music
-                        </Button>
+                        </LinkButton>
                     </div>
                 </div>
             </section>
@@ -376,9 +372,11 @@ export default function Home () {
                     }
                 >
                     <Image
-                        src='/images/about-scott.jpg'
-                        alt='Scott Dupre'
+                        src={ home.bioImage.url }
+                        alt={ home.bioImage.alternativeText || 'Scott Dupre' }
                         fill
+                        placeholder='blur'
+                        blurDataURL={ bioBlurURL }
                         className={
                             css( {
                                 objectFit: 'cover'
@@ -409,7 +407,7 @@ export default function Home () {
                     >
                         About Scott Dupre
                     </h2>
-                    <div
+                    <p
                         className={
                             css( {
                                 fontSize: 'lg'
@@ -418,26 +416,14 @@ export default function Home () {
                                 , color: 'text.primary'
                                 , marginTop: 'lg'
                                 , maxWidth: '560px'
+                                , whiteSpace: 'pre-line'
                             } )
                         }
                     >
-                        <p>
-                            Scott Dupre is an arranger and composer in the Dallas/Ft. Worth metroplex, writing for both high school marching productions and collegiate halftime shows. Scott is actively involved with over 30 programs across the nation, offering services from original marching band arrangements to education and adjudication. Scott&apos;s marching productions have finished as UIL state finalists, BOA finalists, and BOA regional champions around the nation. Scott brings a wealth of experience to his compositions and arrangements through his involvement with the Bluecoats Drum and Bugle Corps and experience in public school education.
-                        </p>
-                        <p className={ css( { marginTop: 'md' } ) }>
-                            Through Scott&apos;s teaching, judging, and performing experiences, he has developed a skill for writing and arranging music to highlight a specific ensemble&apos;s strengths and skill sets. Scott&apos;s goal in creating Dupre Music Designs is to set up every student for success through effective arranging and composing.
-                        </p>
-                    </div>
-                    <Button
-                        render={
-                            props => (
-                                <Link
-                                    href='/about'
-                                    { ...props }
-                                />
-                            )
-                        }
-                        nativeButton={ false }
+                        { home.bio }
+                    </p>
+                    <LinkButton
+                        href='/about'
                         variant='outlineDark'
                         size='md'
                         className={
@@ -448,7 +434,7 @@ export default function Home () {
                         }
                     >
                         Read More
-                    </Button>
+                    </LinkButton>
                 </div>
             </section>
         </main>
