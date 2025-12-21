@@ -221,6 +221,9 @@ export default async function Home () {
                             <p>
                                 { home.primaryTestimonial?.personPositionTitle }
                             </p>
+                            <p>
+                                { home.primaryTestimonial?.personOrganizationName }
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -238,17 +241,21 @@ export default async function Home () {
                         } )
                     }
                 >
-                    <Image
-                        src='/images/testimonial-photo.jpg'
-                        alt='Taylor Smith'
-                        fill
-                        className={
-                            css( {
-                                objectFit: 'cover'
-                                , objectPosition: 'center'
-                            } )
-                        }
-                    />
+                    {
+                        home.primaryTestimonial?.image && (
+                            <Image
+                                src={ home.primaryTestimonial.image.url }
+                                alt={ home.primaryTestimonial.image.alternativeText || home.primaryTestimonial.personName }
+                                fill
+                                className={
+                                    css( {
+                                        objectFit: 'cover'
+                                        , objectPosition: 'center'
+                                    } )
+                                }
+                            />
+                        )
+                    }
                 </div>
             </section>
 

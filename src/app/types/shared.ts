@@ -43,6 +43,8 @@ export type Testimonial = {
     content: string;
     personName: string;
     personPositionTitle: string | null;
+    personOrganizationName: string | null;
+    image: StrapiImage | null;
 }
 
 export type ActionButton = {
