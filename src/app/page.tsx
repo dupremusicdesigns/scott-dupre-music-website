@@ -198,7 +198,9 @@ export default async function Home () {
                                 } )
                             }
                         >
-                            &ldquo;Working with Scott Dupre makes not only my life easier but also our kids lives. Scott goes above and beyond to make sure that the students have everything they need to be successful and works diligently to make sure that the entire staff has what they need in a timely fashion! From a design team standpoint, Scott does an excellent job of supporting everyone on the team and works towards making sure that the entire program has everything they need!&rdquo;
+                            &ldquo;
+                            { home.primaryTestimonial?.content }
+                            &rdquo;
                         </blockquote>
                         <div
                             className={
@@ -209,17 +211,15 @@ export default async function Home () {
                                     , color: 'text.inverse'
                                     , width: '252px'
                                     , flexShrink: 0
+                                    , whiteSpace: 'pre-line'
                                 } )
                             }
                         >
                             <p className={ css( { fontWeight: 'black' } ) }>
-                                Taylor Smith
+                                { home.primaryTestimonial?.personName }
                             </p>
                             <p>
-                                Director of Bands
-                            </p>
-                            <p>
-                                William B. Travis H.S.
+                                { home.primaryTestimonial?.personPositionTitle }
                             </p>
                         </div>
                     </div>
