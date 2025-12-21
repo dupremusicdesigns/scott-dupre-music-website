@@ -119,22 +119,30 @@ export default async function Home () {
                             } )
                         }
                     >
-                        <LinkButton
-                            href='/contact'
-                            variant='secondary'
-                            size='md'
-                            className={ css( { width: '197px' } ) }
-                        >
-                            Contact
-                        </LinkButton>
-                        <LinkButton
-                            href='/music'
-                            variant='outline'
-                            size='md'
-                            className={ css( { width: '197px' } ) }
-                        >
-                            Music
-                        </LinkButton>
+                        {
+                            home.actionButtonPrimary?.slug && (
+                                <LinkButton
+                                    href={ home.actionButtonPrimary.slug }
+                                    variant='secondary'
+                                    size='md'
+                                    className={ css( { width: '197px' } ) }
+                                >
+                                    { home.actionButtonPrimary.text }
+                                </LinkButton>
+                            )
+                        }
+                        {
+                            home.actionButtonSecondary?.slug && (
+                                <LinkButton
+                                    href={ home.actionButtonSecondary.slug }
+                                    variant='outline'
+                                    size='md'
+                                    className={ css( { width: '197px' } ) }
+                                >
+                                    { home.actionButtonSecondary.text }
+                                </LinkButton>
+                            )
+                        }
                     </div>
                 </div>
             </section>
