@@ -34,6 +34,7 @@ const ContactPage = () => {
         <div>
             <form
                 name='contact'
+                method='POST'
                 onSubmit={ handleSubmit }
             >
                 <input
