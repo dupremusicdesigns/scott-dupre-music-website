@@ -3,8 +3,7 @@ const ContactPage = () => {
         <div>
             <form
                 name='contact'
-                // @ts-expect-error -> netlify requires this
-                netlify
+                data-netlify='true'
             >
                 <p>
                     <label>
