@@ -2,8 +2,8 @@ import Image from 'next/image';
 import { css } from '../../styled-system/css';
 import { flex } from '../../styled-system/patterns';
 import { LinkButton } from './components/LinkButton/LinkButton';
+import { CmsImage } from './components/CmsImage/CmsImage';
 import { getHome } from './api/home';
-import { getImageBlurURL } from './utils/imageUtils';
 
 export default async function Home () {
     const { data: home } = await getHome();
@@ -11,11 +11,6 @@ export default async function Home () {
     if ( !home ) {
         throw new Error( 'Failed to fetch home data' );
     }
-
-    const [ heroBlurURL, bioBlurURL ] = await Promise.all( [
-        getImageBlurURL( home.heroImage.formats, home.heroImage.url )
-        , getImageBlurURL( home.bioImage.formats, home.bioImage.url )
-    ] );
 
     return (
         <main
@@ -39,19 +34,11 @@ export default async function Home () {
                     } )
                 }
             >
-                <Image
-                    src={ home.heroImage.url }
-                    alt={ home.heroImage.alternativeText || 'Marching band on football field' }
-                    fill
+                <CmsImage
+                    image={ home.heroImage }
+                    fallbackAlt='Marching band on football field'
                     priority
-                    placeholder='blur'
-                    blurDataURL={ heroBlurURL }
-                    className={
-                        css( {
-                            objectFit: 'cover'
-                            , objectPosition: 'center top'
-                        } )
-                    }
+                    objectPosition='center top'
                 />
                 <div
                     className={
@@ -249,21 +236,10 @@ export default async function Home () {
                         } )
                     }
                 >
-                    {
-                        home.primaryTestimonial?.image && (
-                            <Image
-                                src={ home.primaryTestimonial.image.url }
-                                alt={ home.primaryTestimonial.image.alternativeText || home.primaryTestimonial.personName }
-                                fill
-                                className={
-                                    css( {
-                                        objectFit: 'cover'
-                                        , objectPosition: 'center'
-                                    } )
-                                }
-                            />
-                        )
-                    }
+                    <CmsImage
+                        image={ home.primaryTestimonial?.image || null }
+                        fallbackAlt={ home.primaryTestimonial?.personName || 'Testimonial' }
+                    />
                 </div>
             </section>
 
@@ -386,18 +362,9 @@ export default async function Home () {
                         } )
                     }
                 >
-                    <Image
-                        src={ home.bioImage.url }
-                        alt={ home.bioImage.alternativeText || 'Scott Dupre' }
-                        fill
-                        placeholder='blur'
-                        blurDataURL={ bioBlurURL }
-                        className={
-                            css( {
-                                objectFit: 'cover'
-                                , objectPosition: 'center'
-                            } )
-                        }
+                    <CmsImage
+                        image={ home.bioImage }
+                        fallbackAlt='Scott Dupre'
                     />
                 </div>
                 <div

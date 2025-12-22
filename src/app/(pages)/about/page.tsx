@@ -1,11 +1,15 @@
-'use client';
-
-import Image from 'next/image';
-import Link from 'next/link';
 import { css } from '../../../../styled-system/css';
-import { Button } from '../../components/Button/Button';
+import { LinkButton } from '../../components/LinkButton/LinkButton';
+import { CmsImage } from '../../components/CmsImage/CmsImage';
+import { getAbout } from '../../api/about';
 
-export default function AboutPage () {
+export default async function AboutPage () {
+    const { data: about } = await getAbout();
+
+    if ( !about ) {
+        throw new Error( 'Failed to fetch about data' );
+    }
+
     return (
         <main
             className={
@@ -49,7 +53,6 @@ export default function AboutPage () {
                         About
                     </h1>
                 </section>
-
                 <section
                     className={
                         css( {
@@ -63,20 +66,12 @@ export default function AboutPage () {
                         } )
                     }
                 >
-                    <Image
-                        src='/images/about-hero.jpg'
-                        alt='Marching band on football field'
-                        fill
+                    <CmsImage
+                        image={ about.heroImage }
+                        fallbackAlt='Marching band on football field'
                         priority
-                        className={
-                            css( {
-                                objectFit: 'cover'
-                                , objectPosition: 'center'
-                            } )
-                        }
                     />
                 </section>
-
                 <section
                     className={
                         css( {
@@ -130,15 +125,11 @@ export default function AboutPage () {
                                     , lineHeight: 'normal'
                                     , color: 'text.primary'
                                     , marginTop: 'lg'
+                                    , whiteSpace: 'pre-line'
                                 } )
                             }
                         >
-                            <p>
-                                Scott Dupre is an accomplished composer and arranger with a distinct focus on high school and collegiate marching bands. His extensive involvement as an adjudicator for marching bands throughout the state of Texas underscores his dedication to music education. Drawing upon his background in music education and experience gained from his involvement with the Bluecoats Drum and Bugle Corps, Scott brings a unique and insightful perspective in creating customized musical arrangements tailored to the unique talents of each group&apos;s performers.
-                            </p>
-                            <p className={ css( { marginTop: 'md' } ) }>
-                                Scott received his Masters of Music Education from Southern Methodist University in 2017, and his bachelor&apos;s degree in music education at the University of Houston in 2012. There he had the privilege of studying composition under the mentorship of Dr. Marcus Maroney and Dr. Robert Smith. Before arranging and composing full time, Scott built a noteworthy career in music education, serving as a band director for over a decade including a tenure as the Associate Director of Bands at both Richland High School and North Ridge Middle School. Additionally, he has been an active educator with Drum Corps International for over a decade, currently serving on the brass staff at the Bluecoats Drum and Bugle Corps since 2015. Prior to 2015, he served on the Santa Clara Vanguard Brass staff for 2 seasons.
-                            </p>
+                            { about.bioTop }
                         </div>
                     </div>
                     <div
@@ -154,20 +145,12 @@ export default function AboutPage () {
                             } )
                         }
                     >
-                        <Image
-                            src='/images/about-family-portrait.jpg'
-                            alt='Scott Dupre with family'
-                            fill
-                            className={
-                                css( {
-                                    objectFit: 'cover'
-                                    , objectPosition: 'center'
-                                } )
-                            }
+                        <CmsImage
+                            image={ about.imageTop }
+                            fallbackAlt='Scott Dupre with family'
                         />
                     </div>
                 </section>
-
                 <section
                     className={
                         css( {
@@ -186,22 +169,16 @@ export default function AboutPage () {
                                 position: 'relative'
                                 , width: '55%'
                                 , aspectRatio: '676/436'
-                                , borderRadius: 'md'
+                                , borderTopRightRadius: 'md'
+                                , borderBottomRightRadius: 'md'
                                 , overflow: 'hidden'
                                 , flexShrink: 0
                             } )
                         }
                     >
-                        <Image
-                            src='/images/about-family-outdoor.jpg'
-                            alt='Scott Dupre family outdoor'
-                            fill
-                            className={
-                                css( {
-                                    objectFit: 'cover'
-                                    , objectPosition: 'center'
-                                } )
-                            }
+                        <CmsImage
+                            image={ about.imageBottom }
+                            fallbackAlt='Scott Dupre family outdoor'
                         />
                     </div>
                     <div
@@ -212,18 +189,13 @@ export default function AboutPage () {
                                 , fontWeight: 'normal'
                                 , lineHeight: 'normal'
                                 , color: 'text.primary'
+                                , whiteSpace: 'pre-line'
                             } )
                         }
                     >
-                        <p>
-                            In 2013, Scott married his college sweetheart, Katie, and together they are the loving parents of two children, Connor and Madelyn. They reside in Fort Worth, TX with their 2 dogs, Case and Lucy. Outside of the world of music composition and instruction, Scott enjoys cycling, running, following college football, and spending time with family and friends.
-                        </p>
-                        <p className={ css( { marginTop: 'md' } ) }>
-                            Scott&apos;s mission with Dupre Music Designs is to draw from his educational experience and leverage his expertise in arranging and composing to ensure that every member of every musical ensemble is positioned for success. By attentively listening to and comprehensively understanding the unique strengths and weaknesses of each musical group, Scott crafts a marching show that lays the foundation for both the individual growth of students and the overall success of the musical program.
-                        </p>
+                        { about.bioBottom }
                     </div>
                 </section>
-
                 <section
                     className={
                         css( {
@@ -235,16 +207,8 @@ export default function AboutPage () {
                         } )
                     }
                 >
-                    <Button
-                        render={
-                            props => (
-                                <Link
-                                    href='/music'
-                                    { ...props }
-                                />
-                            )
-                        }
-                        nativeButton={ false }
+                    <LinkButton
+                        href='/music'
                         variant='outlineDark'
                         size='lg'
                         className={
@@ -255,7 +219,7 @@ export default function AboutPage () {
                         }
                     >
                         LET&apos;S LISTEN TO MUSIC
-                    </Button>
+                    </LinkButton>
                 </section>
             </div>
         </main>

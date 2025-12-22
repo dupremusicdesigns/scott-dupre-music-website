@@ -218,7 +218,11 @@ export const Footer = () => {
                             } )
                         }
                     >
-                        © 2025 Website by{ ' ' }
+                        ©
+                        { new Date().getFullYear() }
+                        { ' ' }
+                        Website by
+                        { ' ' }
                         <Link
                             href='https://alexjohnson.netlify.app'
                             target='_blank'
