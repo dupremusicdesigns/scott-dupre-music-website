@@ -13,6 +13,9 @@ export type Global = {
     siteDescription: string;
     favicon: StrapiImage | null;
     defaultSeo: SEO | null;
+    defaultContactEmail: string | null;
+    facebookLink: string | null;
+    instagramLink: string | null;
 }
 
 export type GlobalResponse = SingleTypeResponse<Global>;

@@ -1,53 +1,25 @@
-'use client';
-
 import Link from 'next/link';
 import { css } from '../../../../../styled-system/css';
 import {
     flex
     , hstack
 } from '../../../../../styled-system/patterns';
-import { Button } from '../../Button/Button';
+import { LinkButton } from '../../LinkButton/LinkButton';
 import { FacebookIcon } from '../../icons/FacebookIcon/FacebookIcon';
 import { InstagramIcon } from '../../icons/InstagramIcon/InstagramIcon';
+import { getGlobal } from '../../../api/global';
 
-const footerButtons = [
-    {
-        href: '/about'
-        , variant: 'outline' as const
-        , children: 'Learn more about Scott Dupre'
+const socialLinkStyles = css( {
+    color: 'text.inverse'
+    , transition: 'opacity 0.2s'
+    , _hover: {
+        opacity: 0.7
     }
-    , {
-        href: '/music'
-        , variant: 'outline' as const
-        , children: (
-            <>
-                <span>
-                    Listen to music:
-                </span>
-                <span>
-                    Previous Commissions
-                </span>
-            </>
-        )
-        , extraStyles: {
-            flexDirection: 'column'
-            , gap: '0'
-            , lineHeight: 'tight'
-        }
-    }
-    , {
-        href: '/build-your-own-show'
-        , variant: 'outline' as const
-        , children: 'Build Your Own Show'
-    }
-    , {
-        href: '/contact'
-        , variant: 'secondary' as const
-        , children: 'Contact'
-    }
-];
+} );
 
-export const Footer = () => {
+export const Footer = async () => {
+    const { data: global } = await getGlobal();
+
     return (
         <footer
             className={
@@ -119,33 +91,54 @@ export const Footer = () => {
                             } )
                         }
                     >
-                        {
-                            footerButtons.map( ( button, index ) => (
-                                <Button
-                                    key={ index }
-                                    render={
-                                        props => (
-                                            <Link
-                                                href={ button.href }
-                                                { ...props }
-                                            />
-                                        )
-                                    }
-                                    nativeButton={ false }
-                                    variant={ button.variant }
-                                    size='footer'
-                                    rounded='sm'
-                                    className={
-                                        css( {
-                                            flex: 1
-                                            , ...( button.extraStyles || {} )
-                                        } )
-                                    }
-                                >
-                                    { button.children }
-                                </Button>
-                            ) )
-                        }
+                        <LinkButton
+                            href='/about'
+                            variant='outline'
+                            size='footer'
+                            rounded='sm'
+                            className={ css( { flex: 1 } ) }
+                        >
+                            Learn more about Scott Dupre
+                        </LinkButton>
+                        <LinkButton
+                            href='/music'
+                            variant='outline'
+                            size='footer'
+                            rounded='sm'
+                            className={
+                                css( {
+                                    flex: 1
+                                    , flexDirection: 'column'
+                                    , gap: '0'
+                                    , lineHeight: 'tight'
+                                } )
+                            }
+                        >
+                            <span>
+                                Listen to music:
+                            </span>
+                            <span>
+                                Previous Commissions
+                            </span>
+                        </LinkButton>
+                        <LinkButton
+                            href='/build-your-own-show'
+                            variant='outline'
+                            size='footer'
+                            rounded='sm'
+                            className={ css( { flex: 1 } ) }
+                        >
+                            Build Your Own Show
+                        </LinkButton>
+                        <LinkButton
+                            href='/contact'
+                            variant='secondary'
+                            size='footer'
+                            rounded='sm'
+                            className={ css( { flex: 1 } ) }
+                        >
+                            Contact
+                        </LinkButton>
                     </div>
                     <div
                         className={
@@ -155,58 +148,54 @@ export const Footer = () => {
                             } )
                         }
                     >
-                        <Link
-                            href='https://facebook.com'
-                            target='_blank'
-                            rel='noopener noreferrer'
-                            className={
-                                css( {
-                                    color: 'text.inverse'
-                                    , transition: 'opacity 0.2s'
-                                    , _hover: {
-                                        opacity: 0.7
+                        {
+                            global?.facebookLink && (
+                                <Link
+                                    href={ global.facebookLink }
+                                    target='_blank'
+                                    rel='noopener noreferrer'
+                                    className={ socialLinkStyles }
+                                    aria-label='Facebook'
+                                >
+                                    <FacebookIcon />
+                                </Link>
+                            )
+                        }
+                        {
+                            global?.instagramLink && (
+                                <Link
+                                    href={ global.instagramLink }
+                                    target='_blank'
+                                    rel='noopener noreferrer'
+                                    className={ socialLinkStyles }
+                                    aria-label='Instagram'
+                                >
+                                    <InstagramIcon />
+                                </Link>
+                            )
+                        }
+                        {
+                            global?.defaultContactEmail && (
+                                <Link
+                                    href={ `mailto:${ global.defaultContactEmail }` }
+                                    className={
+                                        css( {
+                                            fontSize: 'base'
+                                            , fontWeight: 'medium'
+                                            , color: 'text.inverse'
+                                            , textDecoration: 'underline'
+                                            , textTransform: 'uppercase'
+                                            , transition: 'opacity 0.2s'
+                                            , _hover: {
+                                                opacity: 0.7
+                                            }
+                                        } )
                                     }
-                                } )
-                            }
-                            aria-label='Facebook'
-                        >
-                            <FacebookIcon />
-                        </Link>
-                        <Link
-                            href='https://instagram.com'
-                            target='_blank'
-                            rel='noopener noreferrer'
-                            className={
-                                css( {
-                                    color: 'text.inverse'
-                                    , transition: 'opacity 0.2s'
-                                    , _hover: {
-                                        opacity: 0.7
-                                    }
-                                } )
-                            }
-                            aria-label='Instagram'
-                        >
-                            <InstagramIcon />
-                        </Link>
-                        <Link
-                            href='mailto:dupremusicdesigns@gmail.com'
-                            className={
-                                css( {
-                                    fontSize: 'base'
-                                    , fontWeight: 'medium'
-                                    , color: 'text.inverse'
-                                    , textDecoration: 'underline'
-                                    , textTransform: 'uppercase'
-                                    , transition: 'opacity 0.2s'
-                                    , _hover: {
-                                        opacity: 0.7
-                                    }
-                                } )
-                            }
-                        >
-                            Dupremusicdesigns@gmail.com
-                        </Link>
+                                >
+                                    { global.defaultContactEmail }
+                                </Link>
+                            )
+                        }
                     </div>
                     <span
                         className={
