@@ -3,47 +3,13 @@ import { css } from '../../../../styled-system/css';
 import { grid } from '../../../../styled-system/patterns';
 import { LinkButton } from '../../components/LinkButton/LinkButton';
 import { Button } from '../../components/Button/Button';
+import { CmsImage } from '../../components/CmsImage/CmsImage';
+import { getMarchingShows } from '../../api/marchingShows';
+import { StrapiImage } from '../../types';
 
-const mockShows = [
-    {
-        id: 1
-        , name: 'Echoes of Eternity'
-    }
-    , {
-        id: 2
-        , name: 'Rise of the Phoenix'
-    }
-    , {
-        id: 3
-        , name: 'Midnight Symphony'
-    }
-    , {
-        id: 4
-        , name: 'Crimson Tide'
-    }
-    , {
-        id: 5
-        , name: 'Into the Storm'
-    }
-    , {
-        id: 6
-        , name: 'Legacy'
-    }
-    , {
-        id: 7
-        , name: 'The Awakening'
-    }
-    , {
-        id: 8
-        , name: 'Vanguard'
-    }
-    , {
-        id: 9
-        , name: 'Fractured Light'
-    }
-];
+export default async function MarchingBandPage () {
+    const { data: shows } = await getMarchingShows();
 
-const MarchingBandPage = () => {
     return (
         <main
             className={
@@ -111,10 +77,10 @@ const MarchingBandPage = () => {
                 }
             >
                 {
-                    mockShows.map( show => (
+                    shows.map( show => (
                         <Link
-                            key={ show.id }
-                            href={ `/marching-band/${ show.id }` }
+                            key={ show.documentId }
+                            href={ `/marching-band/${ show.documentId }` }
                             className={
                                 css( {
                                     display: 'block'
@@ -130,14 +96,9 @@ const MarchingBandPage = () => {
                                 } )
                             }
                         >
-                            <div
-                                className={
-                                    css( {
-                                        position: 'absolute'
-                                        , inset: 0
-                                        , backgroundColor: 'gray.300'
-                                    } )
-                                }
+                            <CmsImage
+                                image={ show.showArtwork as unknown as StrapiImage }
+                                fallbackAlt={ show.showTitle }
                             />
                             <div
                                 className={
@@ -168,7 +129,7 @@ const MarchingBandPage = () => {
                                     } )
                                 }
                             >
-                                { show.name }
+                                { show.showTitle }
                             </span>
                         </Link>
                     ) )
@@ -199,6 +160,4 @@ const MarchingBandPage = () => {
             </div>
         </main>
     );
-};
-
-export default MarchingBandPage;
+}
