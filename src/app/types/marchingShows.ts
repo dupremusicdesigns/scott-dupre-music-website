@@ -46,6 +46,8 @@ export type ShowSection = {
 export type OtherCollaborator = {
     id: number;
     collaboratorName: string;
+    websiteUrl?: string;
+    role?: string;
 }
 
 export type AudioFile = {
@@ -87,7 +89,9 @@ export type MarchingShow = {
     showSections: ShowSection[];
     otherCollaborators: OtherCollaborator[];
     audioPreviews: AudioPreview[];
-    showArtwork: ShowArtwork;
+    showArtwork: ShowArtwork | null;
+    priorityWeight?: number;
+    isNew?: boolean;
 }
 
 export type PaginationMeta = {

@@ -1,3 +1,8 @@
+import { FALLBACK_GRADIENT_COUNT } from '../constants/uiConstants';
+
+export const getFallbackGradient = ( index: number ) =>
+    `/gradient-${ ( index % FALLBACK_GRADIENT_COUNT ) + 1 }.png`;
+
 export const getBlurDataURL = async ( imageUrl: string ): Promise<string> => {
     const response = await fetch( imageUrl );
     const buffer = await response.arrayBuffer();

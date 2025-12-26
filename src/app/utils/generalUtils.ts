@@ -1,10 +1,22 @@
-/**
- * Checks if the given value is an object and not null or an array.
- *
- * @param {unknown} value - The value to check.
- * @returns {boolean} True if the value is an object, not null, and not an array.
- * @typeParam Record<string, unknown> - Type guard to narrow the type to an object with string keys.
- */
+import { MarchingShow } from '../types';
+
 export const isObject = ( value: unknown ): value is Record<string, unknown> => {
     return typeof value === 'object' && value != null && !Array.isArray( value );
+};
+
+export const sortMarchingShows = ( shows: MarchingShow[] ): MarchingShow[] => {
+    return [ ...shows ].sort( ( a, b ) => {
+        console.log( a.priorityWeight );
+        const aPriority = a.priorityWeight ?? Infinity;
+        const bPriority = b.priorityWeight ?? Infinity;
+
+        if ( aPriority !== bPriority ) return aPriority - bPriority;
+
+        const aIsNew = a.isNew ?? false;
+        const bIsNew = b.isNew ?? false;
+
+        if ( aIsNew !== bIsNew ) return aIsNew ? -1 : 1;
+
+        return a.showTitle.localeCompare( b.showTitle );
+    } );
 };
