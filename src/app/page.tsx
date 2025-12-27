@@ -38,7 +38,15 @@ export default async function Home () {
                     image={ home.heroImage }
                     fallbackAlt='Marching band on football field'
                     priority
-                    objectPosition='center top'
+                    className={
+                        css( {
+                            objectFit: 'cover'
+                            , objectPosition: 'center top'
+                            , '3xl': {
+                                objectPosition: 'center 20%'
+                            }
+                        } )
+                    }
                 />
                 <div
                     className={
