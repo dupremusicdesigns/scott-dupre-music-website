@@ -20,17 +20,19 @@ export const slugify = ( title: string ): string => {
  * Removes a "Part X - " prefix from a given string.
  *
  * This function looks for a pattern starting with "Part" (case-insensitive),
- * optionally followed by a number, and ending with a hyphen and optional whitespace.
+ * optionally followed by numbers (including patterns like "1 & 2" or "1, 2 & 3"),
+ * and ending with a hyphen and optional whitespace.
  *
  * @param name - The original string containing the prefix to be removed.
  * @returns The string with the matching prefix removed, or the original string if no match is found.
  *
  * @example
  * stripPartPrefix("Part 1 - Introduction"); // Returns "Introduction"
+ * stripPartPrefix("Part 1 & 2 - Medley"); // Returns "Medley"
  * stripPartPrefix("part - Conclusion"); // Returns "Conclusion"
  */
 export const stripPartPrefix = ( name: string ): string => {
-    return name.replace( /^Part\s*\d*\s*-\s*/i, '' );
+    return name.replace( /^Part\s*[\d\s,&]*\s*-\s*/i, '' );
 };
 
 export const sortMarchingShows = ( shows: MarchingShow[] ): MarchingShow[] => {

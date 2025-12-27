@@ -46,6 +46,9 @@ export default async function MarchingShowPage ( { params }: PageProps ) {
                         , marginX: 'auto'
                         , paddingY: '3xl'
                         , paddingRight: 'lg'
+                        , '2xl': {
+                            maxWidth: '1600px'
+                        }
                     } )
                 }
             >
@@ -60,14 +63,14 @@ export default async function MarchingShowPage ( { params }: PageProps ) {
                         className={
                             css( {
                                 position: 'relative'
-                                , width: '213px'
+                                , width: '280px'
                                 , height: '608px'
                                 , flexShrink: 0
-                                , marginLeft: '-100px'
+                                , marginLeft: '-80px'
                                 , borderTopRightRadius: '20px'
                                 , borderBottomRightRadius: '20px'
                                 , overflow: 'hidden'
-                                , '2xl': {
+                                , '3xl': {
                                     width: '450px'
                                     , height: 'auto'
                                     , alignSelf: 'stretch'
@@ -104,6 +107,7 @@ export default async function MarchingShowPage ( { params }: PageProps ) {
                         className={
                             css( {
                                 flex: 1
+                                , minWidth: 0
                             } )
                         }
                     >
