@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { Button } from '@base-ui/react';
 import { css } from '../../../../styled-system/css';
 
 type BackButtonProps = {
@@ -8,8 +9,9 @@ type BackButtonProps = {
 }
 
 export const BackButton = ( { href }: BackButtonProps ) => (
-    <Link
-        href={ href }
+    <Button
+        render={ <Link href={ href } /> }
+        nativeButton={ false }
         className={
             css( {
                 display: 'flex'
@@ -18,8 +20,7 @@ export const BackButton = ( { href }: BackButtonProps ) => (
                 , width: '63px'
                 , height: '63px'
                 , borderRadius: 'full'
-                , border: '2px solid'
-                , borderColor: 'brand.black'
+                , backgroundColor: 'white'
                 , transition: 'all 0.2s'
                 , _hover: {
                     backgroundColor: 'brand.black'
@@ -30,19 +31,18 @@ export const BackButton = ( { href }: BackButtonProps ) => (
         aria-label='Go back'
     >
         <svg
-            width='16'
-            height='16'
-            viewBox='0 0 16 16'
+            width='20'
+            height='29'
+            viewBox='0 0 20 29'
             fill='none'
             xmlns='http://www.w3.org/2000/svg'
         >
             <path
-                d='M10 12L6 8L10 4'
+                d='M15.9497 3.5L4.94964 14.5001L15.9497 25.5001'
                 stroke='currentColor'
-                strokeWidth='2'
+                strokeWidth='7'
                 strokeLinecap='round'
-                strokeLinejoin='round'
             />
         </svg>
-    </Link>
+    </Button>
 );

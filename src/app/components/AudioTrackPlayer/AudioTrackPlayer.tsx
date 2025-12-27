@@ -3,9 +3,12 @@
 import {
     useRef
     , useState
+    , useCallback
 } from 'react';
+import { Button } from '@base-ui/react';
 import { css } from '../../../../styled-system/css';
-import { hstack } from '../../../../styled-system/patterns';
+import { useAudio } from '../../context/AudioContext';
+import { useAudioListeners } from '../../hooks/useAudioListeners';
 
 type AudioTrackPlayerProps = {
     partNumber: number;
@@ -21,23 +24,29 @@ export const AudioTrackPlayer = ( {
     const audioRef = useRef<HTMLAudioElement>( null );
     const [ isPlaying, setIsPlaying ] = useState( false );
 
+    const { playAudio } = useAudio();
+
+    const handlePlay = useCallback( () => setIsPlaying( true ), [] );
+    const handlePause = useCallback( () => setIsPlaying( false ), [] );
+
+    useAudioListeners( {
+        audioRef
+        , onPlay: handlePlay
+        , onPause: handlePause
+    } );
+
     const togglePlay = () => {
         if ( !audioRef.current ) return;
 
         if ( isPlaying ) {
             audioRef.current.pause();
         } else {
-            audioRef.current.play();
+            playAudio( audioRef.current );
         }
-        setIsPlaying( !isPlaying );
-    };
-
-    const handleEnded = () => {
-        setIsPlaying( false );
     };
 
     return (
-        <button
+        <Button
             onClick={ togglePlay }
             className={
                 css( {
@@ -45,10 +54,11 @@ export const AudioTrackPlayer = ( {
                     , alignItems: 'center'
                     , gap: 'md'
                     , width: '100%'
-                    , padding: 'md'
+                    , height: '95px'
+                    , paddingX: 'md'
                     , border: '2px solid'
                     , borderColor: 'brand.black'
-                    , borderRadius: 'full'
+                    , borderRadius: '100px'
                     , backgroundColor: 'transparent'
                     , cursor: 'pointer'
                     , transition: 'all 0.2s'
@@ -61,7 +71,6 @@ export const AudioTrackPlayer = ( {
             <audio
                 ref={ audioRef }
                 src={ audioUrl }
-                onEnded={ handleEnded }
             />
             <div
                 className={
@@ -69,100 +78,97 @@ export const AudioTrackPlayer = ( {
                         display: 'flex'
                         , alignItems: 'center'
                         , justifyContent: 'center'
-                        , width: '60px'
-                        , height: '60px'
+                        , width: '63px'
+                        , height: '63px'
+                        , borderRadius: 'full'
+                        , backgroundColor: 'brand.black'
                         , flexShrink: 0
                     } )
                 }
             >
-                <svg
-                    width='60'
-                    height='60'
-                    viewBox='0 0 60 60'
-                    fill='none'
-                    xmlns='http://www.w3.org/2000/svg'
-                >
-                    <circle
-                        cx='30'
-                        cy='30'
-                        r='29'
-                        stroke='black'
-                        strokeWidth='2'
-                    />
-                    {
-                        isPlaying
-                            ? (
-                                <>
-                                    <rect
-                                        x='22'
-                                        y='20'
-                                        width='5'
-                                        height='20'
-                                        fill='black'
-                                    />
-                                    <rect
-                                        x='33'
-                                        y='20'
-                                        width='5'
-                                        height='20'
-                                        fill='black'
-                                    />
-                                </>
-                            )
-                            : (
-                                <path
-                                    d='M24 20L40 30L24 40V20Z'
-                                    fill='black'
+                {
+                    isPlaying
+                        ? (
+                            <svg
+                                width='20'
+                                height='26'
+                                viewBox='0 0 20 26'
+                                fill='none'
+                                xmlns='http://www.w3.org/2000/svg'
+                            >
+                                <rect
+                                    x='0'
+                                    y='0'
+                                    width='6'
+                                    height='26'
+                                    fill='white'
                                 />
-                            )
-                    }
-                </svg>
+                                <rect
+                                    x='14'
+                                    y='0'
+                                    width='6'
+                                    height='26'
+                                    fill='white'
+                                />
+                            </svg>
+                        )
+                        : (
+                            <svg
+                                width='22'
+                                height='26'
+                                viewBox='0 0 22 26'
+                                fill='none'
+                                xmlns='http://www.w3.org/2000/svg'
+                                className={
+                                    css( {
+                                        marginLeft: '4px'
+                                    } )
+                                }
+                            >
+                                <path
+                                    d='M22 13L0 26V0L22 13Z'
+                                    fill='white'
+                                />
+                            </svg>
+                        )
+                }
             </div>
             <div
                 className={
-                    hstack( {
-                        gap: 'lg'
-                        , alignItems: 'center'
+                    css( {
+                        display: 'flex'
+                        , flexDirection: 'column'
+                        , alignItems: 'flex-start'
+                        , textAlign: 'left'
                         , flex: 1
                     } )
                 }
             >
-                <div
+                <span
                     className={
                         css( {
-                            display: 'flex'
-                            , flexDirection: 'column'
-                            , alignItems: 'flex-start'
-                            , textAlign: 'left'
+                            fontSize: 'md'
+                            , fontWeight: 'black'
+                            , color: 'text.primary'
                         } )
                     }
                 >
-                    <span
-                        className={
-                            css( {
-                                fontSize: 'md'
-                                , fontWeight: 'black'
-                                , color: 'text.primary'
-                            } )
-                        }
-                    >
-                        PART
-                        { ' ' }
-                        { partNumber }
-                    </span>
-                    <span
-                        className={
-                            css( {
-                                fontSize: 'md'
-                                , fontWeight: 'medium'
-                                , color: 'text.primary'
-                            } )
-                        }
-                    >
-                        { trackName }
-                    </span>
-                </div>
+                    PART
+                    { ' ' }
+                    { partNumber }
+                </span>
+                <span
+                    className={
+                        css( {
+                            fontSize: 'md'
+                            , fontWeight: 'medium'
+                            , color: 'text.primary'
+                        } )
+                    }
+                >
+                    { trackName }
+                </span>
             </div>
-        </button>
+        </Button>
     );
 };

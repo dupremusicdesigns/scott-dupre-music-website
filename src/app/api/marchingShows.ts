@@ -8,7 +8,7 @@ import {
     , MarchingShowsResponse
     , SingleMarchingShowResponse
 } from '../types';
-import { generateSlug } from '../utils/generalUtils';
+import { slugify } from '../utils/generalUtils';
 
 export const getMarchingShows = async (): Promise<MarchingShowsResponse> => {
     return makeApiCall<MarchingShowsResponse, unknown, Record<string, string>>( {
@@ -42,5 +42,5 @@ export const getMarchingShowBySlug = async (
     slug: string
 ): Promise<MarchingShow | null> => {
     const { data: shows } = await getMarchingShows();
-    return shows.find( show => generateSlug( show.showTitle ) === slug ) || null;
+    return shows.find( show => slugify( show.showTitle ) === slug ) || null;
 };

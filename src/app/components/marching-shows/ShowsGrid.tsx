@@ -9,7 +9,7 @@ import { Button } from '../Button/Button';
 import { MarchingShow } from '../../types';
 import { SHOWS_PER_PAGE } from '../../constants/uiConstants';
 import { getFallbackGradient } from '../../utils/imageUtils';
-import { generateSlug } from '../../utils/generalUtils';
+import { slugify } from '../../utils/generalUtils';
 
 type ShowsGridProps = {
     shows: MarchingShow[];
@@ -44,7 +44,7 @@ export const ShowsGrid = ( { shows }: ShowsGridProps ) => {
                     visibleShows.map( ( show, index ) => (
                         <Link
                             key={ show.documentId }
-                            href={ `/marching-band/${ generateSlug( show.showTitle ) }` }
+                            href={ `/marching-band/${ slugify( show.showTitle ) }` }
                             className={
                                 css( {
                                     display: 'block'
@@ -108,31 +108,33 @@ export const ShowsGrid = ( { shows }: ShowsGridProps ) => {
                 }
             </div>
 
-            { shows.length > SHOWS_PER_PAGE && (
-                <div
-                    className={
-                        css( {
-                            display: 'flex'
-                            , justifyContent: 'center'
-                            , marginTop: '3xl'
-                        } )
-                    }
-                >
-                    <Button
-                        variant='outlineDark'
-                        size='lg'
-                        rounded='md'
-                        onClick={ hasMore ? handleViewMore : handleShowLess }
+            {
+                shows.length > SHOWS_PER_PAGE && (
+                    <div
                         className={
                             css( {
-                                width: '394px'
+                                display: 'flex'
+                                , justifyContent: 'center'
+                                , marginTop: '3xl'
                             } )
                         }
                     >
-                        { hasMore ? 'View More' : 'Show Less' }
-                    </Button>
-                </div>
-            ) }
+                        <Button
+                            variant='outlineDark'
+                            size='lg'
+                            rounded='md'
+                            onClick={ hasMore ? handleViewMore : handleShowLess }
+                            className={
+                                css( {
+                                    width: '394px'
+                                } )
+                            }
+                        >
+                            { hasMore ? 'View More' : 'Show Less' }
+                        </Button>
+                    </div>
+                )
+            }
         </>
     );
 };
