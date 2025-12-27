@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { css } from '../../../../../styled-system/css';
 import {
     flex
@@ -51,36 +52,53 @@ export const Header = () => {
                             css( {
                                 textDecoration: 'none'
                                 , display: 'flex'
-                                , flexDirection: 'column'
-                                , gap: '0'
+                                , flexDirection: 'row'
+                                , alignItems: 'center'
+                                , gap: 'sm'
                                 , lineHeight: 'normal'
                             } )
                         }
                     >
-                        <span
+                        <Image
+                            src='/black-logo.png'
+                            alt='Scott Dupre Logo'
+                            width={ 40 }
+                            height={ 43 }
+                        />
+                        <div
                             className={
                                 css( {
-                                    fontSize: 'md'
-                                    , fontWeight: 'black'
-                                    , color: 'text.primary'
-                                    , letterSpacing: 'tight'
+                                    display: 'flex'
+                                    , flexDirection: 'column'
+                                    , gap: '0'
                                 } )
                             }
                         >
-                            SCOTT DUPRE
-                        </span>
-                        <span
-                            className={
-                                css( {
-                                    fontSize: 'xs'
-                                    , fontWeight: 'semibold'
-                                    , color: 'text.primary'
-                                    , letterSpacing: 'tight'
-                                } )
-                            }
-                        >
-                            ARRANGER & COMPOSER
-                        </span>
+                            <span
+                                className={
+                                    css( {
+                                        fontSize: 'md'
+                                        , fontWeight: 'black'
+                                        , color: 'text.primary'
+                                        , letterSpacing: 'tight'
+                                    } )
+                                }
+                            >
+                                SCOTT DUPRE
+                            </span>
+                            <span
+                                className={
+                                    css( {
+                                        fontSize: 'xs'
+                                        , fontWeight: 'semibold'
+                                        , color: 'text.primary'
+                                        , letterSpacing: 'tight'
+                                    } )
+                                }
+                            >
+                                ARRANGER & COMPOSER
+                            </span>
+                        </div>
                     </Link>
                     <nav
                         className={
