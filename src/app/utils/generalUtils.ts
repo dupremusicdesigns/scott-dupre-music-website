@@ -6,7 +6,6 @@ export const isObject = ( value: unknown ): value is Record<string, unknown> => 
 
 export const sortMarchingShows = ( shows: MarchingShow[] ): MarchingShow[] => {
     return [ ...shows ].sort( ( a, b ) => {
-        console.log( a.priorityWeight );
         const aPriority = a.priorityWeight ?? Infinity;
         const bPriority = b.priorityWeight ?? Infinity;
 

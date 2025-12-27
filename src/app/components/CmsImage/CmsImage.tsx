@@ -9,6 +9,7 @@ type CmsImageProps = {
     priority?: boolean;
     objectPosition?: string;
     className?: string;
+    sizes?: string;
 }
 
 export const CmsImage = async ( {
@@ -17,6 +18,7 @@ export const CmsImage = async ( {
     , priority = false
     , objectPosition = 'center'
     , className
+    , sizes = '100vw'
 }: CmsImageProps ) => {
     if ( !image ) return null;
 
@@ -27,6 +29,7 @@ export const CmsImage = async ( {
             src={ image.url }
             alt={ image.alternativeText || fallbackAlt }
             fill
+            sizes={ sizes }
             priority={ priority }
             placeholder='blur'
             blurDataURL={ blurURL }

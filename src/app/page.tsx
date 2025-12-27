@@ -329,6 +329,7 @@ export default async function Home () {
                         src='/images/testimonial-secondary.jpg'
                         alt='Marching band performance'
                         fill
+                        sizes='(max-width: 1024px) 100vw, 50vw'
                         className={
                             css( {
                                 objectFit: 'cover'

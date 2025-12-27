@@ -63,6 +63,8 @@ export const ShowsGrid = ( { shows }: ShowsGridProps ) => {
                                 src={ show.showArtwork?.url || getFallbackGradient( index ) }
                                 alt={ show.showArtwork?.alternativeText || show.showTitle }
                                 fill
+                                sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+                                priority={ index < 3 }
                                 className={
                                     css( {
                                         objectFit: 'cover'
