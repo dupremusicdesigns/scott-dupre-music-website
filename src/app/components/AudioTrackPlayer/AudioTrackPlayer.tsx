@@ -9,6 +9,8 @@ import { Button } from '@base-ui/react';
 import { css } from '../../../../styled-system/css';
 import { useAudio } from '../../context/AudioContext';
 import { useAudioListeners } from '../../hooks/useAudioListeners';
+import { PlayIcon } from '../icons/PlayIcon/PlayIcon';
+import { PauseIcon } from '../icons/PauseIcon/PauseIcon';
 
 type AudioTrackPlayerProps = {
     partNumber: number;
@@ -89,47 +91,23 @@ export const AudioTrackPlayer = ( {
                 {
                     isPlaying
                         ? (
-                            <svg
-                                width='20'
-                                height='26'
-                                viewBox='0 0 20 26'
-                                fill='none'
-                                xmlns='http://www.w3.org/2000/svg'
-                            >
-                                <rect
-                                    x='0'
-                                    y='0'
-                                    width='6'
-                                    height='26'
-                                    fill='white'
-                                />
-                                <rect
-                                    x='14'
-                                    y='0'
-                                    width='6'
-                                    height='26'
-                                    fill='white'
-                                />
-                            </svg>
-                        )
-                        : (
-                            <svg
-                                width='22'
-                                height='26'
-                                viewBox='0 0 22 26'
-                                fill='none'
-                                xmlns='http://www.w3.org/2000/svg'
+                            <PauseIcon
                                 className={
                                     css( {
-                                        marginLeft: '4px'
+                                        color: 'white'
                                     } )
                                 }
-                            >
-                                <path
-                                    d='M22 13L0 26V0L22 13Z'
-                                    fill='white'
-                                />
-                            </svg>
+                            />
+                        )
+                        : (
+                            <PlayIcon
+                                className={
+                                    css( {
+                                        color: 'white'
+                                        , marginLeft: '4px'
+                                    } )
+                                }
+                            />
                         )
                 }
             </div>

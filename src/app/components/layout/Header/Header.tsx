@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { css } from '../../../../../styled-system/css';
 import {
     flex
@@ -10,6 +9,7 @@ import {
 } from '../../../../../styled-system/patterns';
 import { Button } from '../../Button/Button';
 import { navigationRoutes } from '../../../routes/routes';
+import { LogoIcon } from '../../icons/LogoIcon/LogoIcon';
 
 export const Header = () => {
     const [ musicMenuOpen, setMusicMenuOpen ] = useState( false );
@@ -59,12 +59,7 @@ export const Header = () => {
                             } )
                         }
                     >
-                        <Image
-                            src='/black-logo.png'
-                            alt='Scott Dupre Logo'
-                            width={ 40 }
-                            height={ 43 }
-                        />
+                        <LogoIcon />
                         <div
                             className={
                                 css( {
