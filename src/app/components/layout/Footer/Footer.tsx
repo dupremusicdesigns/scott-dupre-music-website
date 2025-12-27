@@ -26,7 +26,7 @@ export const Footer = async () => {
                 css( {
                     width: '100%'
                     , backgroundColor: 'background.dark'
-                    , paddingY: '3xl'
+                    , paddingY: 'xl'
                 } )
             }
         >

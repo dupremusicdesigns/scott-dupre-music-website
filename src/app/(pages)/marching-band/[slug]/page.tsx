@@ -14,7 +14,6 @@ import { getFallbackGradient } from '../../../utils/imageUtils';
 import { BackButton } from '../../../components/BackButton/BackButton';
 import { AudioTrackList } from '../../../components/AudioTrackPlayer/AudioTrackList';
 import { LinkButton } from '../../../components/LinkButton/LinkButton';
-import { Footer } from '../../../components/layout/Footer/Footer';
 
 type PageProps = {
     params: Promise<{ slug: string }>;
@@ -46,6 +45,7 @@ export default async function MarchingShowPage ( { params }: PageProps ) {
                         , maxWidth: '1440px'
                         , marginX: 'auto'
                         , paddingY: '3xl'
+                        , paddingRight: 'lg'
                     } )
                 }
             >
@@ -67,10 +67,10 @@ export default async function MarchingShowPage ( { params }: PageProps ) {
                                 , borderTopRightRadius: '20px'
                                 , borderBottomRightRadius: '20px'
                                 , overflow: 'hidden'
-                                , lg: {
-                                    width: '350px'
+                                , '2xl': {
+                                    width: '450px'
                                     , height: 'auto'
-                                    , aspectRatio: '1/1'
+                                    , alignSelf: 'stretch'
                                     , marginLeft: 0
                                     , borderRadius: '20px'
                                 }
@@ -221,9 +221,6 @@ export default async function MarchingShowPage ( { params }: PageProps ) {
                                                     } )
                                                 }
                                             >
-                                                { collaborator.role }
-                                                :
-                                                { ' ' }
                                                 { collaborator.collaboratorName }
                                             </p>
                                         ) )
@@ -293,7 +290,9 @@ export default async function MarchingShowPage ( { params }: PageProps ) {
                     css( {
                         width: '100%'
                         , backgroundColor: 'background.dark'
-                        , paddingY: '3xl'
+                        , paddingTop: '55px'
+                        , paddingBottom: '55px'
+                        , marginBottom: '2px'
                     } )
                 }
             >
@@ -313,7 +312,8 @@ export default async function MarchingShowPage ( { params }: PageProps ) {
                                 fontSize: '3xl'
                                 , fontWeight: 'black'
                                 , color: 'text.inverse'
-                                , marginBottom: 'lg'
+                                , lineHeight: 'tight'
+                                , marginBottom: 'md'
                             } )
                         }
                     >
@@ -325,7 +325,7 @@ export default async function MarchingShowPage ( { params }: PageProps ) {
                                 color: 'text.inverse'
                                 , fontSize: 'md'
                                 , fontWeight: 'medium'
-                                , lineHeight: 'relaxed'
+                                , lineHeight: 'list'
                                 , paddingLeft: 'lg'
                                 , listStyleType: 'decimal'
                             } )
@@ -349,8 +349,6 @@ export default async function MarchingShowPage ( { params }: PageProps ) {
                     </ol>
                 </div>
             </section>
-
-            <Footer />
         </>
     );
 }
