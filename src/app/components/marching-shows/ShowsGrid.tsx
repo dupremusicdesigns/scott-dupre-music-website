@@ -9,6 +9,7 @@ import { Button } from '../Button/Button';
 import { MarchingShow } from '../../types';
 import { SHOWS_PER_PAGE } from '../../constants/uiConstants';
 import { getFallbackGradient } from '../../utils/imageUtils';
+import { generateSlug } from '../../utils/generalUtils';
 
 type ShowsGridProps = {
     shows: MarchingShow[];
@@ -43,7 +44,7 @@ export const ShowsGrid = ( { shows }: ShowsGridProps ) => {
                     visibleShows.map( ( show, index ) => (
                         <Link
                             key={ show.documentId }
-                            href={ `/marching-band/${ show.documentId }` }
+                            href={ `/marching-band/${ generateSlug( show.showTitle ) }` }
                             className={
                                 css( {
                                     display: 'block'

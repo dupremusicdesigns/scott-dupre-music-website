@@ -4,9 +4,11 @@ import {
 } from '../constants/apiContants';
 import { makeApiCall } from '../utils/apiUtils';
 import {
-    MarchingShowsResponse
+    MarchingShow
+    , MarchingShowsResponse
     , SingleMarchingShowResponse
 } from '../types';
+import { generateSlug } from '../utils/generalUtils';
 
 export const getMarchingShows = async (): Promise<MarchingShowsResponse> => {
     return makeApiCall<MarchingShowsResponse, unknown, Record<string, string>>( {
@@ -34,4 +36,11 @@ export const getMarchingShowByDocumentId = async (
         }
         , options: AUTH_HEADERS
     } );
+};
+
+export const getMarchingShowBySlug = async (
+    slug: string
+): Promise<MarchingShow | null> => {
+    const { data: shows } = await getMarchingShows();
+    return shows.find( show => generateSlug( show.showTitle ) === slug ) || null;
 };

@@ -4,6 +4,15 @@ export const isObject = ( value: unknown ): value is Record<string, unknown> => 
     return typeof value === 'object' && value != null && !Array.isArray( value );
 };
 
+export const generateSlug = ( title: string ): string => {
+    return title
+        .toLowerCase()
+        .replace( /[^a-z0-9\s-]/g, '' )
+        .replace( /\s+/g, '-' )
+        .replace( /-+/g, '-' )
+        .trim();
+};
+
 export const sortMarchingShows = ( shows: MarchingShow[] ): MarchingShow[] => {
     return [ ...shows ].sort( ( a, b ) => {
         const aPriority = a.priorityWeight ?? Infinity;
