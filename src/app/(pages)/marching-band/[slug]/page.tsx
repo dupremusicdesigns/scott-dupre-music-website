@@ -67,15 +67,15 @@ export default async function MarchingShowPage ( { params }: PageProps ) {
                                 , height: '608px'
                                 , flexShrink: 0
                                 , marginLeft: '-80px'
-                                , borderTopRightRadius: '20px'
-                                , borderBottomRightRadius: '20px'
+                                , borderTopRightRadius: 'md'
+                                , borderBottomRightRadius: 'md'
                                 , overflow: 'hidden'
                                 , '3xl': {
                                     width: '450px'
                                     , height: 'auto'
                                     , alignSelf: 'stretch'
                                     , marginLeft: 0
-                                    , borderRadius: '20px'
+                                    , borderRadius: 'md'
                                 }
                             } )
                         }
@@ -247,7 +247,7 @@ export default async function MarchingShowPage ( { params }: PageProps ) {
                                 css( {
                                     border: '2px solid'
                                     , borderColor: 'brand.black'
-                                    , borderRadius: '20px'
+                                    , borderRadius: 'md'
                                     , padding: 'lg'
                                 } )
                             }
@@ -256,7 +256,7 @@ export default async function MarchingShowPage ( { params }: PageProps ) {
                                 tracks={
                                     ( show.audioPreviews || [] ).map( preview => ( {
                                         id: preview.id
-                                        , trackName: stripPartPrefix( preview.trackName )
+                                        , trackName: stripPartPrefix( preview.trackName || '' )
                                         , audioUrl: preview.audioFile.url
                                     } ) )
                                 }

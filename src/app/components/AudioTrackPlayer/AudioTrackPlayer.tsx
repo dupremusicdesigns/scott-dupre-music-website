@@ -60,7 +60,7 @@ export const AudioTrackPlayer = ( {
                     , paddingX: 'md'
                     , border: '2px solid'
                     , borderColor: 'brand.black'
-                    , borderRadius: '100px'
+                    , borderRadius: 'lg'
                     , backgroundColor: 'transparent'
                     , cursor: 'pointer'
                     , transition: 'all 0.2s'

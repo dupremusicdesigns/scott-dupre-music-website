@@ -102,6 +102,7 @@ const theme: ExtendableTheme = {
             , lineHeights: {
                 tight: { value: '0.95' }
                 , normal: { value: 'normal' }
+                , relaxed: { value: '1.6' }
                 , list: { value: '24px' }
             }
             , letterSpacings: {

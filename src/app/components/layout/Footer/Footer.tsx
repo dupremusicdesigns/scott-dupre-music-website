@@ -200,7 +200,7 @@ export const Footer = async () => {
                     <span
                         className={
                             css( {
-                                fontSize: '11px'
+                                fontSize: 'xs'
                                 , color: 'text.inverse'
                                 , opacity: 0.35
                                 , marginTop: 'md'
