@@ -7,65 +7,64 @@ export const ContactFormSkeleton = () => (
             css( {
                 display: 'flex'
                 , flexDirection: 'column'
-                , gap: 'lg'
-                , padding: 'md'
+                , gap: 'md'
             } )
         }
     >
         <Skeleton
             width='80px'
-            height='16px'
+            height='14px'
         />
         <Skeleton
-            height='45px'
+            height='40px'
             borderRadius='md'
         />
         <Skeleton
             width='140px'
-            height='16px'
+            height='14px'
         />
         <Skeleton
-            height='45px'
+            height='40px'
             borderRadius='md'
         />
         <Skeleton
             width='260px'
-            height='16px'
+            height='14px'
         />
         <Skeleton
-            height='45px'
+            height='40px'
             borderRadius='md'
         />
         <Skeleton
             width='100px'
-            height='16px'
+            height='14px'
         />
         <Skeleton
-            height='45px'
+            height='40px'
             borderRadius='md'
         />
         <Skeleton
             width='120px'
-            height='16px'
+            height='14px'
         />
         <Skeleton
-            height='45px'
+            height='40px'
             borderRadius='md'
         />
         <Skeleton
             width='220px'
-            height='16px'
+            height='14px'
         />
         <Skeleton
-            height='45px'
+            height='40px'
             borderRadius='md'
         />
         <Skeleton
             width='180px'
-            height='16px'
+            height='14px'
         />
         <Skeleton
-            height='120px'
+            height='100px'
             borderRadius='md'
         />
         <div
@@ -73,13 +72,13 @@ export const ContactFormSkeleton = () => (
                 css( {
                     display: 'flex'
                     , justifyContent: 'center'
-                    , marginTop: 'md'
+                    , marginTop: 'sm'
                 } )
             }
         >
             <Skeleton
                 width='180px'
-                height='44px'
+                height='40px'
                 borderRadius='md'
             />
         </div>
