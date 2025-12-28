@@ -121,10 +121,12 @@ const BuildYourOwnShowPage = async () => {
             <section
                 className={
                     css( {
-                        maxWidth: '1440px'
-                        , marginX: 'auto'
-                        , paddingX: '7%'
-                        , marginTop: '3xl'
+                        marginTop: '3xl'
+                        , '3xl': {
+                            maxWidth: '1440px'
+                            , marginX: 'auto'
+                            , paddingX: '7%'
+                        }
                     } )
                 }
             >
@@ -135,6 +137,10 @@ const BuildYourOwnShowPage = async () => {
                             , fontWeight: 'black'
                             , lineHeight: 'tight'
                             , color: 'text.primary'
+                            , paddingX: '7%'
+                            , '3xl': {
+                                paddingX: '0'
+                            }
                         } )
                     }
                 >
@@ -157,9 +163,11 @@ const BuildYourOwnShowPage = async () => {
                                 , border: '2px solid'
                                 , borderColor: 'text.primary'
                                 , borderRadius: 'md'
-                                , borderTopRightRadius: '0'
-                                , borderBottomRightRadius: '0'
                                 , padding: 'xl'
+                                , marginLeft: '7%'
+                                , '3xl': {
+                                    marginLeft: '0'
+                                }
                             } )
                         }
                     >
@@ -169,11 +177,15 @@ const BuildYourOwnShowPage = async () => {
                         className={
                             css( {
                                 position: 'relative'
-                                , flex: '0 0 43%'
+                                , flex: '1'
                                 , minHeight: '800px'
+                                , overflow: 'hidden'
+                                , marginLeft: 'md'
                                 , borderTopLeftRadius: 'md'
                                 , borderBottomLeftRadius: 'md'
-                                , overflow: 'hidden'
+                                , '3xl': {
+                                    borderRadius: 'md'
+                                }
                             } )
                         }
                     >
@@ -198,6 +210,7 @@ const BuildYourOwnShowPage = async () => {
                         backgroundColor: 'background.dark'
                         , marginTop: '3xl'
                         , paddingY: '3xl'
+                        , marginBottom: '2px'
                     } )
                 }
             >
