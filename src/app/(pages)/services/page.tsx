@@ -1,55 +1,13 @@
-'use client';
-
 import { css } from '../../../../styled-system/css';
 import { grid } from '../../../../styled-system/patterns';
-import { ServiceCard } from '../../components/ServiceCard/ServiceCard';
-import { PuzzleIcon } from '../../components/icons/PuzzleIcon/PuzzleIcon';
-import { FolderIcon } from '../../components/icons/FolderIcon/FolderIcon';
-import { WindIcon } from '../../components/icons/WindIcon/WindIcon';
-import { HeadphonesIcon } from '../../components/icons/HeadphonesIcon/HeadphonesIcon';
-import { TrumpetIcon } from '../../components/icons/TrumpetIcon/TrumpetIcon';
-import { PencilIcon } from '../../components/icons/PencilIcon/PencilIcon';
+import { ServiceCard } from '../../components/services/ServiceCard/ServiceCard';
+import { ServicesContactButton } from '../../components/services/ServicesContactButton/ServicesContactButton';
+import { getServices } from '../../api/services';
+import { getServiceIcon } from '../../constants/serviceIcons';
 
-const services = [
-    {
-        title: 'Custom Arrangements'
-        , description: 'A custom music package that is tailored to your program\'s specified strengths.'
-        , icon: <PuzzleIcon />
-        , href: 'mailto:dupremusicdesigns@gmail.com'
-    }
-    , {
-        title: 'Pre-Existing Commissions'
-        , description: 'A previously commissioned marching show that can be customized to your program.'
-        , icon: <FolderIcon />
-        , href: 'mailto:dupremusicdesigns@gmail.com'
-    }
-    , {
-        title: 'Stagger Breathing Scores'
-        , description: 'A custom breathing plan for your band\'s current/upcoming marching show.'
-        , icon: <WindIcon />
-        , href: 'mailto:dupremusicdesigns@gmail.com'
-    }
-    , {
-        title: 'Buzzing Tracks'
-        , description: 'Reference audios of your marching show music with the capability to speed up, slow down, and isolate individual parts.'
-        , icon: <HeadphonesIcon />
-        , href: 'mailto:dupremusicdesigns@gmail.com'
-    }
-    , {
-        title: 'Clinics'
-        , description: 'Click here to schedule a clinic for concert or marching band.'
-        , icon: <TrumpetIcon />
-        , href: 'mailto:dupremusicdesigns@gmail.com'
-    }
-    , {
-        title: 'Orchestrations/Edits'
-        , description: 'A service provided to help orchestrate or edit your current marching music package to better fit your program\'s needs.'
-        , icon: <PencilIcon />
-        , href: 'mailto:dupremusicdesigns@gmail.com'
-    }
-];
+export default async function ServicesPage () {
+    const { data: services } = await getServices();
 
-export default function ServicesPage () {
     return (
         <main
             className={
@@ -112,16 +70,26 @@ export default function ServicesPage () {
                         }
                     >
                         {
-                            services.map( ( service, index ) => (
+                            services.map( service => (
                                 <ServiceCard
-                                    key={ index }
+                                    key={ service.documentId }
                                     title={ service.title }
                                     description={ service.description }
-                                    icon={ service.icon }
-                                    href={ service.href }
+                                    icon={ getServiceIcon( service.iconName || '' ) }
                                 />
                             ) )
                         }
+                    </div>
+                    <div
+                        className={
+                            css( {
+                                display: 'flex'
+                                , justifyContent: 'center'
+                                , marginTop: '3xl'
+                            } )
+                        }
+                    >
+                        <ServicesContactButton />
                     </div>
                 </section>
             </div>

@@ -1,24 +1,18 @@
-'use client';
-
 import { ReactNode } from 'react';
-import Link from 'next/link';
-import { css } from '../../../../styled-system/css';
+import { css } from '../../../../../styled-system/css';
 
 type ServiceCardProps = {
     title: string;
     description: string;
     icon: ReactNode;
-    href: string;
 }
 
 export const ServiceCard = ( {
     title
     , description
     , icon
-    , href
 }: ServiceCardProps ) => (
-    <Link
-        href={ href }
+    <div
         className={
             css( {
                 display: 'flex'
@@ -28,11 +22,6 @@ export const ServiceCard = ( {
                 , border: '2px solid'
                 , borderColor: 'brand.black'
                 , borderRadius: 'md'
-                , textDecoration: 'none'
-                , transition: 'all 0.2s'
-                , _hover: {
-                    backgroundColor: 'rgba(0, 0, 0, 0.03)'
-                }
             } )
         }
     >
@@ -74,5 +63,5 @@ export const ServiceCard = ( {
                 { description }
             </p>
         </div>
-    </Link>
+    </div>
 );
