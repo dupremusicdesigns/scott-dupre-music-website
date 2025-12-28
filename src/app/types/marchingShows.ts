@@ -92,6 +92,8 @@ export type MarchingShow = {
     showArtwork: ShowArtwork | null;
     priorityWeight?: number;
     isNew?: boolean;
+    year?: number;
+    comingSoon?: boolean;
 }
 
 export type PaginationMeta = {
