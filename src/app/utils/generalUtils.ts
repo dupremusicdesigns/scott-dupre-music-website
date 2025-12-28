@@ -87,6 +87,28 @@ export type CategorizedSections = {
     closers: CategoryItem[];
 }
 
+const findAudioForSection = (
+    sectionName: string
+    , audioPreviews: MarchingShow[ 'audioPreviews' ]
+    , index: number
+): string | null => {
+    const partMatch = sectionName.match( /Part\s*(\d+)/i );
+
+    if ( partMatch ) {
+        const partNumber = partMatch[ 1 ];
+        const matchingPreview = audioPreviews?.find( preview =>
+            preview.trackName?.includes( `Part ${ partNumber }` )
+            || preview.trackName?.includes( `Part${ partNumber }` )
+        );
+
+        if ( matchingPreview?.audioFile?.url ) {
+            return matchingPreview.audioFile.url;
+        }
+    }
+
+    return audioPreviews?.[ index ]?.audioFile?.url || null;
+};
+
 export const groupShowsBySection = ( shows: MarchingShow[] ): CategorizedSections => {
     const introsAndOpeners: CategoryItem[] = [];
     const ballads: CategoryItem[] = [];
@@ -94,7 +116,7 @@ export const groupShowsBySection = ( shows: MarchingShow[] ): CategorizedSection
 
     shows.forEach( show => {
         show.showSections?.forEach( ( section, index ) => {
-            const matchingAudio = show.audioPreviews?.[ index ]?.audioFile?.url || null;
+            const matchingAudio = findAudioForSection( section.sectionName, show.audioPreviews, index );
 
             const item: CategoryItem = {
                 sectionName: stripPartPrefix( section.sectionName )
@@ -113,9 +135,12 @@ export const groupShowsBySection = ( shows: MarchingShow[] ): CategorizedSection
         } );
     } );
 
+    const sortByName = ( a: CategoryItem, b: CategoryItem ) =>
+        a.sectionName.localeCompare( b.sectionName );
+
     return {
-        introsAndOpeners
-        , ballads
-        , closers
+        introsAndOpeners: introsAndOpeners.sort( sortByName )
+        , ballads: ballads.sort( sortByName )
+        , closers: closers.sort( sortByName )
     };
 };

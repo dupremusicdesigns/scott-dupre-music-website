@@ -43,7 +43,10 @@ export type ShowSectionType = 'intro' | 'opener' | 'ballad' | 'closer';
 export type ShowSection = {
     id: number;
     sectionName: string;
+    composer?: string;
     type?: ShowSectionType;
+    partNumber?: number;
+    sectionAudio?: AudioPreview;
 }
 
 export type OtherCollaborator = {
@@ -77,7 +80,8 @@ export type AudioFile = {
 
 export type AudioPreview = {
     id: number;
-    trackName: string;
+    trackName?: string;
+    composer?: string;
     audioFile: AudioFile;
 }
 

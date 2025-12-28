@@ -108,6 +108,19 @@ export const CategorySectionList = ( {
                             , overflowY: 'auto'
                             , paddingX: 'md'
                             , paddingBottom: 'md'
+                            , '&::-webkit-scrollbar': {
+                                width: '6px'
+                            }
+                            , '&::-webkit-scrollbar-track': {
+                                backgroundColor: 'transparent'
+                            }
+                            , '&::-webkit-scrollbar-thumb': {
+                                backgroundColor: 'gray.300'
+                                , borderRadius: 'full'
+                            }
+                            , '&::-webkit-scrollbar-thumb:hover': {
+                                backgroundColor: 'gray.400'
+                            }
                         } )
                     }
                 >
