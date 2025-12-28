@@ -56,6 +56,17 @@ export const ShowsGrid = ( { shows }: ShowsGridProps ) => {
                                     , _hover: {
                                         transform: 'scale(1.02)'
                                         , boxShadow: 'lg'
+                                        , '& .card-overlay': {
+                                            opacity: 1
+                                        }
+                                        , '& .card-gradient': {
+                                            opacity: 0
+                                        }
+                                        , '& .card-title': {
+                                            bottom: '50%'
+                                            , transform: 'translateY(50%)'
+                                            , fontSize: '3xl'
+                                        }
                                     }
                                 } )
                             }
@@ -74,7 +85,18 @@ export const ShowsGrid = ( { shows }: ShowsGridProps ) => {
                             />
                             <div
                                 className={
-                                    css( {
+                                    `card-overlay ${ css( {
+                                        position: 'absolute'
+                                        , inset: 0
+                                        , backgroundColor: 'rgba(0, 0, 0, 0.5)'
+                                        , opacity: 0
+                                        , transition: 'opacity 0.3s ease'
+                                    } ) }`
+                                }
+                            />
+                            <div
+                                className={
+                                    `card-gradient ${ css( {
                                         position: 'absolute'
                                         , bottom: 0
                                         , left: 0
@@ -83,12 +105,13 @@ export const ShowsGrid = ( { shows }: ShowsGridProps ) => {
                                         , background: 'linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent)'
                                         , borderBottomLeftRadius: 'md'
                                         , borderBottomRightRadius: 'md'
-                                    } )
+                                        , transition: 'opacity 0.3s ease'
+                                    } ) }`
                                 }
                             />
                             <span
                                 className={
-                                    css( {
+                                    `card-title ${ css( {
                                         position: 'absolute'
                                         , bottom: 'md'
                                         , left: 0
@@ -98,7 +121,8 @@ export const ShowsGrid = ( { shows }: ShowsGridProps ) => {
                                         , fontSize: 'lg'
                                         , fontWeight: 'black'
                                         , textTransform: 'uppercase'
-                                    } )
+                                        , transition: 'all 0.3s ease'
+                                    } ) }`
                                 }
                             >
                                 { show.showTitle }

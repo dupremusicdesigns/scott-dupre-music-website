@@ -208,7 +208,7 @@ export default async function AboutPage () {
                     }
                 >
                     <LinkButton
-                        href='/music'
+                        href='/marching-band'
                         variant='outlineDark'
                         size='lg'
                         className={

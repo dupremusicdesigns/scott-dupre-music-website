@@ -10,7 +10,7 @@ export const navigationRoutes: readonly NavigationRoute[] = [
     }
     , {
         label: 'Music'
-        , href: '/music'
+        , href: '/marching-band'
         , hasDropdown: true
         , submenu: [
             {

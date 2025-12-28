@@ -101,7 +101,7 @@ export const Footer = async () => {
                             Learn more about Scott Dupre
                         </LinkButton>
                         <LinkButton
-                            href='/music'
+                            href='/marching-band'
                             variant='outline'
                             size='footer'
                             rounded='sm'
