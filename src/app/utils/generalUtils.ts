@@ -73,3 +73,49 @@ export const sortMarchingShows = ( shows: MarchingShow[] ): MarchingShow[] => {
         return a.showTitle.localeCompare( b.showTitle );
     } );
 };
+
+export type CategoryItem = {
+    sectionName: string;
+    showTitle: string;
+    commissionedBy: string;
+    audioUrl: string | null;
+}
+
+export type CategorizedSections = {
+    introsAndOpeners: CategoryItem[];
+    ballads: CategoryItem[];
+    closers: CategoryItem[];
+}
+
+export const groupShowsBySection = ( shows: MarchingShow[] ): CategorizedSections => {
+    const introsAndOpeners: CategoryItem[] = [];
+    const ballads: CategoryItem[] = [];
+    const closers: CategoryItem[] = [];
+
+    shows.forEach( show => {
+        show.showSections?.forEach( ( section, index ) => {
+            const matchingAudio = show.audioPreviews?.[ index ]?.audioFile?.url || null;
+
+            const item: CategoryItem = {
+                sectionName: stripPartPrefix( section.sectionName )
+                , showTitle: show.showTitle
+                , commissionedBy: show.commissionedBy
+                , audioUrl: matchingAudio
+            };
+
+            if ( section.type === 'intro' || section.type === 'opener' ) {
+                introsAndOpeners.push( item );
+            } else if ( section.type === 'ballad' ) {
+                ballads.push( item );
+            } else if ( section.type === 'closer' ) {
+                closers.push( item );
+            }
+        } );
+    } );
+
+    return {
+        introsAndOpeners
+        , ballads
+        , closers
+    };
+};

@@ -2,21 +2,10 @@ import Image from 'next/image';
 import { css } from '../../../../styled-system/css';
 import { grid } from '../../../../styled-system/patterns';
 import { BuildYourOwnShowForm } from '../../components/build-your-own-show/BuildYourOwnShowForm';
-
-const categories = [
-    {
-        title: 'Intros & Openers'
-        , image: '/images/category-intros.jpg'
-    }
-    , {
-        title: 'Ballads'
-        , image: '/images/category-ballads.jpg'
-    }
-    , {
-        title: 'Closers'
-        , image: '/images/category-closers.jpg'
-    }
-];
+import { CategorySectionList } from '../../components/build-your-own-show/CategorySectionList';
+import { CategoryListsWrapper } from '../../components/build-your-own-show/CategoryListsWrapper';
+import { getMarchingShows } from '../../api/marchingShows';
+import { groupShowsBySection } from '../../utils/generalUtils';
 
 const additionalInfo = [
     'All arrangements can be custom tailored to your students.'
@@ -26,7 +15,10 @@ const additionalInfo = [
     , 'Percussion and sound design arrangements are available directly through the original creator. Contact information can be available upon request.'
 ];
 
-const BuildYourOwnShowPage = () => {
+const BuildYourOwnShowPage = async () => {
+    const { data: shows } = await getMarchingShows();
+    const categorizedSections = groupShowsBySection( shows );
+
     return (
         <main
             className={
@@ -97,74 +89,33 @@ const BuildYourOwnShowPage = () => {
                 >
                     Step 1 - Listen to Music
                 </h2>
-                <div
-                    className={
-                        grid( {
-                            columns: 3
-                            , gap: '30px'
-                            , marginTop: 'xl'
-                        } )
-                    }
-                >
-                    {
-                        categories.map( ( category, index ) => (
-                            <div
-                                key={ category.title }
-                                className={
-                                    css( {
-                                        position: 'relative'
-                                        , aspectRatio: '393/350'
-                                        , borderRadius: 'md'
-                                        , overflow: 'hidden'
-                                    } )
-                                }
-                            >
-                                <Image
-                                    src={ `/gradient-${ index + 1 }.png` }
-                                    alt={ category.title }
-                                    fill
-                                    sizes='(max-width: 768px) 100vw, 33vw'
-                                    className={
-                                        css( {
-                                            objectFit: 'cover'
-                                        } )
-                                    }
-                                />
-                                <div
-                                    className={
-                                        css( {
-                                            position: 'absolute'
-                                            , bottom: 0
-                                            , left: 0
-                                            , right: 0
-                                            , height: '50%'
-                                            , background: 'linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent)'
-                                            , borderBottomLeftRadius: 'md'
-                                            , borderBottomRightRadius: 'md'
-                                        } )
-                                    }
-                                />
-                                <span
-                                    className={
-                                        css( {
-                                            position: 'absolute'
-                                            , bottom: 'md'
-                                            , left: 0
-                                            , right: 0
-                                            , textAlign: 'center'
-                                            , color: 'white'
-                                            , fontSize: 'lg'
-                                            , fontWeight: 'black'
-                                            , textTransform: 'uppercase'
-                                        } )
-                                    }
-                                >
-                                    { category.title }
-                                </span>
-                            </div>
-                        ) )
-                    }
-                </div>
+                <CategoryListsWrapper>
+                    <div
+                        className={
+                            grid( {
+                                columns: 3
+                                , gap: '30px'
+                                , marginTop: 'xl'
+                            } )
+                        }
+                    >
+                        <CategorySectionList
+                            title='Intros & Openers'
+                            items={ categorizedSections.introsAndOpeners }
+                            imageIndex={ 1 }
+                        />
+                        <CategorySectionList
+                            title='Ballads'
+                            items={ categorizedSections.ballads }
+                            imageIndex={ 2 }
+                        />
+                        <CategorySectionList
+                            title='Closers'
+                            items={ categorizedSections.closers }
+                            imageIndex={ 3 }
+                        />
+                    </div>
+                </CategoryListsWrapper>
             </section>
 
             <section

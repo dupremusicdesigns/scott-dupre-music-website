@@ -6,6 +6,7 @@ export * from './service';
 export type {
     ShowArtwork
     , ShowSection
+    , ShowSectionType
     , OtherCollaborator
     , AudioPreview
     , MarchingShow
