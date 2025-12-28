@@ -18,7 +18,8 @@ export default async function Home () {
                     position: 'relative'
                     , width: '100%'
                     , backgroundColor: 'background.primary'
-                    , paddingBottom: '100px'
+                    , paddingBottom: 'xl'
+                    , md: { paddingBottom: '100px' }
                 } )
             }
         >
@@ -26,10 +27,22 @@ export default async function Home () {
                 className={
                     css( {
                         position: 'relative'
-                        , height: '54vw'
-                        , maxHeight: '778px'
+                        , height: '100vw'
+                        , maxHeight: '420px'
                         , width: '100%'
                         , overflow: 'hidden'
+                        , sm: {
+                            height: '80vw'
+                            , maxHeight: '480px'
+                        }
+                        , md: {
+                            height: '70vw'
+                            , maxHeight: '600px'
+                        }
+                        , lg: {
+                            height: '54vw'
+                            , maxHeight: '778px'
+                        }
                     } )
                 }
             >
@@ -40,10 +53,9 @@ export default async function Home () {
                     className={
                         css( {
                             objectFit: 'cover'
-                            , objectPosition: 'center top'
-                            , '3xl': {
-                                objectPosition: 'center 20%'
-                            }
+                            , objectPosition: 'center center'
+                            , md: { objectPosition: 'center top' }
+                            , '3xl': { objectPosition: 'center 20%' }
                         } )
                     }
                 />
@@ -53,9 +65,10 @@ export default async function Home () {
                             position: 'absolute'
                             , top: 0
                             , left: 0
-                            , width: '70%'
+                            , width: '100%'
                             , height: '100%'
                             , background: 'linear-gradient(to right, rgba(0,0,0,0.75), rgba(0,0,0,0))'
+                            , md: { width: '70%' }
                         } )
                     }
                 />
@@ -75,12 +88,15 @@ export default async function Home () {
                     <h1
                         className={
                             css( {
-                                fontSize: '6xl'
+                                fontSize: '3xl'
                                 , fontWeight: 'black'
                                 , lineHeight: 'tight'
                                 , color: 'text.inverse'
                                 , textTransform: 'uppercase'
                                 , maxWidth: '750px'
+                                , sm: { fontSize: '4xl' }
+                                , md: { fontSize: '5xl' }
+                                , lg: { fontSize: '6xl' }
                             } )
                         }
                     >
@@ -94,12 +110,22 @@ export default async function Home () {
                     <p
                         className={
                             css( {
-                                fontSize: '2xl'
+                                fontSize: 'md'
                                 , fontWeight: 'bold'
-                                , lineHeight: 'tight'
+                                , lineHeight: 'normal'
                                 , color: 'text.inverse'
                                 , maxWidth: '583px'
-                                , marginTop: 'xl'
+                                , marginTop: 'md'
+                                , sm: { fontSize: 'lg' }
+                                , md: {
+                                    fontSize: 'xl'
+                                    , marginTop: 'xl'
+                                }
+                                , lg: {
+                                    fontSize: '2xl'
+                                    , lineHeight: 'tight'
+                                    , marginTop: 'xl'
+                                }
                             } )
                         }
                     >
@@ -108,8 +134,14 @@ export default async function Home () {
                     <div
                         className={
                             flex( {
-                                gap: 'md'
-                                , marginTop: 'xl'
+                                flexDirection: 'column'
+                                , gap: 'sm'
+                                , marginTop: 'lg'
+                                , sm: {
+                                    flexDirection: 'row'
+                                    , gap: 'md'
+                                    , marginTop: 'xl'
+                                }
                             } )
                         }
                     >
@@ -119,7 +151,12 @@ export default async function Home () {
                                     href={ home.actionButtonPrimary.slug }
                                     variant='secondary'
                                     size='md'
-                                    className={ css( { width: '197px' } ) }
+                                    className={
+                                        css( {
+                                            width: '100%'
+                                            , sm: { width: '197px' }
+                                        } )
+                                    }
                                 >
                                     { home.actionButtonPrimary.text }
                                 </LinkButton>
@@ -131,7 +168,12 @@ export default async function Home () {
                                     href={ home.actionButtonSecondary.slug }
                                     variant='outline'
                                     size='md'
-                                    className={ css( { width: '197px' } ) }
+                                    className={
+                                        css( {
+                                            width: '100%'
+                                            , sm: { width: '197px' }
+                                        } )
+                                    }
                                 >
                                     { home.actionButtonSecondary.text }
                                 </LinkButton>
@@ -145,7 +187,8 @@ export default async function Home () {
                 className={
                     css( {
                         position: 'relative'
-                        , marginTop: '91px'
+                        , marginTop: 'xl'
+                        , md: { marginTop: '91px' }
                     } )
                 }
             >
@@ -153,26 +196,38 @@ export default async function Home () {
                     className={
                         css( {
                             position: 'relative'
-                            , width: '93%'
-                            , height: '287px'
+                            , width: '100%'
+                            , height: 'auto'
                             , backgroundColor: 'background.dark'
-                            , borderTopRightRadius: 'md'
-                            , borderBottomRightRadius: 'md'
+                            , borderRadius: '0'
                             , display: 'flex'
                             , flexDirection: 'column'
                             , justifyContent: 'center'
                             , paddingLeft: '7%'
-                            , paddingRight: '350px'
+                            , paddingRight: '7%'
+                            , paddingY: 'xl'
+                            , md: {
+                                width: '93%'
+                                , borderTopRightRadius: 'md'
+                                , borderBottomRightRadius: 'md'
+                                , paddingRight: '6%'
+                            }
+                            , xl: {
+                                height: '287px'
+                                , paddingRight: '350px'
+                                , paddingY: '0'
+                            }
                         } )
                     }
                 >
                     <h2
                         className={
                             css( {
-                                fontSize: '3xl'
+                                fontSize: '2xl'
                                 , fontWeight: 'black'
                                 , lineHeight: 'tight'
                                 , color: 'text.inverse'
+                                , md: { fontSize: '3xl' }
                             } )
                         }
                     >
@@ -182,21 +237,32 @@ export default async function Home () {
                         className={
                             css( {
                                 display: 'flex'
-                                , marginTop: 'lg'
-                                , gap: '68px'
+                                , flexDirection: 'column'
+                                , marginTop: 'md'
+                                , gap: 'md'
                                 , alignItems: 'flex-start'
+                                , lg: {
+                                    flexDirection: 'row'
+                                    , marginTop: 'lg'
+                                    , gap: 'xl'
+                                }
+                                , xl: { gap: '68px' }
                             } )
                         }
                     >
                         <blockquote
                             className={
                                 css( {
-                                    fontSize: 'md'
+                                    fontSize: 'sm'
                                     , fontWeight: 'normal'
-                                    , lineHeight: '19px'
+                                    , lineHeight: 'relaxed'
                                     , color: 'text.inverse'
-                                    , width: '638px'
-                                    , flexShrink: 0
+                                    , md: { fontSize: 'md' }
+                                    , lg: {
+                                        width: '638px'
+                                        , flexShrink: 0
+                                        , lineHeight: '19px'
+                                    }
                                 } )
                             }
                         >
@@ -207,13 +273,16 @@ export default async function Home () {
                         <div
                             className={
                                 css( {
-                                    fontSize: 'md'
+                                    fontSize: 'sm'
                                     , fontWeight: 'normal'
                                     , lineHeight: 'normal'
                                     , color: 'text.inverse'
-                                    , width: '252px'
-                                    , flexShrink: 0
                                     , whiteSpace: 'pre-line'
+                                    , md: { fontSize: 'md' }
+                                    , lg: {
+                                        width: '252px'
+                                        , flexShrink: 0
+                                    }
                                 } )
                             }
                         >
@@ -232,14 +301,18 @@ export default async function Home () {
                 <div
                     className={
                         css( {
-                            position: 'absolute'
-                            , top: 0
-                            , right: '7%'
-                            , width: '282px'
-                            , height: '287px'
-                            , borderTopRightRadius: 'md'
-                            , borderBottomRightRadius: 'md'
-                            , overflow: 'hidden'
+                            display: 'none'
+                            , xl: {
+                                display: 'block'
+                                , position: 'absolute'
+                                , top: 0
+                                , right: '7%'
+                                , width: '282px'
+                                , height: '287px'
+                                , borderTopRightRadius: 'md'
+                                , borderBottomRightRadius: 'md'
+                                , overflow: 'hidden'
+                            }
                         } )
                     }
                 >
@@ -251,23 +324,33 @@ export default async function Home () {
             </section>
 
             {
-                home.additionalTestimonials?.[0] && (
+                home.additionalTestimonials?.[ 0 ] && (
                     <section
                         className={
                             css( {
                                 position: 'relative'
                                 , display: 'flex'
-                                , marginTop: '100px'
-                                , gap: 'xl'
+                                , flexDirection: 'column-reverse'
+                                , marginTop: 'xl'
+                                , gap: 'lg'
+                                , md: {
+                                    flexDirection: 'row'
+                                    , marginTop: '100px'
+                                    , gap: 'xl'
+                                }
                             } )
                         }
                     >
                         <div
                             className={
                                 css( {
-                                    width: '457px'
-                                    , paddingLeft: '7%'
-                                    , flexShrink: 0
+                                    paddingX: '7%'
+                                    , md: {
+                                        width: '457px'
+                                        , paddingLeft: '7%'
+                                        , paddingRight: '0'
+                                        , flexShrink: 0
+                                    }
                                 } )
                             }
                         >
@@ -275,43 +358,46 @@ export default async function Home () {
                                 <p
                                     className={
                                         css( {
-                                            fontSize: '2xl'
+                                            fontSize: 'xl'
                                             , fontWeight: 'black'
                                             , color: 'text.primary'
+                                            , md: { fontSize: '2xl' }
                                         } )
                                     }
                                 >
-                                    { home.additionalTestimonials[0].personName }
+                                    { home.additionalTestimonials[ 0 ].personName }
                                 </p>
                                 {
-                                    home.additionalTestimonials[0].personPositionTitle && (
+                                    home.additionalTestimonials[ 0 ].personPositionTitle && (
                                         <p
                                             className={
                                                 css( {
-                                                    fontSize: 'md'
+                                                    fontSize: 'sm'
                                                     , fontWeight: 'medium'
                                                     , color: 'text.primary'
                                                     , lineHeight: 'list'
+                                                    , md: { fontSize: 'md' }
                                                 } )
                                             }
                                         >
-                                            { home.additionalTestimonials[0].personPositionTitle }
+                                            { home.additionalTestimonials[ 0 ].personPositionTitle }
                                         </p>
                                     )
                                 }
                                 {
-                                    home.additionalTestimonials[0].personOrganizationName && (
+                                    home.additionalTestimonials[ 0 ].personOrganizationName && (
                                         <p
                                             className={
                                                 css( {
-                                                    fontSize: 'md'
+                                                    fontSize: 'sm'
                                                     , fontWeight: 'medium'
                                                     , color: 'text.primary'
                                                     , lineHeight: 'tight'
+                                                    , md: { fontSize: 'md' }
                                                 } )
                                             }
                                         >
-                                            { home.additionalTestimonials[0].personOrganizationName }
+                                            { home.additionalTestimonials[ 0 ].personOrganizationName }
                                         </p>
                                     )
                                 }
@@ -319,36 +405,44 @@ export default async function Home () {
                             <p
                                 className={
                                     css( {
-                                        fontSize: 'lg'
+                                        fontSize: 'md'
                                         , fontWeight: 'normal'
                                         , lineHeight: 'normal'
                                         , color: 'text.primary'
                                         , marginTop: 'md'
+                                        , md: { fontSize: 'lg' }
                                     } )
                                 }
                             >
-                                &ldquo;{ home.additionalTestimonials[0].content }&rdquo;
+                                &ldquo;
+                                { home.additionalTestimonials[ 0 ].content }
+                                &rdquo;
                             </p>
                         </div>
                         <div
                             className={
                                 css( {
                                     position: 'relative'
-                                    , flex: 1
-                                    , height: '260px'
-                                    , borderTopLeftRadius: 'md'
-                                    , borderBottomLeftRadius: 'md'
+                                    , width: '100%'
+                                    , height: '200px'
                                     , overflow: 'hidden'
+                                    , md: {
+                                        flex: 1
+                                        , height: '260px'
+                                        , borderTopLeftRadius: 'md'
+                                        , borderBottomLeftRadius: 'md'
+                                    }
                                 } )
                             }
                         >
                             <CmsImage
-                                image={ home.additionalTestimonials[0].image }
-                                fallbackAlt={ home.additionalTestimonials[0].personName }
+                                image={ home.additionalTestimonials[ 0 ].image }
+                                fallbackAlt={ home.additionalTestimonials[ 0 ].personName }
                                 className={
                                     css( {
                                         objectFit: 'cover'
-                                        , objectPosition: 'right 70%'
+                                        , objectPosition: 'center 70%'
+                                        , md: { objectPosition: 'right 70%' }
                                     } )
                                 }
                             />
@@ -362,8 +456,13 @@ export default async function Home () {
                     css( {
                         position: 'relative'
                         , width: '100%'
-                        , marginTop: '100px'
+                        , marginTop: 'xl'
                         , display: 'flex'
+                        , flexDirection: 'column'
+                        , md: {
+                            flexDirection: 'row'
+                            , marginTop: '100px'
+                        }
                     } )
                 }
             >
@@ -371,12 +470,17 @@ export default async function Home () {
                     className={
                         css( {
                             position: 'relative'
-                            , width: '46%'
-                            , aspectRatio: '664/519'
-                            , borderTopRightRadius: 'md'
-                            , borderBottomRightRadius: 'md'
-                            , flexShrink: 0
+                            , width: '100%'
+                            , height: '300px'
                             , overflow: 'hidden'
+                            , md: {
+                                width: '46%'
+                                , height: 'auto'
+                                , aspectRatio: '664/519'
+                                , borderTopRightRadius: 'md'
+                                , borderBottomRightRadius: 'md'
+                                , flexShrink: 0
+                            }
                         } )
                     }
                 >
@@ -388,20 +492,25 @@ export default async function Home () {
                 <div
                     className={
                         css( {
-                            flex: 1
-                            , paddingLeft: 'xl'
-                            , paddingRight: '6%'
-                            , paddingTop: 'sm'
+                            paddingX: '7%'
+                            , paddingTop: 'lg'
+                            , md: {
+                                flex: 1
+                                , paddingLeft: 'xl'
+                                , paddingRight: '6%'
+                                , paddingTop: 'sm'
+                            }
                         } )
                     }
                 >
                     <h2
                         className={
                             css( {
-                                fontSize: '3xl'
+                                fontSize: '2xl'
                                 , fontWeight: 'black'
                                 , lineHeight: 'tight'
                                 , color: 'text.primary'
+                                , md: { fontSize: '3xl' }
                             } )
                         }
                     >
@@ -410,13 +519,17 @@ export default async function Home () {
                     <p
                         className={
                             css( {
-                                fontSize: 'lg'
+                                fontSize: 'md'
                                 , fontWeight: 'normal'
                                 , lineHeight: 'normal'
                                 , color: 'text.primary'
-                                , marginTop: 'lg'
+                                , marginTop: 'md'
                                 , maxWidth: '560px'
                                 , whiteSpace: 'pre-line'
+                                , md: {
+                                    fontSize: 'lg'
+                                    , marginTop: 'lg'
+                                }
                             } )
                         }
                     >
@@ -428,8 +541,10 @@ export default async function Home () {
                         size='md'
                         className={
                             css( {
-                                marginTop: 'xl'
-                                , width: '197px'
+                                marginTop: 'lg'
+                                , width: '100%'
+                                , sm: { width: '197px' }
+                                , md: { marginTop: 'xl' }
                             } )
                         }
                     >
