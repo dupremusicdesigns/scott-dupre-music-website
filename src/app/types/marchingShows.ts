@@ -38,9 +38,12 @@ export type ShowArtwork = {
     publishedAt: string;
 }
 
+export type ShowSectionType = 'intro' | 'opener' | 'ballad' | 'closer';
+
 export type ShowSection = {
     id: number;
     sectionName: string;
+    type?: ShowSectionType;
 }
 
 export type OtherCollaborator = {
@@ -82,7 +85,7 @@ export type MarchingShow = {
     id: number;
     documentId: string;
     showTitle: string;
-    commisionedBy: string;
+    commissionedBy: string;
     createdAt: string;
     updatedAt: string;
     publishedAt: string;

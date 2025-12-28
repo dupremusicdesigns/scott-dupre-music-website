@@ -140,7 +140,7 @@ export default async function MarchingShowPage ( { params }: PageProps ) {
                             >
                                 Commissioned by
                                 { ' ' }
-                                { show.commisionedBy }
+                                { show.commissionedBy }
                             </p>
                         </div>
 
