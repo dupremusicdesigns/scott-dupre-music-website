@@ -35,17 +35,40 @@ export const stripPartPrefix = ( name: string ): string => {
     return name.replace( /^Part\s*[\d\s,&]*\s*-\s*/i, '' );
 };
 
+/**
+ * Sorts marching shows based on a multi-level sorting criteria.
+ *
+ * The sorting priority is as follows:
+ * 1. Shows with a year are sorted before shows without a year
+ * 2. Among shows with years, they are sorted in descending order by year (newest first)
+ * 3. Shows with a priority weight are sorted before shows without a priority weight
+ * 4. Among shows with priority weights, they are sorted in ascending order by priority weight
+ * 5. Finally, shows are sorted alphabetically by show title using locale-aware comparison
+ *
+ * @param shows - The array of MarchingShow objects to sort
+ * @returns A new sorted array of MarchingShow objects (does not mutate the original array)
+ */
 export const sortMarchingShows = ( shows: MarchingShow[] ): MarchingShow[] => {
     return [ ...shows ].sort( ( a, b ) => {
-        const aPriority = a.priorityWeight ?? Infinity;
-        const bPriority = b.priorityWeight ?? Infinity;
+        const aHasYear = a.year != null;
+        const bHasYear = b.year != null;
 
-        if ( aPriority !== bPriority ) return aPriority - bPriority;
+        if ( aHasYear !== bHasYear ) return aHasYear ? -1 : 1;
 
-        const aIsNew = a.isNew ?? false;
-        const bIsNew = b.isNew ?? false;
+        if ( aHasYear && bHasYear ) {
+            if ( a.year !== b.year ) return b.year! - a.year!;
+        }
 
-        if ( aIsNew !== bIsNew ) return aIsNew ? -1 : 1;
+        const aHasPriority = a.priorityWeight != null;
+        const bHasPriority = b.priorityWeight != null;
+
+        if ( aHasPriority !== bHasPriority ) return aHasPriority ? -1 : 1;
+
+        if ( aHasPriority && bHasPriority ) {
+            if ( a.priorityWeight !== b.priorityWeight ) {
+                return a.priorityWeight! - b.priorityWeight!;
+            }
+        }
 
         return a.showTitle.localeCompare( b.showTitle );
     } );
