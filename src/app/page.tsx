@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { css } from '../../styled-system/css';
 import { flex } from '../../styled-system/patterns';
 import { LinkButton } from './components/LinkButton/LinkButton';
@@ -251,102 +250,112 @@ export default async function Home () {
                 </div>
             </section>
 
-            <section
-                className={
-                    css( {
-                        position: 'relative'
-                        , display: 'flex'
-                        , marginTop: '100px'
-                        , gap: 'xl'
-                    } )
-                }
-            >
-                <div
-                    className={
-                        css( {
-                            width: '457px'
-                            , paddingLeft: '7%'
-                            , flexShrink: 0
-                        } )
-                    }
-                >
-                    <div className={ css( { lineHeight: 'tight' } ) }>
-                        <p
-                            className={
-                                css( {
-                                    fontSize: '2xl'
-                                    , fontWeight: 'black'
-                                    , color: 'text.primary'
-                                } )
-                            }
-                        >
-                            Quote 1 Name
-                        </p>
-                        <p
-                            className={
-                                css( {
-                                    fontSize: 'md'
-                                    , fontWeight: 'medium'
-                                    , color: 'text.primary'
-                                    , lineHeight: 'list'
-                                } )
-                            }
-                        >
-                            Director of Bands
-                        </p>
-                        <p
-                            className={
-                                css( {
-                                    fontSize: 'md'
-                                    , fontWeight: 'medium'
-                                    , color: 'text.primary'
-                                    , lineHeight: 'tight'
-                                } )
-                            }
-                        >
-                            High School Name
-                        </p>
-                    </div>
-                    <p
+            {
+                home.additionalTestimonials?.[0] && (
+                    <section
                         className={
                             css( {
-                                fontSize: 'lg'
-                                , fontWeight: 'normal'
-                                , lineHeight: 'normal'
-                                , color: 'text.primary'
-                                , marginTop: 'md'
+                                position: 'relative'
+                                , display: 'flex'
+                                , marginTop: '100px'
+                                , gap: 'xl'
                             } )
                         }
                     >
-                        &ldquo;This will be where quote 1 will go. This is filler text that will be replaced. This will be where quote 1 will go. This is filler text that will be replaced. This will be where quote 1 will go. This is filler text that will be replaced. This will be where quote 1 will go.&rdquo;
-                    </p>
-                </div>
-                <div
-                    className={
-                        css( {
-                            position: 'relative'
-                            , flex: 1
-                            , height: '260px'
-                            , borderTopLeftRadius: 'md'
-                            , borderBottomLeftRadius: 'md'
-                            , overflow: 'hidden'
-                        } )
-                    }
-                >
-                    <Image
-                        src='/images/testimonial-secondary.jpg'
-                        alt='Marching band performance'
-                        fill
-                        sizes='(max-width: 1024px) 100vw, 50vw'
-                        className={
-                            css( {
-                                objectFit: 'cover'
-                                , objectPosition: 'right center'
-                            } )
-                        }
-                    />
-                </div>
-            </section>
+                        <div
+                            className={
+                                css( {
+                                    width: '457px'
+                                    , paddingLeft: '7%'
+                                    , flexShrink: 0
+                                } )
+                            }
+                        >
+                            <div className={ css( { lineHeight: 'tight' } ) }>
+                                <p
+                                    className={
+                                        css( {
+                                            fontSize: '2xl'
+                                            , fontWeight: 'black'
+                                            , color: 'text.primary'
+                                        } )
+                                    }
+                                >
+                                    { home.additionalTestimonials[0].personName }
+                                </p>
+                                {
+                                    home.additionalTestimonials[0].personPositionTitle && (
+                                        <p
+                                            className={
+                                                css( {
+                                                    fontSize: 'md'
+                                                    , fontWeight: 'medium'
+                                                    , color: 'text.primary'
+                                                    , lineHeight: 'list'
+                                                } )
+                                            }
+                                        >
+                                            { home.additionalTestimonials[0].personPositionTitle }
+                                        </p>
+                                    )
+                                }
+                                {
+                                    home.additionalTestimonials[0].personOrganizationName && (
+                                        <p
+                                            className={
+                                                css( {
+                                                    fontSize: 'md'
+                                                    , fontWeight: 'medium'
+                                                    , color: 'text.primary'
+                                                    , lineHeight: 'tight'
+                                                } )
+                                            }
+                                        >
+                                            { home.additionalTestimonials[0].personOrganizationName }
+                                        </p>
+                                    )
+                                }
+                            </div>
+                            <p
+                                className={
+                                    css( {
+                                        fontSize: 'lg'
+                                        , fontWeight: 'normal'
+                                        , lineHeight: 'normal'
+                                        , color: 'text.primary'
+                                        , marginTop: 'md'
+                                    } )
+                                }
+                            >
+                                &ldquo;{ home.additionalTestimonials[0].content }&rdquo;
+                            </p>
+                        </div>
+                        <div
+                            className={
+                                css( {
+                                    position: 'relative'
+                                    , flex: 1
+                                    , height: '260px'
+                                    , borderTopLeftRadius: 'md'
+                                    , borderBottomLeftRadius: 'md'
+                                    , overflow: 'hidden'
+                                } )
+                            }
+                        >
+                            <CmsImage
+                                image={ home.additionalTestimonials[0].image }
+                                fallbackAlt={ home.additionalTestimonials[0].personName }
+                                className={
+                                    css( {
+                                        objectFit: 'cover'
+                                        , objectPosition: 'right 70%'
+                                    } )
+                                }
+                            />
+                        </div>
+                    </section>
+                )
+            }
 
             <section
                 className={
