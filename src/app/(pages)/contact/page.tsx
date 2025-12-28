@@ -1,46 +1,209 @@
+import Link from 'next/link';
 import { css } from '../../../../styled-system/css';
+import { flex } from '../../../../styled-system/patterns';
+import { FacebookIcon } from '../../components/icons/FacebookIcon/FacebookIcon';
+import { InstagramIcon } from '../../components/icons/InstagramIcon/InstagramIcon';
+import { ContactFormEmbed } from '../../components/contact/ContactFormEmbed/ContactFormEmbed';
+import { getGlobal } from '../../api/global';
 
-const ContactPage = () => {
+export default async function ContactPage () {
+    const { data: global } = await getGlobal();
 
     return (
-        <div
+        <main
             className={
                 css( {
-                    display: 'flex'
-                    , flexDirection: 'column'
-                    , alignItems: 'center'
-                    , justifyContent: 'center'
-                    , minHeight: '60vh'
-                    , textAlign: 'center'
-                    , paddingX: '2xl'
+                    position: 'relative'
+                    , width: '100%'
+                    , backgroundColor: 'background.primary'
+                    , paddingBottom: '100px'
                 } )
             }
         >
-            <h1
+            <div
                 className={
                     css( {
-                        fontSize: '4xl'
-                        , fontWeight: 'black'
-                        , color: 'text.primary'
-                        , marginBottom: 'md'
+                        maxWidth: '1120px'
+                        , marginX: 'auto'
+                        , position: 'relative'
                     } )
                 }
             >
-                COMING SOON
-            </h1>
-            <p
-                className={
-                    css( {
-                        fontSize: 'lg'
-                        , color: 'text.secondary'
-                        , maxWidth: '500px'
-                    } )
-                }
-            >
-                Our contact page is currently under construction. Check back soon!
-            </p>
-        </div>
-    );
-};
+                <section
+                    className={
+                        css( {
+                            paddingLeft: '7%'
+                            , paddingRight: '6%'
+                            , paddingTop: 'xl'
+                        } )
+                    }
+                >
+                    <h1
+                        className={
+                            css( {
+                                fontSize: '6xl'
+                                , fontWeight: 'black'
+                                , lineHeight: 'tight'
+                                , color: 'text.primary'
+                                , textTransform: 'uppercase'
+                                , textAlign: 'center'
+                            } )
+                        }
+                    >
+                        Contact
+                    </h1>
+                    <p
+                        className={
+                            css( {
+                                fontSize: 'lg'
+                                , fontWeight: 'medium'
+                                , color: 'text.primary'
+                                , textAlign: 'center'
+                                , marginTop: 'xs'
+                            } )
+                        }
+                    >
+                        Have questions? I would love to help!
+                    </p>
 
-export default ContactPage;
+                    <div
+                        className={
+                            flex( {
+                                justifyContent: 'space-between'
+                                , alignItems: 'flex-start'
+                                , marginTop: 'xl'
+                            } )
+                        }
+                    >
+                        <div>
+                            <p
+                                className={
+                                    css( {
+                                        fontSize: 'base'
+                                        , fontWeight: 'bold'
+                                        , color: 'text.primary'
+                                        , textTransform: 'uppercase'
+                                    } )
+                                }
+                            >
+                                Email
+                            </p>
+                            {
+                                global.defaultContactEmail && (
+                                    <Link
+                                        href={ `mailto:${ global.defaultContactEmail }` }
+                                        className={
+                                            css( {
+                                                fontSize: 'base'
+                                                , fontWeight: 'medium'
+                                                , color: 'text.primary'
+                                                , textDecoration: 'underline'
+                                                , marginTop: 'xs'
+                                                , display: 'block'
+                                            } )
+                                        }
+                                    >
+                                        { global.defaultContactEmail }
+                                    </Link>
+                                )
+                            }
+                        </div>
+                        <div
+                            className={
+                                css( {
+                                    textAlign: 'right'
+                                } )
+                            }
+                        >
+                            <p
+                                className={
+                                    css( {
+                                        fontSize: 'base'
+                                        , fontWeight: 'bold'
+                                        , color: 'text.primary'
+                                        , textTransform: 'uppercase'
+                                    } )
+                                }
+                            >
+                                Social Media
+                            </p>
+                            <div
+                                className={
+                                    flex( {
+                                        gap: 'md'
+                                        , marginTop: 'xs'
+                                        , justifyContent: 'flex-end'
+                                    } )
+                                }
+                            >
+                                {
+                                    global.facebookLink && (
+                                        <Link
+                                            href={ global.facebookLink }
+                                            target='_blank'
+                                            rel='noopener noreferrer'
+                                            className={
+                                                css( {
+                                                    color: 'text.primary'
+                                                    , _hover: {
+                                                        color: 'text.secondary'
+                                                    }
+                                                    , transition: 'color 0.2s'
+                                                } )
+                                            }
+                                        >
+                                            <FacebookIcon />
+                                        </Link>
+                                    )
+                                }
+                                {
+                                    global.instagramLink && (
+                                        <Link
+                                            href={ global.instagramLink }
+                                            target='_blank'
+                                            rel='noopener noreferrer'
+                                            className={
+                                                css( {
+                                                    color: 'text.primary'
+                                                    , _hover: {
+                                                        color: 'text.secondary'
+                                                    }
+                                                    , transition: 'color 0.2s'
+                                                } )
+                                            }
+                                        >
+                                            <InstagramIcon />
+                                        </Link>
+                                    )
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section
+                    className={
+                        css( {
+                            marginTop: 'xl'
+                            , marginLeft: '7%'
+                            , marginRight: '6%'
+                        } )
+                    }
+                >
+                    <div
+                        className={
+                            css( {
+                                border: '2px solid'
+                                , borderColor: 'text.primary'
+                                , borderRadius: 'md'
+                                , padding: 'xl'
+                            } )
+                        }
+                    >
+                        <ContactFormEmbed />
+                    </div>
+                </section>
+            </div>
+        </main>
+    );
+}

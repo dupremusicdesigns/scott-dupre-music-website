@@ -7,10 +7,10 @@ export const BuildYourOwnShowForm = () => {
         <>
             <iframe
                 name='lc_contact_form'
-                frameBorder='0'
                 width='100%'
                 height='600'
                 src='https://683148.17hats.com/p#/embed/srgkvdwkzskwwdtzzcsdxhkvfhnfkphc'
+                style={ { border: 'none' } }
             />
             <Script
                 src='https://683148.17hats.com/vendor/iframeSizer.min.js'
