@@ -45,7 +45,8 @@ export const Footer = async () => {
                     className={
                         flex( {
                             flexDirection: 'column'
-                            , gap: 'xl'
+                            , gap: 'lg'
+                            , md: { gap: 'xl' }
                         } )
                     }
                 >
@@ -61,10 +62,12 @@ export const Footer = async () => {
                         <span
                             className={
                                 css( {
-                                    fontSize: '4xl'
+                                    fontSize: '2xl'
                                     , fontWeight: 'black'
                                     , color: 'text.inverse'
                                     , lineHeight: 'normal'
+                                    , sm: { fontSize: '3xl' }
+                                    , md: { fontSize: '4xl' }
                                 } )
                             }
                         >
@@ -73,10 +76,12 @@ export const Footer = async () => {
                         <span
                             className={
                                 css( {
-                                    fontSize: '2xl'
+                                    fontSize: 'lg'
                                     , fontWeight: 'semibold'
                                     , color: 'text.inverse'
                                     , lineHeight: 'normal'
+                                    , sm: { fontSize: 'xl' }
+                                    , md: { fontSize: '2xl' }
                                 } )
                             }
                         >
@@ -85,9 +90,13 @@ export const Footer = async () => {
                     </div>
                     <div
                         className={
-                            hstack( {
-                                gap: 'md'
-                                , flexWrap: 'wrap'
+                            flex( {
+                                flexDirection: 'column'
+                                , gap: 'md'
+                                , md: {
+                                    flexDirection: 'row'
+                                    , flexWrap: 'wrap'
+                                }
                             } )
                         }
                     >
@@ -96,7 +105,15 @@ export const Footer = async () => {
                             variant='outline'
                             size='footer'
                             rounded='sm'
-                            className={ css( { flex: 1 } ) }
+                            className={
+                                css( {
+                                    width: '100%'
+                                    , md: {
+                                        width: 'auto'
+                                        , flex: 1
+                                    }
+                                } )
+                            }
                         >
                             Learn more about Scott Dupre
                         </LinkButton>
@@ -107,10 +124,14 @@ export const Footer = async () => {
                             rounded='sm'
                             className={
                                 css( {
-                                    flex: 1
+                                    width: '100%'
                                     , flexDirection: 'column'
                                     , gap: '0'
                                     , lineHeight: 'tight'
+                                    , md: {
+                                        width: 'auto'
+                                        , flex: 1
+                                    }
                                 } )
                             }
                         >
@@ -126,7 +147,15 @@ export const Footer = async () => {
                             variant='outline'
                             size='footer'
                             rounded='sm'
-                            className={ css( { flex: 1 } ) }
+                            className={
+                                css( {
+                                    width: '100%'
+                                    , md: {
+                                        width: 'auto'
+                                        , flex: 1
+                                    }
+                                } )
+                            }
                         >
                             Build Your Own Show
                         </LinkButton>
@@ -135,7 +164,15 @@ export const Footer = async () => {
                             variant='secondary'
                             size='footer'
                             rounded='sm'
-                            className={ css( { flex: 1 } ) }
+                            className={
+                                css( {
+                                    width: '100%'
+                                    , md: {
+                                        width: 'auto'
+                                        , flex: 1
+                                    }
+                                } )
+                            }
                         >
                             Contact
                         </LinkButton>
@@ -203,7 +240,7 @@ export const Footer = async () => {
                                 fontSize: 'xs'
                                 , color: 'text.inverse'
                                 , opacity: 0.35
-                                , marginTop: 'md'
+                                , md: { marginTop: 'md' }
                             } )
                         }
                     >
