@@ -104,7 +104,10 @@ export default async function Home () {
                             Intentional.
                         </span>
                         <span className={ css( { display: 'block' } ) }>
-                            Purposeful. Effective.
+                            Purposeful.
+                        </span>
+                        <span className={ css( { display: 'block' } ) }>
+                            Effective.
                         </span>
                     </h1>
                     <p

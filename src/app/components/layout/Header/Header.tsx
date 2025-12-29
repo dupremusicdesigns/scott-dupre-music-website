@@ -10,6 +10,7 @@ import {
 import { Button } from '../../Button/Button';
 import { navigationRoutes } from '../../../routes/routes';
 import { LogoIcon } from '../../icons/LogoIcon/LogoIcon';
+import { MobileNav } from '../MobileNav/MobileNav';
 
 export const Header = () => {
     const [ musicMenuOpen, setMusicMenuOpen ] = useState( false );
@@ -100,6 +101,8 @@ export const Header = () => {
                             hstack( {
                                 gap: '2xl'
                                 , alignItems: 'center'
+                                , display: 'none'
+                                , lg: { display: 'flex' }
                             } )
                         }
                     >
@@ -253,6 +256,7 @@ export const Header = () => {
                             Contact
                         </Button>
                     </nav>
+                    <MobileNav />
                 </div>
             </div>
         </header>
