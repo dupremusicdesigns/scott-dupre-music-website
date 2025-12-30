@@ -1,5 +1,4 @@
 import { css } from '../../../../styled-system/css';
-import { grid } from '../../../../styled-system/patterns';
 import { ServiceCard } from '../../components/services/ServiceCard/ServiceCard';
 import { ServicesContactButton } from '../../components/services/ServicesContactButton/ServicesContactButton';
 import { getServices } from '../../api/services';
@@ -15,7 +14,8 @@ export default async function ServicesPage () {
                     position: 'relative'
                     , width: '100%'
                     , backgroundColor: 'background.primary'
-                    , paddingBottom: '100px'
+                    , paddingBottom: '2xl'
+                    , md: { paddingBottom: '100px' }
                 } )
             }
         >
@@ -40,11 +40,13 @@ export default async function ServicesPage () {
                     <h1
                         className={
                             css( {
-                                fontSize: '6xl'
+                                fontSize: '4xl'
                                 , fontWeight: 'black'
                                 , lineHeight: 'tight'
                                 , color: 'text.primary'
                                 , textTransform: 'uppercase'
+                                , sm: { fontSize: '5xl' }
+                                , md: { fontSize: '6xl' }
                             } )
                         }
                     >
@@ -55,17 +57,24 @@ export default async function ServicesPage () {
                 <section
                     className={
                         css( {
-                            marginTop: '60px'
+                            marginTop: 'xl'
                             , marginLeft: '7%'
                             , marginRight: '6%'
+                            , md: { marginTop: '60px' }
                         } )
                     }
                 >
                     <div
                         className={
-                            grid( {
-                                columns: 3
-                                , gap: 'lg'
+                            css( {
+                                display: 'grid'
+                                , gridTemplateColumns: '1fr'
+                                , gap: 'md'
+                                , lg: { gridTemplateColumns: 'repeat(2, 1fr)' }
+                                , xl: {
+                                    gridTemplateColumns: 'repeat(3, 1fr)'
+                                    , gap: 'lg'
+                                }
                             } )
                         }
                     >

@@ -17,11 +17,15 @@ export const ServiceCard = ( {
             css( {
                 display: 'flex'
                 , alignItems: 'flex-start'
-                , gap: 'md'
-                , padding: 'lg'
+                , gap: 'sm'
+                , padding: 'md'
                 , border: '2px solid'
                 , borderColor: 'brand.black'
                 , borderRadius: 'md'
+                , sm: {
+                    gap: 'md'
+                    , padding: 'lg'
+                }
             } )
         }
     >

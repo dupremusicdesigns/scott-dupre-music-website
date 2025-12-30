@@ -21,7 +21,15 @@ export const ServicesContactButton = ( { size = 'lg' }: ServicesContactButtonPro
         nativeButton={ false }
         variant='primary'
         size={ size }
-        className={ css( { paddingX: '3xl' } ) }
+        className={
+            css( {
+                width: '100%'
+                , md: {
+                    width: 'auto'
+                    , paddingX: '3xl'
+                }
+            } )
+        }
     >
         Contact
     </Button>
