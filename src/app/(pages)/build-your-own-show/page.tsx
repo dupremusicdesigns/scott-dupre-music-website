@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import { css } from '../../../../styled-system/css';
-import { grid } from '../../../../styled-system/patterns';
 import { BuildYourOwnShowForm } from '../../components/build-your-own-show/BuildYourOwnShowForm';
 import { CategorySectionList } from '../../components/build-your-own-show/CategorySectionList';
 import { CategoryListsWrapper } from '../../components/build-your-own-show/CategoryListsWrapper';
@@ -34,18 +33,21 @@ const BuildYourOwnShowPage = async () => {
                         maxWidth: '1440px'
                         , marginX: 'auto'
                         , paddingX: '7%'
-                        , paddingTop: '2xl'
+                        , paddingTop: 'xl'
+                        , md: { paddingTop: '2xl' }
                     } )
                 }
             >
                 <h1
                     className={
                         css( {
-                            fontSize: '5xl'
+                            fontSize: '3xl'
                             , fontWeight: 'black'
                             , lineHeight: 'tight'
                             , textTransform: 'uppercase'
                             , color: 'text.primary'
+                            , sm: { fontSize: '4xl' }
+                            , md: { fontSize: '5xl' }
                         } )
                     }
                 >
@@ -54,12 +56,14 @@ const BuildYourOwnShowPage = async () => {
                 <p
                     className={
                         css( {
-                            fontSize: '2xl'
+                            fontSize: 'lg'
                             , fontWeight: 'medium'
                             , lineHeight: 'normal'
                             , color: 'text.primary'
                             , marginTop: 'sm'
                             , maxWidth: '884px'
+                            , sm: { fontSize: 'xl' }
+                            , md: { fontSize: '2xl' }
                         } )
                     }
                 >
@@ -73,17 +77,20 @@ const BuildYourOwnShowPage = async () => {
                         maxWidth: '1440px'
                         , marginX: 'auto'
                         , paddingX: '7%'
-                        , marginTop: '3xl'
+                        , marginTop: 'xl'
+                        , md: { marginTop: '3xl' }
                     } )
                 }
             >
                 <h2
                     className={
                         css( {
-                            fontSize: '4xl'
+                            fontSize: '2xl'
                             , fontWeight: 'black'
                             , lineHeight: 'tight'
                             , color: 'text.primary'
+                            , sm: { fontSize: '3xl' }
+                            , md: { fontSize: '4xl' }
                         } )
                     }
                 >
@@ -92,10 +99,20 @@ const BuildYourOwnShowPage = async () => {
                 <CategoryListsWrapper>
                     <div
                         className={
-                            grid( {
-                                columns: 3
-                                , gap: '30px'
-                                , marginTop: 'xl'
+                            css( {
+                                display: 'grid'
+                                , gridTemplateColumns: '1fr'
+                                , gap: 'md'
+                                , marginTop: 'lg'
+                                , sm: {
+                                    gridTemplateColumns: 'repeat(2, 1fr)'
+                                    , gap: 'lg'
+                                }
+                                , md: {
+                                    gridTemplateColumns: 'repeat(3, 1fr)'
+                                    , gap: '30px'
+                                    , marginTop: 'xl'
+                                }
                             } )
                         }
                     >
@@ -121,11 +138,12 @@ const BuildYourOwnShowPage = async () => {
             <section
                 className={
                     css( {
-                        marginTop: '3xl'
+                        marginTop: 'xl'
+                        , paddingX: '7%'
+                        , md: { marginTop: '3xl' }
                         , '3xl': {
                             maxWidth: '1440px'
                             , marginX: 'auto'
-                            , paddingX: '7%'
                         }
                     } )
                 }
@@ -133,14 +151,12 @@ const BuildYourOwnShowPage = async () => {
                 <h2
                     className={
                         css( {
-                            fontSize: '4xl'
+                            fontSize: '2xl'
                             , fontWeight: 'black'
                             , lineHeight: 'tight'
                             , color: 'text.primary'
-                            , paddingX: '7%'
-                            , '3xl': {
-                                paddingX: '0'
-                            }
+                            , sm: { fontSize: '3xl' }
+                            , md: { fontSize: '4xl' }
                         } )
                     }
                 >
@@ -150,23 +166,28 @@ const BuildYourOwnShowPage = async () => {
                     className={
                         css( {
                             display: 'flex'
-                            , marginTop: 'xl'
+                            , marginTop: 'lg'
                             , gap: '0'
+                            , md: { marginTop: 'xl' }
                         } )
                     }
                 >
                     <div
                         className={
                             css( {
-                                flex: '0 0 57%'
-                                , minHeight: '800px'
+                                flex: '1'
+                                , minHeight: '500px'
                                 , border: '2px solid'
                                 , borderColor: 'text.primary'
                                 , borderRadius: 'md'
-                                , padding: 'xl'
-                                , marginLeft: '7%'
-                                , '3xl': {
-                                    marginLeft: '0'
+                                , padding: 'md'
+                                , sm: { padding: 'lg' }
+                                , md: {
+                                    padding: 'xl'
+                                    , minHeight: '800px'
+                                }
+                                , lg: {
+                                    flex: '0 0 57%'
                                 }
                             } )
                         }
@@ -176,13 +197,17 @@ const BuildYourOwnShowPage = async () => {
                     <div
                         className={
                             css( {
-                                position: 'relative'
-                                , flex: '1'
-                                , minHeight: '800px'
-                                , overflow: 'hidden'
-                                , marginLeft: 'md'
-                                , borderTopLeftRadius: 'md'
-                                , borderBottomLeftRadius: 'md'
+                                display: 'none'
+                                , lg: {
+                                    display: 'block'
+                                    , position: 'relative'
+                                    , flex: '1'
+                                    , minHeight: '800px'
+                                    , overflow: 'hidden'
+                                    , marginLeft: 'md'
+                                    , borderTopLeftRadius: 'md'
+                                    , borderBottomLeftRadius: 'md'
+                                }
                                 , '3xl': {
                                     borderRadius: 'md'
                                 }
@@ -208,9 +233,13 @@ const BuildYourOwnShowPage = async () => {
                 className={
                     css( {
                         backgroundColor: 'background.dark'
-                        , marginTop: '3xl'
-                        , paddingY: '3xl'
+                        , marginTop: 'xl'
+                        , paddingY: 'xl'
                         , marginBottom: '2px'
+                        , md: {
+                            marginTop: '3xl'
+                            , paddingY: '3xl'
+                        }
                     } )
                 }
             >
@@ -226,10 +255,11 @@ const BuildYourOwnShowPage = async () => {
                     <h2
                         className={
                             css( {
-                                fontSize: '3xl'
+                                fontSize: '2xl'
                                 , fontWeight: 'black'
                                 , lineHeight: 'tight'
                                 , color: 'text.inverse'
+                                , sm: { fontSize: '3xl' }
                             } )
                         }
                     >
@@ -238,9 +268,13 @@ const BuildYourOwnShowPage = async () => {
                     <ol
                         className={
                             css( {
-                                marginTop: 'lg'
-                                , paddingLeft: 'xl'
+                                marginTop: 'md'
+                                , paddingLeft: 'lg'
                                 , listStyleType: 'decimal'
+                                , md: {
+                                    marginTop: 'lg'
+                                    , paddingLeft: 'xl'
+                                }
                             } )
                         }
                     >
@@ -250,11 +284,12 @@ const BuildYourOwnShowPage = async () => {
                                     key={ index }
                                     className={
                                         css( {
-                                            fontSize: 'md'
+                                            fontSize: 'sm'
                                             , fontWeight: 'medium'
                                             , lineHeight: 'relaxed'
                                             , color: 'text.inverse'
                                             , marginBottom: 'xs'
+                                            , sm: { fontSize: 'md' }
                                         } )
                                     }
                                 >

@@ -34,9 +34,12 @@ export const ShowsGrid = ( { shows }: ShowsGridProps ) => {
                 className={
                     css( {
                         display: 'grid'
-                        , gridTemplateColumns: 'repeat(2, 1fr)'
+                        , gridTemplateColumns: '1fr'
                         , columnGap: 'sm'
                         , rowGap: 'sm'
+                        , sm: {
+                            gridTemplateColumns: 'repeat(2, 1fr)'
+                        }
                         , md: {
                             gridTemplateColumns: 'repeat(3, 1fr)'
                             , columnGap: '30px'
