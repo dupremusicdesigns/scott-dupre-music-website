@@ -13,13 +13,13 @@ import { PlayIcon } from '../icons/PlayIcon/PlayIcon';
 import { PauseIcon } from '../icons/PauseIcon/PauseIcon';
 
 type AudioTrackPlayerProps = {
-    partNumber: number;
+    partLabel: string;
     trackName: string;
     audioUrl: string;
 }
 
 export const AudioTrackPlayer = ( {
-    partNumber
+    partLabel
     , trackName
     , audioUrl
 }: AudioTrackPlayerProps ) => {
@@ -141,9 +141,7 @@ export const AudioTrackPlayer = ( {
                         } )
                     }
                 >
-                    PART
-                    { ' ' }
-                    { partNumber }
+                    { partLabel }
                 </span>
                 <span
                     className={

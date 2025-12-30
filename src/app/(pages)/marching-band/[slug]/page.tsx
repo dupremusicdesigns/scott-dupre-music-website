@@ -7,8 +7,8 @@ import {
     , getMarchingShows
 } from '../../../api/marchingShows';
 import {
-    slugify
-    , stripPartPrefix
+    groupSectionsByAudio
+    , slugify
 } from '../../../utils/generalUtils';
 import { getFallbackGradient } from '../../../utils/imageUtils';
 import { BackButton } from '../../../components/BackButton/BackButton';
@@ -374,7 +374,7 @@ export default async function MarchingShowPage ( { params }: PageProps ) {
                                                     >
                                                         Part
                                                         { ' ' }
-                                                        { index + 1 }
+                                                        { section.partNumber ?? index + 1 }
                                                     </p>
                                                     <p
                                                         className={
@@ -384,7 +384,24 @@ export default async function MarchingShowPage ( { params }: PageProps ) {
                                                             } )
                                                         }
                                                     >
-                                                        { stripPartPrefix( section.sectionName ) }
+                                                        { section.sectionName }
+                                                        {
+                                                            section.composer && (
+                                                                <span
+                                                                    className={
+                                                                        css( {
+                                                                            fontStyle: 'italic'
+                                                                            , color: 'text.secondary'
+                                                                        } )
+                                                                    }
+                                                                >
+                                                                    { ' ' }
+                                                                    by
+                                                                    { ' ' }
+                                                                    { section.composer }
+                                                                </span>
+                                                            )
+                                                        }
                                                     </p>
                                                 </div>
                                             ) )
@@ -446,15 +463,7 @@ export default async function MarchingShowPage ( { params }: PageProps ) {
                             }
                         >
                             <AudioTrackList
-                                tracks={
-                                    ( show.audioPreviews || [] )
-                                        .filter( preview => preview.audioFile?.url )
-                                        .map( preview => ( {
-                                            id: preview.id
-                                            , trackName: stripPartPrefix( preview.trackName || '' )
-                                            , audioUrl: preview.audioFile.url
-                                        } ) )
-                                }
+                                tracks={ groupSectionsByAudio( show.showSections || [] ) }
                             />
                             <div
                                 className={

@@ -15,7 +15,7 @@ export const getMarchingShows = async (): Promise<MarchingShowsResponse> => {
         url: `${ CMS_URL }/marching-shows`
         , queryParams: {
             'populate[0]': 'showArtwork'
-            , 'populate[1]': 'showSections'
+            , 'populate[1]': 'showSections.audioFile'
             , 'populate[2]': 'otherCollaborators'
             , 'populate[3]': 'audioPreviews.audioFile'
         }
@@ -30,7 +30,7 @@ export const getMarchingShowByDocumentId = async (
         url: `${ CMS_URL }/marching-shows/${ documentId }`
         , queryParams: {
             'populate[0]': 'showArtwork'
-            , 'populate[1]': 'showSections'
+            , 'populate[1]': 'showSections.audioFile'
             , 'populate[2]': 'otherCollaborators'
             , 'populate[3]': 'audioPreviews.audioFile'
         }

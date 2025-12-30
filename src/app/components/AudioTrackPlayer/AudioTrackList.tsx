@@ -7,6 +7,7 @@ import { AudioTrackPlayer } from './AudioTrackPlayer';
 
 type AudioTrack = {
     id: number;
+    partLabel: string;
     trackName: string;
     audioUrl: string;
 }
@@ -43,10 +44,10 @@ export const AudioTrackList = ( { tracks }: AudioTrackListProps ) => {
                 }
             >
                 {
-                    tracks.map( ( track, index ) => (
+                    tracks.map( track => (
                         <AudioTrackPlayer
                             key={ track.id }
-                            partNumber={ index + 1 }
+                            partLabel={ track.partLabel }
                             trackName={ track.trackName }
                             audioUrl={ track.audioUrl }
                         />

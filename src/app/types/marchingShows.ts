@@ -46,7 +46,7 @@ export type ShowSection = {
     composer?: string;
     type?: ShowSectionType;
     partNumber?: number;
-    sectionAudio?: AudioPreview;
+    audioFile?: AudioFile;
 }
 
 export type OtherCollaborator = {

@@ -1,4 +1,7 @@
-import { MarchingShow } from '../types';
+import {
+    MarchingShow
+    , ShowSection
+} from '../types';
 
 export const isObject = ( value: unknown ): value is Record<string, unknown> => {
     return typeof value === 'object' && value != null && !Array.isArray( value );
@@ -143,4 +146,46 @@ export const groupShowsBySection = ( shows: MarchingShow[] ): CategorizedSection
         , ballads: ballads.sort( sortByName )
         , closers: closers.sort( sortByName )
     };
+};
+
+export type GroupedAudioTrack = {
+    id: number;
+    partLabel: string;
+    trackName: string;
+    audioUrl: string;
+}
+
+export const groupSectionsByAudio = ( sections: ShowSection[] ): GroupedAudioTrack[] => {
+    const sectionsWithAudio = sections.filter( section => section.audioFile?.url );
+
+    const audioGroups = new Map<string, ShowSection[]>();
+
+    sectionsWithAudio.forEach( ( section, index ) => {
+        const audioUrl = section.audioFile!.url;
+        const existing = audioGroups.get( audioUrl ) || [];
+
+        audioGroups.set( audioUrl, [ ...existing, {
+            ...section
+            , partNumber: section.partNumber ?? index + 1
+        } ] );
+    } );
+
+    return Array.from( audioGroups.entries() ).map( ( [ audioUrl, groupedSections ] ) => {
+        const partNumbers = groupedSections
+            .map( s => s.partNumber! )
+            .sort( ( a, b ) => a - b );
+        const partLabel = partNumbers.length > 1
+            ? `PART ${ partNumbers.join( ' & ' ) }`
+            : `PART ${ partNumbers[ 0 ] }`;
+        const trackName = groupedSections.length > 1
+            ? groupedSections.map( s => s.sectionName ).join( ' & ' )
+            : groupedSections[ 0 ].sectionName;
+
+        return {
+            id: groupedSections[ 0 ].id
+            , partLabel
+            , trackName
+            , audioUrl
+        };
+    } );
 };
