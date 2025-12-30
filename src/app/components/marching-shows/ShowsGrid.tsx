@@ -4,7 +4,6 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { css } from '../../../../styled-system/css';
-import { grid } from '../../../../styled-system/patterns';
 import { Button } from '../Button/Button';
 import { MarchingShow } from '../../types';
 import { SHOWS_PER_PAGE } from '../../constants/uiConstants';
@@ -33,10 +32,16 @@ export const ShowsGrid = ( { shows }: ShowsGridProps ) => {
         <>
             <div
                 className={
-                    grid( {
-                        columns: 3
-                        , columnGap: '30px'
-                        , rowGap: '39px'
+                    css( {
+                        display: 'grid'
+                        , gridTemplateColumns: 'repeat(2, 1fr)'
+                        , columnGap: 'sm'
+                        , rowGap: 'sm'
+                        , md: {
+                            gridTemplateColumns: 'repeat(3, 1fr)'
+                            , columnGap: '30px'
+                            , rowGap: '39px'
+                        }
                     } )
                 }
             >
@@ -150,7 +155,8 @@ export const ShowsGrid = ( { shows }: ShowsGridProps ) => {
                             onClick={ hasMore ? handleViewMore : handleShowLess }
                             className={
                                 css( {
-                                    width: '394px'
+                                    width: '100%'
+                                    , md: { width: '394px' }
                                 } )
                             }
                         >

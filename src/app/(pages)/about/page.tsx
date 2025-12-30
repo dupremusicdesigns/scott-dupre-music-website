@@ -17,7 +17,7 @@ export default async function AboutPage () {
                     position: 'relative'
                     , width: '100%'
                     , backgroundColor: 'background.primary'
-                    , paddingBottom: '60px'
+                    , paddingBottom: '2xl'
                     , md: { paddingBottom: '100px' }
                 } )
             }
@@ -85,7 +85,7 @@ export default async function AboutPage () {
                     className={
                         css( {
                             position: 'relative'
-                            , marginTop: '40px'
+                            , marginTop: 'xl'
                             , marginLeft: '7%'
                             , marginRight: '6%'
                             , display: 'flex'
@@ -178,7 +178,7 @@ export default async function AboutPage () {
                     className={
                         css( {
                             position: 'relative'
-                            , marginTop: '40px'
+                            , marginTop: 'xl'
                             , marginLeft: '7%'
                             , marginRight: '6%'
                             , display: 'flex'
@@ -236,7 +236,7 @@ export default async function AboutPage () {
                         css( {
                             display: 'flex'
                             , justifyContent: 'center'
-                            , marginTop: '40px'
+                            , marginTop: 'xl'
                             , paddingLeft: '7%'
                             , paddingRight: '6%'
                             , md: { marginTop: '80px' }

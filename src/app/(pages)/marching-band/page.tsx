@@ -16,8 +16,12 @@ export default async function MarchingBandPage () {
                     , maxWidth: '1440px'
                     , marginX: 'auto'
                     , paddingX: '7%'
-                    , paddingTop: '2xl'
-                    , paddingBottom: '120px'
+                    , paddingTop: 'xl'
+                    , paddingBottom: '2xl'
+                    , md: {
+                        paddingTop: '2xl'
+                        , paddingBottom: '120px'
+                    }
                 } )
             }
         >
@@ -25,9 +29,15 @@ export default async function MarchingBandPage () {
                 className={
                     css( {
                         display: 'flex'
-                        , justifyContent: 'space-between'
-                        , alignItems: 'flex-start'
-                        , marginBottom: '2xl'
+                        , flexDirection: 'column'
+                        , gap: 'lg'
+                        , marginBottom: 'xl'
+                        , lg: {
+                            flexDirection: 'row'
+                            , justifyContent: 'space-between'
+                            , alignItems: 'flex-start'
+                            , marginBottom: '2xl'
+                        }
                     } )
                 }
             >
@@ -35,10 +45,12 @@ export default async function MarchingBandPage () {
                     <h1
                         className={
                             css( {
-                                fontSize: '5xl'
+                                fontSize: '3xl'
                                 , fontWeight: 'black'
                                 , lineHeight: 'tight'
                                 , textTransform: 'uppercase'
+                                , sm: { fontSize: '4xl' }
+                                , md: { fontSize: '5xl' }
                             } )
                         }
                     >
@@ -47,8 +59,10 @@ export default async function MarchingBandPage () {
                     <p
                         className={
                             css( {
-                                fontSize: '28px'
+                                fontSize: 'lg'
                                 , fontWeight: 'medium'
+                                , sm: { fontSize: 'xl' }
+                                , md: { fontSize: '28px' }
                             } )
                         }
                     >
@@ -60,6 +74,12 @@ export default async function MarchingBandPage () {
                     variant='outlineDark'
                     size='lg'
                     rounded='md'
+                    className={
+                        css( {
+                            width: '100%'
+                            , md: { width: 'auto' }
+                        } )
+                    }
                 >
                     Build Your Own Show
                 </LinkButton>
