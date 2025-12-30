@@ -18,14 +18,18 @@ export const BackButton = ( { href }: BackButtonProps ) => (
                 display: 'flex'
                 , alignItems: 'center'
                 , justifyContent: 'center'
-                , width: '63px'
-                , height: '63px'
+                , width: '48px'
+                , height: '48px'
                 , borderRadius: 'full'
                 , backgroundColor: 'white'
                 , transition: 'all 0.2s'
                 , _hover: {
                     backgroundColor: 'brand.black'
                     , color: 'text.inverse'
+                }
+                , sm: {
+                    width: '63px'
+                    , height: '63px'
                 }
             } )
         }

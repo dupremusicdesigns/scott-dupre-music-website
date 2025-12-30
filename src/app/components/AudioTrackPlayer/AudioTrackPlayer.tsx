@@ -54,10 +54,10 @@ export const AudioTrackPlayer = ( {
                 css( {
                     display: 'flex'
                     , alignItems: 'center'
-                    , gap: 'md'
+                    , gap: 'sm'
                     , width: '100%'
-                    , height: '95px'
-                    , paddingX: 'md'
+                    , height: '80px'
+                    , paddingX: 'sm'
                     , border: '2px solid'
                     , borderColor: 'brand.black'
                     , borderRadius: 'lg'
@@ -66,6 +66,11 @@ export const AudioTrackPlayer = ( {
                     , transition: 'all 0.2s'
                     , _hover: {
                         backgroundColor: 'gray.100'
+                    }
+                    , sm: {
+                        gap: 'md'
+                        , height: '95px'
+                        , paddingX: 'md'
                     }
                 } )
             }
@@ -80,11 +85,15 @@ export const AudioTrackPlayer = ( {
                         display: 'flex'
                         , alignItems: 'center'
                         , justifyContent: 'center'
-                        , width: '63px'
-                        , height: '63px'
+                        , width: '50px'
+                        , height: '50px'
                         , borderRadius: 'full'
                         , backgroundColor: 'brand.black'
                         , flexShrink: 0
+                        , sm: {
+                            width: '63px'
+                            , height: '63px'
+                        }
                     } )
                 }
             >
@@ -125,9 +134,10 @@ export const AudioTrackPlayer = ( {
                 <span
                     className={
                         css( {
-                            fontSize: 'md'
+                            fontSize: 'sm'
                             , fontWeight: 'black'
                             , color: 'text.primary'
+                            , sm: { fontSize: 'md' }
                         } )
                     }
                 >
@@ -138,9 +148,10 @@ export const AudioTrackPlayer = ( {
                 <span
                     className={
                         css( {
-                            fontSize: 'md'
+                            fontSize: 'sm'
                             , fontWeight: 'medium'
                             , color: 'text.primary'
+                            , sm: { fontSize: 'md' }
                         } )
                     }
                 >

@@ -36,6 +36,174 @@ export default async function MarchingShowPage ( { params }: PageProps ) {
     const { data: allShows } = await getMarchingShows();
     const showIndex = allShows.findIndex( s => s.documentId === show.documentId );
 
+    if ( show.comingSoon ) {
+        return (
+            <main
+                className={
+                    css( {
+                        width: '100%'
+                        , maxWidth: '1440px'
+                        , marginX: 'auto'
+                        , paddingY: 'xl'
+                        , paddingX: '7%'
+                        , paddingBottom: '3xl'
+                        , md: {
+                            paddingY: '3xl'
+                            , paddingBottom: '100px'
+                        }
+                    } )
+                }
+            >
+                <div
+                    className={
+                        flex( {
+                            flexDirection: 'column'
+                            , alignItems: 'center'
+                            , gap: 'xl'
+                        } )
+                    }
+                >
+                    <div
+                        className={
+                            css( {
+                                position: 'relative'
+                                , width: '100%'
+                                , maxWidth: '500px'
+                                , aspectRatio: '1/1'
+                                , borderRadius: 'md'
+                                , overflow: 'hidden'
+                            } )
+                        }
+                    >
+                        <Image
+                            src={ show.showArtwork?.url || getFallbackGradient( showIndex ) }
+                            alt={ show.showArtwork?.alternativeText || show.showTitle }
+                            fill
+                            className={
+                                css( {
+                                    objectFit: 'cover'
+                                } )
+                            }
+                        />
+                        <div
+                            className={
+                                css( {
+                                    position: 'absolute'
+                                    , top: 'md'
+                                    , right: 'md'
+                                } )
+                            }
+                        >
+                            <BackButton href='/marching-band' />
+                        </div>
+                    </div>
+
+                    <div
+                        className={
+                            css( {
+                                textAlign: 'center'
+                                , maxWidth: '600px'
+                            } )
+                        }
+                    >
+                        <h1
+                            className={
+                                css( {
+                                    fontSize: '2xl'
+                                    , fontWeight: 'black'
+                                    , lineHeight: 'tight'
+                                    , sm: { fontSize: '3xl' }
+                                    , md: { fontSize: '4xl' }
+                                } )
+                            }
+                        >
+                            { show.showTitle }
+                        </h1>
+                        {
+                            show.commissionedBy && (
+                                <p
+                                    className={
+                                        css( {
+                                            fontSize: 'md'
+                                            , fontWeight: 'medium'
+                                            , marginTop: 'xs'
+                                            , sm: { fontSize: 'lg' }
+                                            , md: { fontSize: 'xl' }
+                                        } )
+                                    }
+                                >
+                                    Commissioned by
+                                    { ' ' }
+                                    { show.commissionedBy }
+                                </p>
+                            )
+                        }
+
+                        <div
+                            className={
+                                css( {
+                                    marginTop: 'xl'
+                                    , padding: 'lg'
+                                    , backgroundColor: 'gray.100'
+                                    , borderRadius: 'md'
+                                    , md: { padding: 'xl' }
+                                } )
+                            }
+                        >
+                            <p
+                                className={
+                                    css( {
+                                        fontSize: 'xl'
+                                        , fontWeight: 'black'
+                                        , textTransform: 'uppercase'
+                                        , letterSpacing: '0.05em'
+                                        , sm: { fontSize: '2xl' }
+                                    } )
+                                }
+                            >
+                                Coming Soon
+                            </p>
+                            <p
+                                className={
+                                    css( {
+                                        fontSize: 'md'
+                                        , fontWeight: 'medium'
+                                        , marginTop: 'sm'
+                                        , color: 'text.secondary'
+                                    } )
+                                }
+                            >
+                                Contact us to learn more or express your interest.
+                            </p>
+                            <div
+                                className={
+                                    css( {
+                                        marginTop: 'lg'
+                                    } )
+                                }
+                            >
+                                <LinkButton
+                                    href='/contact'
+                                    variant='primary'
+                                    size='md'
+                                    rounded='md'
+                                    className={
+                                        css( {
+                                            width: '100%'
+                                            , sm: { width: 'auto' }
+                                        } )
+                                    }
+                                >
+                                    Get In Touch
+                                </LinkButton>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        );
+    }
+
     return (
         <>
             <main
@@ -44,8 +212,13 @@ export default async function MarchingShowPage ( { params }: PageProps ) {
                         width: '100%'
                         , maxWidth: '1440px'
                         , marginX: 'auto'
-                        , paddingY: '3xl'
-                        , paddingRight: 'lg'
+                        , paddingY: 'xl'
+                        , paddingX: '7%'
+                        , lg: {
+                            paddingY: '3xl'
+                            , paddingX: 0
+                            , paddingRight: 'lg'
+                        }
                         , '2xl': {
                             maxWidth: '1600px'
                         }
@@ -55,7 +228,12 @@ export default async function MarchingShowPage ( { params }: PageProps ) {
                 <div
                     className={
                         flex( {
-                            gap: 'xl'
+                            flexDirection: 'column'
+                            , gap: 'lg'
+                            , lg: {
+                                flexDirection: 'row'
+                                , gap: 'xl'
+                            }
                         } )
                     }
                 >
@@ -63,13 +241,20 @@ export default async function MarchingShowPage ( { params }: PageProps ) {
                         className={
                             css( {
                                 position: 'relative'
-                                , width: '280px'
-                                , height: '608px'
-                                , flexShrink: 0
-                                , marginLeft: '-80px'
-                                , borderTopRightRadius: 'md'
-                                , borderBottomRightRadius: 'md'
+                                , width: '100%'
+                                , aspectRatio: '1/1'
+                                , borderRadius: 'md'
                                 , overflow: 'hidden'
+                                , lg: {
+                                    width: '280px'
+                                    , height: '608px'
+                                    , aspectRatio: 'auto'
+                                    , flexShrink: 0
+                                    , marginLeft: '-80px'
+                                    , borderRadius: 0
+                                    , borderTopRightRadius: 'md'
+                                    , borderBottomRightRadius: 'md'
+                                }
                                 , '3xl': {
                                     width: '450px'
                                     , height: 'auto'
@@ -121,9 +306,11 @@ export default async function MarchingShowPage ( { params }: PageProps ) {
                             <h1
                                 className={
                                     css( {
-                                        fontSize: '4xl'
+                                        fontSize: '2xl'
                                         , fontWeight: 'black'
                                         , lineHeight: 'tight'
+                                        , sm: { fontSize: '3xl' }
+                                        , md: { fontSize: '4xl' }
                                     } )
                                 }
                             >
@@ -132,9 +319,11 @@ export default async function MarchingShowPage ( { params }: PageProps ) {
                             <p
                                 className={
                                     css( {
-                                        fontSize: 'xl'
+                                        fontSize: 'md'
                                         , fontWeight: 'medium'
                                         , marginTop: 'xs'
+                                        , sm: { fontSize: 'lg' }
+                                        , md: { fontSize: 'xl' }
                                     } )
                                 }
                             >
@@ -237,8 +426,11 @@ export default async function MarchingShowPage ( { params }: PageProps ) {
                     <div
                         className={
                             css( {
-                                width: '534px'
-                                , flexShrink: 0
+                                width: '100%'
+                                , lg: {
+                                    width: '534px'
+                                    , flexShrink: 0
+                                }
                             } )
                         }
                     >
@@ -248,7 +440,8 @@ export default async function MarchingShowPage ( { params }: PageProps ) {
                                     border: '2px solid'
                                     , borderColor: 'brand.black'
                                     , borderRadius: 'md'
-                                    , padding: 'lg'
+                                    , padding: 'md'
+                                    , sm: { padding: 'lg' }
                                 } )
                             }
                         >
@@ -279,7 +472,8 @@ export default async function MarchingShowPage ( { params }: PageProps ) {
                                     rounded='md'
                                     className={
                                         css( {
-                                            width: '251px'
+                                            width: '100%'
+                                            , sm: { width: '251px' }
                                         } )
                                     }
                                 >
@@ -296,9 +490,12 @@ export default async function MarchingShowPage ( { params }: PageProps ) {
                     css( {
                         width: '100%'
                         , backgroundColor: 'background.dark'
-                        , paddingTop: '55px'
-                        , paddingBottom: '55px'
+                        , paddingY: 'xl'
                         , marginBottom: '2px'
+                        , md: {
+                            paddingTop: '55px'
+                            , paddingBottom: '55px'
+                        }
                     } )
                 }
             >
@@ -315,11 +512,12 @@ export default async function MarchingShowPage ( { params }: PageProps ) {
                     <h2
                         className={
                             css( {
-                                fontSize: '3xl'
+                                fontSize: '2xl'
                                 , fontWeight: 'black'
                                 , color: 'text.inverse'
                                 , lineHeight: 'tight'
                                 , marginBottom: 'md'
+                                , sm: { fontSize: '3xl' }
                             } )
                         }
                     >
@@ -329,11 +527,13 @@ export default async function MarchingShowPage ( { params }: PageProps ) {
                         className={
                             css( {
                                 color: 'text.inverse'
-                                , fontSize: 'md'
+                                , fontSize: 'sm'
                                 , fontWeight: 'medium'
-                                , lineHeight: 'list'
+                                , lineHeight: 'relaxed'
                                 , paddingLeft: 'lg'
                                 , listStyleType: 'decimal'
+                                , sm: { fontSize: 'md' }
+                                , md: { lineHeight: 'list' }
                             } )
                         }
                     >

@@ -117,6 +117,61 @@ export const ShowsGrid = ( { shows }: ShowsGridProps ) => {
                                     } ) }`
                                 }
                             />
+                            {
+                                show.comingSoon && (
+                                    <div
+                                        className={
+                                            css( {
+                                                position: 'absolute'
+                                                , top: '20px'
+                                                , right: '-28px'
+                                                , width: '130px'
+                                                , backgroundColor: 'gray.600'
+                                                , color: 'white'
+                                                , fontSize: '10px'
+                                                , fontWeight: 'bold'
+                                                , display: 'flex'
+                                                , justifyContent: 'center'
+                                                , alignItems: 'center'
+                                                , textTransform: 'uppercase'
+                                                , letterSpacing: '0.02em'
+                                                , paddingY: '6px'
+                                                , transform: 'rotate(45deg)'
+                                                , transformOrigin: 'center'
+                                                , boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)'
+                                            } )
+                                        }
+                                    >
+                                        Coming Soon
+                                    </div>
+                                )
+                            }
+                            {
+                                show.isNew && !show.comingSoon && (
+                                    <div
+                                        className={
+                                            css( {
+                                                position: 'absolute'
+                                                , top: '16px'
+                                                , right: '-32px'
+                                                , width: '120px'
+                                                , backgroundColor: 'brand.black'
+                                                , color: 'white'
+                                                , fontSize: 'sm'
+                                                , fontWeight: 'bold'
+                                                , textAlign: 'center'
+                                                , textTransform: 'uppercase'
+                                                , letterSpacing: '0.1em'
+                                                , paddingY: '6px'
+                                                , transform: 'rotate(45deg)'
+                                                , boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)'
+                                            } )
+                                        }
+                                    >
+                                        New
+                                    </div>
+                                )
+                            }
                             <span
                                 className={
                                     `card-title ${ css( {
