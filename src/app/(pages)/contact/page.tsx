@@ -16,7 +16,8 @@ export default async function ContactPage () {
                     position: 'relative'
                     , width: '100%'
                     , backgroundColor: 'background.primary'
-                    , paddingBottom: '100px'
+                    , paddingBottom: '2xl'
+                    , md: { paddingBottom: '100px' }
                 } )
             }
         >
@@ -41,12 +42,14 @@ export default async function ContactPage () {
                     <h1
                         className={
                             css( {
-                                fontSize: '6xl'
+                                fontSize: '4xl'
                                 , fontWeight: 'black'
                                 , lineHeight: 'tight'
                                 , color: 'text.primary'
                                 , textTransform: 'uppercase'
                                 , textAlign: 'center'
+                                , sm: { fontSize: '5xl' }
+                                , md: { fontSize: '6xl' }
                             } )
                         }
                     >
@@ -55,11 +58,12 @@ export default async function ContactPage () {
                     <p
                         className={
                             css( {
-                                fontSize: 'lg'
+                                fontSize: 'md'
                                 , fontWeight: 'medium'
                                 , color: 'text.primary'
                                 , textAlign: 'center'
                                 , marginTop: 'xs'
+                                , sm: { fontSize: 'lg' }
                             } )
                         }
                     >
@@ -68,14 +72,29 @@ export default async function ContactPage () {
 
                     <div
                         className={
-                            flex( {
-                                justifyContent: 'space-between'
-                                , alignItems: 'flex-start'
-                                , marginTop: 'xl'
+                            css( {
+                                display: 'flex'
+                                , flexDirection: 'column'
+                                , alignItems: 'center'
+                                , gap: 'md'
+                                , marginTop: 'lg'
+                                , sm: {
+                                    flexDirection: 'row'
+                                    , justifyContent: 'space-between'
+                                    , alignItems: 'flex-start'
+                                    , marginTop: 'xl'
+                                }
                             } )
                         }
                     >
-                        <div>
+                        <div
+                            className={
+                                css( {
+                                    textAlign: 'center'
+                                    , sm: { textAlign: 'left' }
+                                } )
+                            }
+                        >
                             <p
                                 className={
                                     css( {
@@ -111,7 +130,8 @@ export default async function ContactPage () {
                         <div
                             className={
                                 css( {
-                                    textAlign: 'right'
+                                    textAlign: 'center'
+                                    , sm: { textAlign: 'right' }
                                 } )
                             }
                         >
@@ -132,7 +152,7 @@ export default async function ContactPage () {
                                     flex( {
                                         gap: 'md'
                                         , marginTop: 'xs'
-                                        , justifyContent: 'flex-end'
+                                        , justifyContent: 'center'
                                     } )
                                 }
                             >
@@ -184,9 +204,10 @@ export default async function ContactPage () {
                 <section
                     className={
                         css( {
-                            marginTop: 'xl'
+                            marginTop: 'lg'
                             , marginLeft: '7%'
                             , marginRight: '6%'
+                            , sm: { marginTop: 'xl' }
                         } )
                     }
                 >
@@ -196,7 +217,9 @@ export default async function ContactPage () {
                                 border: '2px solid'
                                 , borderColor: 'text.primary'
                                 , borderRadius: 'md'
-                                , padding: 'xl'
+                                , padding: 'md'
+                                , sm: { padding: 'lg' }
+                                , md: { padding: 'xl' }
                             } )
                         }
                     >

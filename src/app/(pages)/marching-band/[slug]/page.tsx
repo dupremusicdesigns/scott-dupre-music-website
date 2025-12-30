@@ -254,11 +254,13 @@ export default async function MarchingShowPage ( { params }: PageProps ) {
                         >
                             <AudioTrackList
                                 tracks={
-                                    ( show.audioPreviews || [] ).map( preview => ( {
-                                        id: preview.id
-                                        , trackName: stripPartPrefix( preview.trackName || '' )
-                                        , audioUrl: preview.audioFile.url
-                                    } ) )
+                                    ( show.audioPreviews || [] )
+                                        .filter( preview => preview.audioFile?.url )
+                                        .map( preview => ( {
+                                            id: preview.id
+                                            , trackName: stripPartPrefix( preview.trackName || '' )
+                                            , audioUrl: preview.audioFile.url
+                                        } ) )
                                 }
                             />
                             <div

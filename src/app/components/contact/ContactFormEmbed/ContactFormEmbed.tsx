@@ -13,7 +13,8 @@ export const ContactFormEmbed = () => {
             className={
                 css( {
                     position: 'relative'
-                    , minHeight: '600px'
+                    , minHeight: '500px'
+                    , sm: { minHeight: '600px' }
                 } )
             }
         >
@@ -40,9 +41,10 @@ export const ContactFormEmbed = () => {
                 className={
                     css( {
                         border: 'none'
-                        , minHeight: '600px'
+                        , minHeight: '500px'
                         , opacity: isLoading ? 0 : 1
                         , transition: 'opacity 0.3s ease-in-out'
+                        , sm: { minHeight: '600px' }
                     } )
                 }
             />
