@@ -79,8 +79,7 @@ export const sortMarchingShows = ( shows: MarchingShow[] ): MarchingShow[] => {
 
 export type CategoryItem = {
     sectionName: string;
-    showTitle: string;
-    commissionedBy: string;
+    composer: string | null;
     audioUrl: string | null;
 }
 
@@ -90,61 +89,64 @@ export type CategorizedSections = {
     closers: CategoryItem[];
 }
 
-const findAudioForSection = (
-    sectionName: string
-    , audioPreviews: MarchingShow[ 'audioPreviews' ]
-    , index: number
-): string | null => {
-    const partMatch = sectionName.match( /Part\s*(\d+)/i );
-
-    if ( partMatch ) {
-        const partNumber = partMatch[ 1 ];
-        const matchingPreview = audioPreviews?.find( preview =>
-            preview.trackName?.includes( `Part ${ partNumber }` )
-            || preview.trackName?.includes( `Part${ partNumber }` )
-        );
-
-        if ( matchingPreview?.audioFile?.url ) {
-            return matchingPreview.audioFile.url;
-        }
-    }
-
-    return audioPreviews?.[ index ]?.audioFile?.url || null;
-};
+type SectionWithMeta = {
+    sectionName: string;
+    composer: string | null;
+    audioUrl: string;
+    type: ShowSection[ 'type' ];
+}
 
 export const groupShowsBySection = ( shows: MarchingShow[] ): CategorizedSections => {
-    const introsAndOpeners: CategoryItem[] = [];
-    const ballads: CategoryItem[] = [];
-    const closers: CategoryItem[] = [];
+    const sectionsWithAudio: SectionWithMeta[] = [];
 
     shows.forEach( show => {
-        show.showSections?.forEach( ( section, index ) => {
-            const matchingAudio = findAudioForSection( section.sectionName, show.audioPreviews, index );
-
-            const item: CategoryItem = {
-                sectionName: stripPartPrefix( section.sectionName )
-                , showTitle: show.showTitle
-                , commissionedBy: show.commissionedBy
-                , audioUrl: matchingAudio
-            };
-
-            if ( section.type === 'intro' || section.type === 'opener' ) {
-                introsAndOpeners.push( item );
-            } else if ( section.type === 'ballad' ) {
-                ballads.push( item );
-            } else if ( section.type === 'closer' ) {
-                closers.push( item );
+        show.showSections?.forEach( section => {
+            if ( section.audioFile?.url && section.type ) {
+                sectionsWithAudio.push( {
+                    sectionName: stripPartPrefix( section.sectionName )
+                    , composer: section.composer || null
+                    , audioUrl: section.audioFile.url
+                    , type: section.type
+                } );
             }
         } );
     } );
+
+    const groupByAudioAndType = ( sections: SectionWithMeta[] ): CategoryItem[] => {
+        const audioGroups = new Map<string, SectionWithMeta[]>();
+
+        sections.forEach( section => {
+            const existing = audioGroups.get( section.audioUrl ) || [];
+            audioGroups.set( section.audioUrl, [ ...existing, section ] );
+        } );
+
+        return Array.from( audioGroups.entries() ).map( ( [ audioUrl, grouped ] ) => {
+            const sectionName = grouped.length > 1
+                ? grouped.map( s => s.sectionName ).join( ' & ' )
+                : grouped[ 0 ].sectionName;
+
+            const composers = [ ...new Set( grouped.map( s => s.composer ).filter( Boolean ) ) ];
+            const composer = composers.length > 0 ? composers.join( ' & ' ) : null;
+
+            return {
+                sectionName
+                , composer
+                , audioUrl
+            };
+        } );
+    };
+
+    const intros = sectionsWithAudio.filter( s => s.type === 'intro' || s.type === 'opener' );
+    const ballads = sectionsWithAudio.filter( s => s.type === 'ballad' );
+    const closers = sectionsWithAudio.filter( s => s.type === 'closer' );
 
     const sortByName = ( a: CategoryItem, b: CategoryItem ) =>
         a.sectionName.localeCompare( b.sectionName );
 
     return {
-        introsAndOpeners: introsAndOpeners.sort( sortByName )
-        , ballads: ballads.sort( sortByName )
-        , closers: closers.sort( sortByName )
+        introsAndOpeners: groupByAudioAndType( intros ).sort( sortByName )
+        , ballads: groupByAudioAndType( ballads ).sort( sortByName )
+        , closers: groupByAudioAndType( closers ).sort( sortByName )
     };
 };
 
@@ -174,9 +176,11 @@ export const groupSectionsByAudio = ( sections: ShowSection[] ): GroupedAudioTra
         const partNumbers = groupedSections
             .map( s => s.partNumber! )
             .sort( ( a, b ) => a - b );
+
         const partLabel = partNumbers.length > 1
             ? `PART ${ partNumbers.join( ' & ' ) }`
             : `PART ${ partNumbers[ 0 ] }`;
+
         const trackName = groupedSections.length > 1
             ? groupedSections.map( s => s.sectionName ).join( ' & ' )
             : groupedSections[ 0 ].sectionName;

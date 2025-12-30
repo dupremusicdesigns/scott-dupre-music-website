@@ -14,13 +14,13 @@ import { PauseIcon } from '../icons/PauseIcon/PauseIcon';
 
 type CategoryAudioPlayerProps = {
     sectionName: string;
-    showTitle: string;
+    composer: string | null;
     audioUrl: string;
 }
 
 export const CategoryAudioPlayer = ( {
     sectionName
-    , showTitle
+    , composer
     , audioUrl
 }: CategoryAudioPlayerProps ) => {
     const audioRef = useRef<HTMLAudioElement>( null );
@@ -138,21 +138,26 @@ export const CategoryAudioPlayer = ( {
                 >
                     { sectionName }
                 </span>
-                <span
-                    title={ showTitle }
-                    className={
-                        css( {
-                            fontSize: 'xs'
-                            , fontWeight: 'medium'
-                            , color: 'text.secondary'
-                            , overflow: 'hidden'
-                            , textOverflow: 'ellipsis'
-                            , whiteSpace: 'nowrap'
-                        } )
-                    }
-                >
-                    { showTitle }
-                </span>
+                {
+                    composer && (
+                        <span
+                            title={ composer }
+                            className={
+                                css( {
+                                    fontSize: 'xs'
+                                    , fontWeight: 'medium'
+                                    , fontStyle: 'italic'
+                                    , color: 'text.secondary'
+                                    , overflow: 'hidden'
+                                    , textOverflow: 'ellipsis'
+                                    , whiteSpace: 'nowrap'
+                                } )
+                            }
+                        >
+                            { composer }
+                        </span>
+                    )
+                }
             </div>
         </div>
     );

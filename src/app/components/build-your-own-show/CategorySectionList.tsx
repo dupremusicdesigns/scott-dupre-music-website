@@ -6,8 +6,7 @@ import { CategoryAudioPlayer } from './CategoryAudioPlayer';
 
 type CategoryItem = {
     sectionName: string;
-    showTitle: string;
-    commissionedBy: string;
+    composer: string | null;
     audioUrl: string | null;
 }
 
@@ -131,7 +130,7 @@ export const CategorySectionList = ( {
                                     <CategoryAudioPlayer
                                         key={ `${ item.sectionName }-${ index }` }
                                         sectionName={ item.sectionName }
-                                        showTitle={ item.showTitle }
+                                        composer={ item.composer }
                                         audioUrl={ item.audioUrl! }
                                     />
                                 ) )
