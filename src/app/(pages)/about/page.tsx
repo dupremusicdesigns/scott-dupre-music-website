@@ -17,7 +17,8 @@ export default async function AboutPage () {
                     position: 'relative'
                     , width: '100%'
                     , backgroundColor: 'background.primary'
-                    , paddingBottom: '100px'
+                    , paddingBottom: '60px'
+                    , md: { paddingBottom: '100px' }
                 } )
             }
         >
@@ -42,11 +43,13 @@ export default async function AboutPage () {
                     <h1
                         className={
                             css( {
-                                fontSize: '6xl'
+                                fontSize: '4xl'
                                 , fontWeight: 'black'
                                 , lineHeight: 'tight'
                                 , color: 'text.primary'
                                 , textTransform: 'uppercase'
+                                , sm: { fontSize: '5xl' }
+                                , md: { fontSize: '6xl' }
                             } )
                         }
                     >
@@ -57,12 +60,18 @@ export default async function AboutPage () {
                     className={
                         css( {
                             position: 'relative'
-                            , marginTop: 'xl'
+                            , marginTop: 'lg'
                             , marginLeft: '7%'
                             , marginRight: '6%'
-                            , height: '407px'
+                            , height: '200px'
                             , borderRadius: 'md'
                             , overflow: 'hidden'
+                            , sm: { height: '280px' }
+                            , md: {
+                                height: '350px'
+                                , marginTop: 'xl'
+                            }
+                            , lg: { height: '407px' }
                         } )
                     }
                 >
@@ -76,11 +85,17 @@ export default async function AboutPage () {
                     className={
                         css( {
                             position: 'relative'
-                            , marginTop: '80px'
+                            , marginTop: '40px'
                             , marginLeft: '7%'
                             , marginRight: '6%'
                             , display: 'flex'
-                            , gap: 'xl'
+                            , flexDirection: 'column-reverse'
+                            , gap: 'lg'
+                            , md: {
+                                flexDirection: 'row'
+                                , gap: 'xl'
+                                , marginTop: '80px'
+                            }
                         } )
                     }
                 >
@@ -95,9 +110,10 @@ export default async function AboutPage () {
                             <h2
                                 className={
                                     css( {
-                                        fontSize: '3xl'
+                                        fontSize: '2xl'
                                         , fontWeight: 'black'
                                         , color: 'text.primary'
+                                        , sm: { fontSize: '3xl' }
                                     } )
                                 }
                             >
@@ -106,11 +122,12 @@ export default async function AboutPage () {
                             <p
                                 className={
                                     css( {
-                                        fontSize: 'lg'
+                                        fontSize: 'base'
                                         , fontWeight: 'medium'
                                         , color: 'text.primary'
                                         , lineHeight: 'normal'
                                         , marginTop: 'xs'
+                                        , sm: { fontSize: 'lg' }
                                     } )
                                 }
                             >
@@ -120,12 +137,13 @@ export default async function AboutPage () {
                         <div
                             className={
                                 css( {
-                                    fontSize: 'lg'
+                                    fontSize: 'base'
                                     , fontWeight: 'normal'
                                     , lineHeight: 'normal'
                                     , color: 'text.primary'
                                     , marginTop: 'lg'
                                     , whiteSpace: 'pre-line'
+                                    , sm: { fontSize: 'lg' }
                                 } )
                             }
                         >
@@ -136,12 +154,17 @@ export default async function AboutPage () {
                         className={
                             css( {
                                 position: 'relative'
-                                , width: '37%'
+                                , width: '100%'
                                 , aspectRatio: '1'
-                                , borderTopLeftRadius: 'md'
-                                , borderBottomLeftRadius: 'md'
+                                , borderRadius: 'md'
                                 , overflow: 'hidden'
                                 , flexShrink: 0
+                                , md: {
+                                    width: '37%'
+                                    , borderRadius: '0'
+                                    , borderTopLeftRadius: 'md'
+                                    , borderBottomLeftRadius: 'md'
+                                }
                             } )
                         }
                     >
@@ -155,11 +178,17 @@ export default async function AboutPage () {
                     className={
                         css( {
                             position: 'relative'
-                            , marginTop: '80px'
+                            , marginTop: '40px'
                             , marginLeft: '7%'
                             , marginRight: '6%'
                             , display: 'flex'
-                            , gap: 'xl'
+                            , flexDirection: 'column'
+                            , gap: 'lg'
+                            , md: {
+                                flexDirection: 'row'
+                                , gap: 'xl'
+                                , marginTop: '80px'
+                            }
                         } )
                     }
                 >
@@ -167,12 +196,17 @@ export default async function AboutPage () {
                         className={
                             css( {
                                 position: 'relative'
-                                , width: '55%'
+                                , width: '100%'
                                 , aspectRatio: '676/436'
-                                , borderTopRightRadius: 'md'
-                                , borderBottomRightRadius: 'md'
+                                , borderRadius: 'md'
                                 , overflow: 'hidden'
                                 , flexShrink: 0
+                                , md: {
+                                    width: '55%'
+                                    , borderRadius: '0'
+                                    , borderTopRightRadius: 'md'
+                                    , borderBottomRightRadius: 'md'
+                                }
                             } )
                         }
                     >
@@ -185,11 +219,12 @@ export default async function AboutPage () {
                         className={
                             css( {
                                 flex: 1
-                                , fontSize: 'lg'
+                                , fontSize: 'base'
                                 , fontWeight: 'normal'
                                 , lineHeight: 'normal'
                                 , color: 'text.primary'
                                 , whiteSpace: 'pre-line'
+                                , sm: { fontSize: 'lg' }
                             } )
                         }
                     >
@@ -201,9 +236,10 @@ export default async function AboutPage () {
                         css( {
                             display: 'flex'
                             , justifyContent: 'center'
-                            , marginTop: '80px'
+                            , marginTop: '40px'
                             , paddingLeft: '7%'
                             , paddingRight: '6%'
+                            , md: { marginTop: '80px' }
                         } )
                     }
                 >
