@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import { css } from '../../../../styled-system/css';
-import { AudioProvider } from '../../context/AudioContext';
 import { CategoryAudioPlayer } from './CategoryAudioPlayer';
 
 type CategoryItem = {
@@ -127,19 +126,15 @@ export const CategorySectionList = ( {
                     {
                         itemsWithAudio.length > 0
                             ? (
-                                <AudioProvider>
-                                    {
-                                        itemsWithAudio.map( ( item, index ) => (
-                                            <CategoryAudioPlayer
-                                                key={ `${ item.sectionName }-${ index }` }
-                                                trackId={ `${ title }-${ index }` }
-                                                sectionName={ item.sectionName }
-                                                composer={ item.composer }
-                                                audioUrl={ item.audioUrl! }
-                                            />
-                                        ) )
-                                    }
-                                </AudioProvider>
+                                itemsWithAudio.map( ( item, index ) => (
+                                    <CategoryAudioPlayer
+                                        key={ `${ item.sectionName }-${ index }` }
+                                        trackId={ `${ title }-${ index }` }
+                                        sectionName={ item.sectionName }
+                                        composer={ item.composer }
+                                        audioUrl={ item.audioUrl! }
+                                    />
+                                ) )
                             )
                             : (
                                 <p
