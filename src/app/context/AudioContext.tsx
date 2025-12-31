@@ -10,12 +10,17 @@ import {
 
 type AudioContextType = {
     playAudio: ( audio: HTMLAudioElement ) => void;
+    registerAudio: ( id: string, audio: HTMLAudioElement ) => void;
+    unregisterAudio: ( id: string ) => void;
+    playNext: ( currentId: string ) => void;
 }
 
 const AudioContext = createContext<AudioContextType | null>( null );
 
 export const AudioProvider = ( { children }: { children: ReactNode } ) => {
     const currentlyPlayingRef = useRef<HTMLAudioElement | null>( null );
+    const audioMapRef = useRef<Map<string, HTMLAudioElement>>( new Map() );
+    const orderRef = useRef<string[]>( [] );
 
     const playAudio = useCallback( ( audio: HTMLAudioElement ) => {
         if ( currentlyPlayingRef.current && currentlyPlayingRef.current !== audio ) {
@@ -28,11 +33,40 @@ export const AudioProvider = ( { children }: { children: ReactNode } ) => {
         audio.play();
     }, [] );
 
+    const registerAudio = useCallback( ( id: string, audio: HTMLAudioElement ) => {
+        audioMapRef.current.set( id, audio );
+
+        if ( !orderRef.current.includes( id ) ) {
+            orderRef.current.push( id );
+        }
+    }, [] );
+
+    const unregisterAudio = useCallback( ( id: string ) => {
+        audioMapRef.current.delete( id );
+        orderRef.current = orderRef.current.filter( orderId => orderId !== id );
+    }, [] );
+
+    const playNext = useCallback( ( currentId: string ) => {
+        const currentIndex = orderRef.current.indexOf( currentId );
+
+        if ( currentIndex === -1 || currentIndex >= orderRef.current.length - 1 ) {
+            return;
+        }
+
+        const nextId = orderRef.current[ currentIndex + 1 ];
+        const nextAudio = audioMapRef.current.get( nextId );
+
+        if ( nextAudio ) playAudio( nextAudio );
+    }, [ playAudio ] );
+
     return (
         <AudioContext.Provider
             value={
                 {
                     playAudio
+                    , registerAudio
+                    , unregisterAudio
+                    , playNext
                 }
             }
         >

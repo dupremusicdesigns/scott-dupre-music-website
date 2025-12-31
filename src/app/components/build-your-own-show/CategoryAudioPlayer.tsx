@@ -4,6 +4,8 @@ import {
     useRef
     , useState
     , useCallback
+    , useEffect
+    , type MouseEvent
 } from 'react';
 import { Button } from '@base-ui/react';
 import { css } from '../../../../styled-system/css';
@@ -13,31 +15,76 @@ import { PlayIcon } from '../icons/PlayIcon/PlayIcon';
 import { PauseIcon } from '../icons/PauseIcon/PauseIcon';
 
 type CategoryAudioPlayerProps = {
+    trackId: string;
     sectionName: string;
     composer: string | null;
     audioUrl: string;
 }
 
 export const CategoryAudioPlayer = ( {
-    sectionName
+    trackId
+    , sectionName
     , composer
     , audioUrl
 }: CategoryAudioPlayerProps ) => {
     const audioRef = useRef<HTMLAudioElement>( null );
+    const containerRef = useRef<HTMLDivElement>( null );
     const [ isPlaying, setIsPlaying ] = useState( false );
+    const [ progress, setProgress ] = useState( 0 );
 
-    const { playAudio } = useAudio();
+    const {
+        playAudio
+        , registerAudio
+        , unregisterAudio
+        , playNext
+    } = useAudio();
+
+    useEffect( () => {
+        if ( audioRef.current ) {
+            registerAudio( trackId, audioRef.current );
+        }
+
+        return () => {
+            unregisterAudio( trackId );
+        };
+    }, [ trackId, registerAudio, unregisterAudio ] );
+
+    useEffect( () => {
+        const audio = audioRef.current;
+
+        if ( !audio ) return;
+
+        const handleTimeUpdate = () => {
+            if ( audio.duration ) {
+                setProgress( ( audio.currentTime / audio.duration ) * 100 );
+            }
+        };
+
+        audio.addEventListener( 'timeupdate', handleTimeUpdate );
+
+        return () => {
+            audio.removeEventListener( 'timeupdate', handleTimeUpdate );
+        };
+    }, [] );
 
     const handlePlay = useCallback( () => setIsPlaying( true ), [] );
     const handlePause = useCallback( () => setIsPlaying( false ), [] );
+    const handleEnded = useCallback( () => {
+        setIsPlaying( false );
+        setProgress( 0 );
+        playNext( trackId );
+    }, [ trackId, playNext ] );
 
     useAudioListeners( {
         audioRef
         , onPlay: handlePlay
         , onPause: handlePause
+        , onEnded: handleEnded
     } );
 
-    const togglePlay = () => {
+    const togglePlay = ( e: MouseEvent ) => {
+        e.stopPropagation();
+
         if ( !audioRef.current ) return;
 
         if ( isPlaying ) {
@@ -47,8 +94,27 @@ export const CategoryAudioPlayer = ( {
         }
     };
 
+    const handleSeek = ( e: MouseEvent<HTMLDivElement> ) => {
+        if ( !audioRef.current || !containerRef.current ) return;
+
+        const rect = containerRef.current.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const percentage = clickX / rect.width;
+        const newTime = percentage * audioRef.current.duration;
+
+        if ( !isNaN( newTime ) ) {
+            audioRef.current.currentTime = newTime;
+
+            if ( !isPlaying ) {
+                playAudio( audioRef.current );
+            }
+        }
+    };
+
     return (
         <div
+            ref={ containerRef }
+            onClick={ handleSeek }
             className={
                 css( {
                     display: 'flex'
@@ -56,11 +122,34 @@ export const CategoryAudioPlayer = ( {
                     , gap: 'sm'
                     , width: '100%'
                     , paddingY: 'sm'
-                    , borderBottom: '1px solid'
-                    , borderColor: 'gray.200'
+                    , position: 'relative'
+                    , cursor: 'pointer'
+                    , _after: {
+                        content: '""'
+                        , position: 'absolute'
+                        , bottom: 0
+                        , left: 0
+                        , right: 0
+                        , height: '2px'
+                        , backgroundColor: 'gray.200'
+                    }
                 } )
             }
         >
+            <div
+                style={ { width: `${ progress }%` } }
+                className={
+                    css( {
+                        position: 'absolute'
+                        , bottom: 0
+                        , left: 0
+                        , height: '2px'
+                        , backgroundColor: 'brand.black'
+                        , transition: 'width 0.1s linear'
+                        , zIndex: 1
+                    } )
+                }
+            />
             <Button
                 onClick={ togglePlay }
                 className={
