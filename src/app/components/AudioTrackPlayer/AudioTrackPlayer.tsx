@@ -69,6 +69,7 @@ export const AudioTrackPlayer = ( {
 
     const handlePlay = useCallback( () => setIsPlaying( true ), [] );
     const handlePause = useCallback( () => setIsPlaying( false ), [] );
+
     const handleEnded = useCallback( () => {
         setIsPlaying( false );
         setProgress( 0 );
