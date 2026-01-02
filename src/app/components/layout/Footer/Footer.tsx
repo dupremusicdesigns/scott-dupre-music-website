@@ -93,7 +93,7 @@ export const Footer = async () => {
                             flex( {
                                 flexDirection: 'column'
                                 , gap: 'md'
-                                , md: {
+                                , xl: {
                                     flexDirection: 'row'
                                     , flexWrap: 'wrap'
                                 }
@@ -108,7 +108,7 @@ export const Footer = async () => {
                             className={
                                 css( {
                                     width: '100%'
-                                    , md: {
+                                    , xl: {
                                         width: 'auto'
                                         , flex: 1
                                     }
@@ -128,7 +128,7 @@ export const Footer = async () => {
                                     , flexDirection: 'column'
                                     , gap: '0'
                                     , lineHeight: 'tight'
-                                    , md: {
+                                    , xl: {
                                         width: 'auto'
                                         , flex: 1
                                     }
@@ -150,7 +150,7 @@ export const Footer = async () => {
                             className={
                                 css( {
                                     width: '100%'
-                                    , md: {
+                                    , xl: {
                                         width: 'auto'
                                         , flex: 1
                                     }
@@ -167,7 +167,7 @@ export const Footer = async () => {
                             className={
                                 css( {
                                     width: '100%'
-                                    , md: {
+                                    , xl: {
                                         width: 'auto'
                                         , flex: 1
                                     }
