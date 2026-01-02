@@ -6,6 +6,7 @@ import { sortMarchingShows } from '../../utils/generalUtils';
 
 export default async function MarchingBandPage () {
     const { data: shows } = await getMarchingShows();
+
     const sortedShows = sortMarchingShows( shows );
 
     return (

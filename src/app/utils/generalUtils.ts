@@ -84,7 +84,8 @@ export type CategoryItem = {
 }
 
 export type CategorizedSections = {
-    introsAndOpeners: CategoryItem[];
+    intros: CategoryItem[];
+    openers: CategoryItem[];
     ballads: CategoryItem[];
     closers: CategoryItem[];
 }
@@ -136,7 +137,8 @@ export const groupShowsBySection = ( shows: MarchingShow[] ): CategorizedSection
         } );
     };
 
-    const intros = sectionsWithAudio.filter( s => s.type === 'intro' || s.type === 'opener' );
+    const intros = sectionsWithAudio.filter( s => s.type === 'intro' );
+    const openers = sectionsWithAudio.filter( s => s.type === 'opener' );
     const ballads = sectionsWithAudio.filter( s => s.type === 'ballad' );
     const closers = sectionsWithAudio.filter( s => s.type === 'closer' );
 
@@ -144,7 +146,8 @@ export const groupShowsBySection = ( shows: MarchingShow[] ): CategorizedSection
         a.sectionName.localeCompare( b.sectionName );
 
     return {
-        introsAndOpeners: groupByAudioAndType( intros ).sort( sortByName )
+        intros: groupByAudioAndType( intros ).sort( sortByName )
+        , openers: groupByAudioAndType( openers ).sort( sortByName )
         , ballads: groupByAudioAndType( ballads ).sort( sortByName )
         , closers: groupByAudioAndType( closers ).sort( sortByName )
     };

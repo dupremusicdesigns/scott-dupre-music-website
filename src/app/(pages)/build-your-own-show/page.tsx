@@ -104,12 +104,12 @@ const BuildYourOwnShowPage = async () => {
                                 , gridTemplateColumns: '1fr'
                                 , gap: 'md'
                                 , marginTop: 'lg'
-                                , sm: {
+                                , md: {
                                     gridTemplateColumns: 'repeat(2, 1fr)'
                                     , gap: 'lg'
                                 }
-                                , md: {
-                                    gridTemplateColumns: 'repeat(3, 1fr)'
+                                , xl: {
+                                    gridTemplateColumns: 'repeat(4, 1fr)'
                                     , gap: '30px'
                                     , marginTop: 'xl'
                                 }
@@ -117,19 +117,24 @@ const BuildYourOwnShowPage = async () => {
                         }
                     >
                         <CategorySectionList
-                            title='Intros & Openers'
-                            items={ categorizedSections.introsAndOpeners }
+                            title='Intros'
+                            items={ categorizedSections.intros }
                             imageIndex={ 1 }
+                        />
+                        <CategorySectionList
+                            title='Openers'
+                            items={ categorizedSections.openers }
+                            imageIndex={ 2 }
                         />
                         <CategorySectionList
                             title='Ballads'
                             items={ categorizedSections.ballads }
-                            imageIndex={ 2 }
+                            imageIndex={ 3 }
                         />
                         <CategorySectionList
                             title='Closers'
                             items={ categorizedSections.closers }
-                            imageIndex={ 3 }
+                            imageIndex={ 4 }
                         />
                     </div>
                 </CategoryListsWrapper>

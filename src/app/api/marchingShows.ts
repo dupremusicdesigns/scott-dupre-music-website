@@ -10,7 +10,7 @@ import {
 } from '../types';
 import { slugify } from '../utils/generalUtils';
 
-export const getMarchingShows = async (): Promise<MarchingShowsResponse> => {
+const fetchMarchingShowsPage = async ( page: number ): Promise<MarchingShowsResponse> => {
     return makeApiCall<MarchingShowsResponse, unknown, Record<string, string>>( {
         url: `${ CMS_URL }/marching-shows`
         , queryParams: {
@@ -18,9 +18,43 @@ export const getMarchingShows = async (): Promise<MarchingShowsResponse> => {
             , 'populate[1]': 'showSections.audioFile'
             , 'populate[2]': 'otherCollaborators'
             , 'populate[3]': 'audioPreviews.audioFile'
+            , 'pagination[page]': String( page )
+            , 'pagination[pageSize]': '100'
         }
         , options: AUTH_HEADERS
     } );
+};
+
+export const getMarchingShows = async (): Promise<MarchingShowsResponse> => {
+    const firstPage = await fetchMarchingShowsPage( 1 );
+
+    const {
+        pageCount
+        , total
+    } = firstPage.meta.pagination;
+
+    if ( pageCount <= 1 ) return firstPage;
+
+    const remainingPages = await Promise.all(
+        Array.from( { length: pageCount - 1 }, ( _, i ) => fetchMarchingShowsPage( i + 2 ) )
+    );
+
+    const allData = [
+        ...firstPage.data
+        , ...remainingPages.flatMap( page => page.data )
+    ];
+
+    return {
+        data: allData
+        , meta: {
+            pagination: {
+                ...firstPage.meta.pagination
+                , total
+                , pageCount: 1
+                , pageSize: allData.length
+            }
+        }
+    };
 };
 
 export const getMarchingShowByDocumentId = async (
