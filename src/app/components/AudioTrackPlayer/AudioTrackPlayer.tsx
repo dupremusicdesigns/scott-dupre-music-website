@@ -8,6 +8,7 @@ import {
 } from 'react';
 import { Button } from '@base-ui/react';
 import { css } from '../../../../styled-system/css';
+import { colors } from '../../theme/colors';
 import { useAudio } from '../../context/AudioContext';
 import { useAudioListeners } from '../../hooks/useAudioListeners';
 import { PlayIcon } from '../icons/PlayIcon/PlayIcon';
@@ -53,21 +54,19 @@ export const AudioTrackPlayer = ( {
 
         if ( !audio || !container ) return;
 
-        const handleTimeUpdate = () => {
+        const controller = new AbortController();
+
+        audio.addEventListener( 'timeupdate', () => {
             if ( audio.duration ) {
                 const progress = ( audio.currentTime / audio.duration ) * 100;
 
                 container.style.background = progress > 0
-                    ? `linear-gradient(to right, #e5e5e5 ${ progress }%, transparent ${ progress }%)`
+                    ? `linear-gradient(to right, ${ colors.gray200 } ${ progress }%, transparent ${ progress }%)`
                     : 'transparent';
             }
-        };
+        }, { signal: controller.signal } );
 
-        audio.addEventListener( 'timeupdate', handleTimeUpdate );
-
-        return () => {
-            audio.removeEventListener( 'timeupdate', handleTimeUpdate );
-        };
+        return () => controller.abort();
     }, [] );
 
     const handlePlay = () => setIsPlaying( true );

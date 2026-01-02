@@ -62,7 +62,7 @@ export const CategorySectionList = ( {
                     css( {
                         position: 'absolute'
                         , inset: 0
-                        , backgroundColor: 'rgba(255, 255, 255, 0.85)'
+                        , backgroundColor: 'overlay.white'
                         , zIndex: 1
                     } )
                 }

@@ -54,18 +54,17 @@ export const CategoryAudioPlayer = ( {
 
         if ( !audio || !progressBar ) return;
 
-        const handleTimeUpdate = () => {
+        const controller = new AbortController();
+
+        audio.addEventListener( 'timeupdate', () => {
             if ( audio.duration ) {
                 const progress = ( audio.currentTime / audio.duration ) * 100;
+
                 progressBar.style.width = `${ progress }%`;
             }
-        };
+        }, { signal: controller.signal } );
 
-        audio.addEventListener( 'timeupdate', handleTimeUpdate );
-
-        return () => {
-            audio.removeEventListener( 'timeupdate', handleTimeUpdate );
-        };
+        return () => controller.abort();
     }, [] );
 
     const handlePlay = () => setIsPlaying( true );

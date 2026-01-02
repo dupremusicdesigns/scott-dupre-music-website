@@ -217,7 +217,7 @@ export default async function Home () {
                             }
                             , xl: {
                                 height: '287px'
-                                , paddingRight: '350px'
+                                , paddingRight: 'calc(7% + 300px)'
                                 , paddingY: '0'
                             }
                         } )
@@ -266,6 +266,11 @@ export default async function Home () {
                                         , flexShrink: 0
                                         , lineHeight: '19px'
                                     }
+                                    , xl: {
+                                        width: 'auto'
+                                        , flex: 1
+                                        , flexShrink: 1
+                                    }
                                 } )
                             }
                         >
@@ -285,6 +290,11 @@ export default async function Home () {
                                     , lg: {
                                         width: '252px'
                                         , flexShrink: 0
+                                    }
+                                    , xl: {
+                                        width: 'auto'
+                                        , minWidth: '180px'
+                                        , flexShrink: 1
                                     }
                                 } )
                             }

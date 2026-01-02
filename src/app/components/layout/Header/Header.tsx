@@ -166,6 +166,7 @@ export const Header = () => {
                                                                     , flexDirection: 'column'
                                                                     , gap: 'sm'
                                                                     , boxShadow: 'dropdown'
+                                                                    , clipPath: 'inset(0 -20px -20px -20px)'
                                                                     , animation: 'dropdownFadeIn 0.2s ease-out'
                                                                 } )
                                                             }

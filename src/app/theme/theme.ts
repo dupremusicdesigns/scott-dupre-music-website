@@ -43,11 +43,19 @@ const theme: ExtendableTheme = {
                     , secondary: { value: colors.gray600 }
                     , muted: { value: colors.gray500 }
                     , inverse: { value: colors.white }
+                    , link: { value: colors.link }
+                    , linkHover: { value: colors.linkHover }
                 }
                 , border: {
                     default: { value: colors.gray200 }
                     , dark: { value: colors.black }
                     , light: { value: colors.white }
+                }
+                , overlay: {
+                    light: { value: colors.overlayLight }
+                    , medium: { value: colors.overlayMedium }
+                    , heavy: { value: colors.overlayHeavy }
+                    , white: { value: 'rgba(255, 255, 255, 0.85)' }
                 }
                 , button: {
                     primary: { value: colors.black }
@@ -115,6 +123,8 @@ const theme: ExtendableTheme = {
             }
             , shadows: {
                 dropdown: { value: '0 4px 16px rgba(0, 0, 0, 0.08)' }
+                , badge: { value: '0 2px 4px rgba(0, 0, 0, 0.2)' }
+                , nav: { value: '-4px 0 20px rgba(0, 0, 0, 0.15)' }
             }
             , durations: {
                 fast: { value: '0.2s' }

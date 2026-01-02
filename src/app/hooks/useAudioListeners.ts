@@ -46,14 +46,13 @@ export const useAudioListeners = ( {
 
         if ( !audio ) return;
 
-        if ( onPlay ) audio.addEventListener( 'play', onPlay );
-        if ( onPause ) audio.addEventListener( 'pause', onPause );
-        if ( onEnded ) audio.addEventListener( 'ended', onEnded );
+        const controller = new AbortController();
+        const { signal } = controller;
 
-        return () => {
-            if ( onPlay ) audio.removeEventListener( 'play', onPlay );
-            if ( onPause ) audio.removeEventListener( 'pause', onPause );
-            if ( onEnded ) audio.removeEventListener( 'ended', onEnded );
-        };
+        if ( onPlay ) audio.addEventListener( 'play', onPlay, { signal } );
+        if ( onPause ) audio.addEventListener( 'pause', onPause, { signal } );
+        if ( onEnded ) audio.addEventListener( 'ended', onEnded, { signal } );
+
+        return () => controller.abort();
     }, [ audioRef, onPlay, onPause, onEnded ] );
 };

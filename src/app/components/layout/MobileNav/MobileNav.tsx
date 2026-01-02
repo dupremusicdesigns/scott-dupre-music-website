@@ -48,7 +48,7 @@ export const MobileNav = () => {
                         css( {
                             position: 'fixed'
                             , inset: 0
-                            , backgroundColor: 'rgba(0, 0, 0, 0.5)'
+                            , backgroundColor: 'overlay.medium'
                             , zIndex: 999
                             , '&[data-open]': {
                                 animation: 'backdropFadeIn 0.3s ease-out forwards'
@@ -68,7 +68,7 @@ export const MobileNav = () => {
                             , width: '280px'
                             , height: '100vh'
                             , backgroundColor: 'background.primary'
-                            , boxShadow: '-4px 0 20px rgba(0, 0, 0, 0.15)'
+                            , boxShadow: 'nav'
                             , zIndex: 1000
                             , overflowY: 'auto'
                             , '&[data-open]': {

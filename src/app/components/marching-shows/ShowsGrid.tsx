@@ -98,7 +98,7 @@ export const ShowsGrid = ( { shows }: ShowsGridProps ) => {
                                     `card-overlay ${ css( {
                                         position: 'absolute'
                                         , inset: 0
-                                        , backgroundColor: 'rgba(0, 0, 0, 0.5)'
+                                        , backgroundColor: 'overlay.medium'
                                         , opacity: 0
                                         , transition: 'opacity 0.3s ease'
                                     } ) }`
@@ -140,7 +140,7 @@ export const ShowsGrid = ( { shows }: ShowsGridProps ) => {
                                                 , paddingY: '6px'
                                                 , transform: 'rotate(45deg)'
                                                 , transformOrigin: 'center'
-                                                , boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)'
+                                                , boxShadow: 'badge'
                                             } )
                                         }
                                     >
@@ -166,7 +166,7 @@ export const ShowsGrid = ( { shows }: ShowsGridProps ) => {
                                                 , letterSpacing: '0.1em'
                                                 , paddingY: '6px'
                                                 , transform: 'rotate(45deg)'
-                                                , boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)'
+                                                , boxShadow: 'badge'
                                             } )
                                         }
                                     >

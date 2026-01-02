@@ -16,7 +16,7 @@ export const ServiceCard = ( {
         className={
             css( {
                 display: 'flex'
-                , alignItems: 'flex-start'
+                , alignItems: 'center'
                 , gap: 'sm'
                 , padding: 'md'
                 , border: '2px solid'

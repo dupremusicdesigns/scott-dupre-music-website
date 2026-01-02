@@ -4,6 +4,9 @@ export const colors = {
     , placeholder: '#D9D9D9'
     , pageBackground: '#AEAEAE'
 
+    , link: '#3182ce'
+    , linkHover: '#2c5282'
+
     , gray50: '#FAFAFA'
     , gray100: '#F5F5F5'
     , gray200: '#E5E5E5'

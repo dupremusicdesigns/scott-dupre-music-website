@@ -16,11 +16,11 @@ export const Markdown = ( {
                         <h1
                             className={
                                 css( {
-                                    fontSize: '2rem'
+                                    fontSize: '2xl'
                                     , fontWeight: 'bold'
-                                    , marginTop: '2.5rem'
-                                    , marginBottom: '1.25rem'
-                                    , color: '#1a202c'
+                                    , marginTop: 'lg'
+                                    , marginBottom: 'sm'
+                                    , color: 'text.primary'
                                 } )
                             }
                         >
@@ -31,11 +31,11 @@ export const Markdown = ( {
                         <h2
                             className={
                                 css( {
-                                    fontSize: '1.5rem'
+                                    fontSize: 'xl'
                                     , fontWeight: 'bold'
-                                    , marginTop: '2rem'
-                                    , marginBottom: '1rem'
-                                    , color: '#1a202c'
+                                    , marginTop: 'lg'
+                                    , marginBottom: 'sm'
+                                    , color: 'text.primary'
                                 } )
                             }
                         >
@@ -46,11 +46,11 @@ export const Markdown = ( {
                         <h3
                             className={
                                 css( {
-                                    fontSize: '1.25rem'
+                                    fontSize: 'lg'
                                     , fontWeight: 'semibold'
-                                    , marginTop: '1.5rem'
-                                    , marginBottom: '0.75rem'
-                                    , color: '#2d3748'
+                                    , marginTop: 'md'
+                                    , marginBottom: 'xs'
+                                    , color: 'text.primary'
                                 } )
                             }
                         >
@@ -61,9 +61,9 @@ export const Markdown = ( {
                         <p
                             className={
                                 css( {
-                                    marginBottom: '1rem'
-                                    , lineHeight: '1.6'
-                                    , color: '#4a5568'
+                                    marginBottom: 'sm'
+                                    , lineHeight: 'relaxed'
+                                    , color: 'text.secondary'
                                 } )
                             }
                         >
@@ -75,8 +75,8 @@ export const Markdown = ( {
                             className={
                                 css( {
                                     listStyleType: 'disc'
-                                    , paddingLeft: '1.5rem'
-                                    , marginBottom: '1rem'
+                                    , paddingLeft: 'md'
+                                    , marginBottom: 'sm'
                                 } )
                             }
                         >
@@ -87,7 +87,7 @@ export const Markdown = ( {
                         <li
                             className={
                                 css( {
-                                    marginBottom: '0.5rem'
+                                    marginBottom: 'xs'
                                 } )
                             }
                         >
@@ -98,13 +98,14 @@ export const Markdown = ( {
                         <blockquote
                             className={
                                 css( {
-                                    borderLeft: '4px solid #e2e8f0'
-                                    , paddingLeft: '1rem'
+                                    borderLeft: '4px solid'
+                                    , borderColor: 'gray.200'
+                                    , paddingLeft: 'sm'
                                     , marginLeft: '0'
                                     , marginRight: '0'
-                                    , marginBottom: '1rem'
+                                    , marginBottom: 'sm'
                                     , fontStyle: 'italic'
-                                    , color: '#718096'
+                                    , color: 'text.muted'
                                 } )
                             }
                         >
@@ -115,10 +116,10 @@ export const Markdown = ( {
                         <code
                             className={
                                 css( {
-                                    backgroundColor: '#f7fafc'
+                                    backgroundColor: 'gray.50'
                                     , padding: '0.125rem 0.25rem'
                                     , borderRadius: '0.25rem'
-                                    , fontSize: '0.875rem'
+                                    , fontSize: 'sm'
                                     , fontFamily: 'monospace'
                                 } )
                             }
@@ -130,12 +131,12 @@ export const Markdown = ( {
                         <pre
                             className={
                                 css( {
-                                    backgroundColor: '#1a202c'
-                                    , color: '#e2e8f0'
-                                    , padding: '1rem'
-                                    , borderRadius: '0.5rem'
+                                    backgroundColor: 'gray.900'
+                                    , color: 'gray.200'
+                                    , padding: 'sm'
+                                    , borderRadius: 'sm'
                                     , overflow: 'auto'
-                                    , marginBottom: '1rem'
+                                    , marginBottom: 'sm'
                                 } )
                             }
                         >
@@ -172,10 +173,10 @@ export const Markdown = ( {
                             href={ href }
                             className={
                                 css( {
-                                    color: '#3182ce'
+                                    color: 'text.link'
                                     , textDecoration: 'underline'
                                     , _hover: {
-                                        color: '#2c5282'
+                                        color: 'text.linkHover'
                                     }
                                 } )
                             }
