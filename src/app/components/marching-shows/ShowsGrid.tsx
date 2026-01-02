@@ -61,19 +61,21 @@ export const ShowsGrid = ( { shows }: ShowsGridProps ) => {
                                     , borderRadius: 'md'
                                     , overflow: 'hidden'
                                     , transition: 'transform 0.2s, box-shadow 0.2s'
-                                    , _hover: {
-                                        transform: 'scale(1.02)'
-                                        , boxShadow: 'lg'
-                                        , '& .card-overlay': {
-                                            opacity: 1
-                                        }
-                                        , '& .card-gradient': {
-                                            opacity: 0
-                                        }
-                                        , '& .card-title': {
-                                            bottom: '50%'
-                                            , transform: 'translateY(50%)'
-                                            , fontSize: '3xl'
+                                    , md: {
+                                        _hover: {
+                                            transform: 'scale(1.02)'
+                                            , boxShadow: 'lg'
+                                            , '& .card-overlay': {
+                                                opacity: 1
+                                            }
+                                            , '& .card-gradient': {
+                                                opacity: 0
+                                            }
+                                            , '& .card-title': {
+                                                bottom: '50%'
+                                                , transform: 'translateY(50%)'
+                                                , fontSize: '3xl'
+                                            }
                                         }
                                     }
                                 } )
