@@ -1,8 +1,10 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-    images: {
-        remotePatterns: [
+    output: 'export'
+    , images: {
+        unoptimized: true
+        , remotePatterns: [
             {
                 protocol: 'https'
                 , hostname: '*.strapiapp.com'
