@@ -3,7 +3,6 @@
 import {
     useRef
     , useState
-    , useCallback
     , useEffect
     , type MouseEvent
 } from 'react';
@@ -29,8 +28,8 @@ export const CategoryAudioPlayer = ( {
 }: CategoryAudioPlayerProps ) => {
     const audioRef = useRef<HTMLAudioElement>( null );
     const containerRef = useRef<HTMLDivElement>( null );
+    const progressRef = useRef<HTMLDivElement>( null );
     const [ isPlaying, setIsPlaying ] = useState( false );
-    const [ progress, setProgress ] = useState( 0 );
 
     const {
         playAudio
@@ -51,12 +50,14 @@ export const CategoryAudioPlayer = ( {
 
     useEffect( () => {
         const audio = audioRef.current;
+        const progressBar = progressRef.current;
 
-        if ( !audio ) return;
+        if ( !audio || !progressBar ) return;
 
         const handleTimeUpdate = () => {
             if ( audio.duration ) {
-                setProgress( ( audio.currentTime / audio.duration ) * 100 );
+                const progress = ( audio.currentTime / audio.duration ) * 100;
+                progressBar.style.width = `${ progress }%`;
             }
         };
 
@@ -67,13 +68,15 @@ export const CategoryAudioPlayer = ( {
         };
     }, [] );
 
-    const handlePlay = useCallback( () => setIsPlaying( true ), [] );
-    const handlePause = useCallback( () => setIsPlaying( false ), [] );
-    const handleEnded = useCallback( () => {
+    const handlePlay = () => setIsPlaying( true );
+    const handlePause = () => setIsPlaying( false );
+    const handleEnded = () => {
         setIsPlaying( false );
-        setProgress( 0 );
+        if ( progressRef.current ) {
+            progressRef.current.style.width = '0%';
+        }
         playNext( trackId );
-    }, [ trackId, playNext ] );
+    };
 
     useAudioListeners( {
         audioRef
@@ -137,12 +140,13 @@ export const CategoryAudioPlayer = ( {
             }
         >
             <div
-                style={ { width: `${ progress }%` } }
+                ref={ progressRef }
                 className={
                     css( {
                         position: 'absolute'
                         , bottom: 0
                         , left: 0
+                        , width: 0
                         , height: '2px'
                         , backgroundColor: 'brand.black'
                         , transition: 'width 0.1s linear'

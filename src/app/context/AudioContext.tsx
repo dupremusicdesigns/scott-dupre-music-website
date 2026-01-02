@@ -4,7 +4,6 @@ import {
     createContext
     , useContext
     , useRef
-    , useCallback
     , ReactNode
 } from 'react';
 
@@ -22,7 +21,7 @@ export const AudioProvider = ( { children }: { children: ReactNode } ) => {
     const audioMapRef = useRef<Map<string, HTMLAudioElement>>( new Map() );
     const orderRef = useRef<string[]>( [] );
 
-    const playAudio = useCallback( ( audio: HTMLAudioElement ) => {
+    const playAudio = ( audio: HTMLAudioElement ) => {
         if ( currentlyPlayingRef.current && currentlyPlayingRef.current !== audio ) {
             currentlyPlayingRef.current.pause();
             currentlyPlayingRef.current.currentTime = 0;
@@ -31,22 +30,22 @@ export const AudioProvider = ( { children }: { children: ReactNode } ) => {
         currentlyPlayingRef.current = audio;
 
         audio.play();
-    }, [] );
+    };
 
-    const registerAudio = useCallback( ( id: string, audio: HTMLAudioElement ) => {
+    const registerAudio = ( id: string, audio: HTMLAudioElement ) => {
         audioMapRef.current.set( id, audio );
 
         if ( !orderRef.current.includes( id ) ) {
             orderRef.current.push( id );
         }
-    }, [] );
+    };
 
-    const unregisterAudio = useCallback( ( id: string ) => {
+    const unregisterAudio = ( id: string ) => {
         audioMapRef.current.delete( id );
         orderRef.current = orderRef.current.filter( orderId => orderId !== id );
-    }, [] );
+    };
 
-    const playNext = useCallback( ( currentId: string ) => {
+    const playNext = ( currentId: string ) => {
         const currentIndex = orderRef.current.indexOf( currentId );
 
         if ( currentIndex === -1 || currentIndex >= orderRef.current.length - 1 ) {
@@ -57,7 +56,7 @@ export const AudioProvider = ( { children }: { children: ReactNode } ) => {
         const nextAudio = audioMapRef.current.get( nextId );
 
         if ( nextAudio ) playAudio( nextAudio );
-    }, [ playAudio ] );
+    };
 
     return (
         <AudioContext.Provider

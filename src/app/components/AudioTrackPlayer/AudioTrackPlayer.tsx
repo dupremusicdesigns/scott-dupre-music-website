@@ -3,7 +3,6 @@
 import {
     useRef
     , useState
-    , useCallback
     , useEffect
     , type MouseEvent
 } from 'react';
@@ -30,7 +29,6 @@ export const AudioTrackPlayer = ( {
     const audioRef = useRef<HTMLAudioElement>( null );
     const containerRef = useRef<HTMLDivElement>( null );
     const [ isPlaying, setIsPlaying ] = useState( false );
-    const [ progress, setProgress ] = useState( 0 );
 
     const {
         playAudio
@@ -51,12 +49,17 @@ export const AudioTrackPlayer = ( {
 
     useEffect( () => {
         const audio = audioRef.current;
+        const container = containerRef.current;
 
-        if ( !audio ) return;
+        if ( !audio || !container ) return;
 
         const handleTimeUpdate = () => {
             if ( audio.duration ) {
-                setProgress( ( audio.currentTime / audio.duration ) * 100 );
+                const progress = ( audio.currentTime / audio.duration ) * 100;
+
+                container.style.background = progress > 0
+                    ? `linear-gradient(to right, #e5e5e5 ${ progress }%, transparent ${ progress }%)`
+                    : 'transparent';
             }
         };
 
@@ -67,13 +70,15 @@ export const AudioTrackPlayer = ( {
         };
     }, [] );
 
-    const handlePlay = useCallback( () => setIsPlaying( true ), [] );
-    const handlePause = useCallback( () => setIsPlaying( false ), [] );
-    const handleEnded = useCallback( () => {
+    const handlePlay = () => setIsPlaying( true );
+    const handlePause = () => setIsPlaying( false );
+    const handleEnded = () => {
         setIsPlaying( false );
-        setProgress( 0 );
+        if ( containerRef.current ) {
+            containerRef.current.style.background = 'transparent';
+        }
         playNext( trackId );
-    }, [ trackId, playNext ] );
+    };
 
     useAudioListeners( {
         audioRef
@@ -111,15 +116,10 @@ export const AudioTrackPlayer = ( {
         }
     };
 
-    const progressBackground = progress > 0
-        ? `linear-gradient(to right, #e5e5e5 ${ progress }%, transparent ${ progress }%)`
-        : 'transparent';
-
     return (
         <div
             ref={ containerRef }
             onClick={ handleSeek }
-            style={ { background: progressBackground } }
             className={
                 css( {
                     display: 'flex'
