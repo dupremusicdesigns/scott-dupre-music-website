@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { Header } from './components/layout/Header/Header';
 import { Footer } from './components/layout/Footer/Footer';
+import { LogRocketProvider } from './components/LogRocketProvider/LogRocketProvider';
 
 const inter = Inter( {
     variable: '--font-inter'
@@ -22,6 +23,7 @@ export default function RootLayout ( {
     return (
         <html lang='en'>
             <body className={ inter.variable }>
+                <LogRocketProvider />
                 <Header />
                 { children }
                 <Footer />
