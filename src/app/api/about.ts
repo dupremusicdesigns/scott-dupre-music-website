@@ -1,7 +1,7 @@
 import {
     CMS_URL
     , AUTH_HEADERS
-} from '../constants/apiContants';
+} from '../constants/apiConstants';
 import { makeApiCall } from '../utils/apiUtils';
 import { AboutResponse } from '../types';
 
