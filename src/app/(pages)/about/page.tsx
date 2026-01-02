@@ -89,7 +89,7 @@ export default async function AboutPage () {
                             , marginLeft: '7%'
                             , marginRight: '6%'
                             , display: 'flex'
-                            , flexDirection: 'column-reverse'
+                            , flexDirection: 'column'
                             , gap: 'lg'
                             , md: {
                                 flexDirection: 'row'
@@ -182,7 +182,7 @@ export default async function AboutPage () {
                             , marginLeft: '7%'
                             , marginRight: '6%'
                             , display: 'flex'
-                            , flexDirection: 'column'
+                            , flexDirection: 'column-reverse'
                             , gap: 'lg'
                             , md: {
                                 flexDirection: 'row'

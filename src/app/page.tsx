@@ -2,6 +2,7 @@ import { css } from '../../styled-system/css';
 import { flex } from '../../styled-system/patterns';
 import { LinkButton } from './components/LinkButton/LinkButton';
 import { CmsImage } from './components/CmsImage/CmsImage';
+import { MobileTestimonials } from './components/MobileTestimonials/MobileTestimonials';
 import { getHome } from './api/home';
 
 export default async function Home () {
@@ -18,7 +19,6 @@ export default async function Home () {
                     position: 'relative'
                     , width: '100%'
                     , backgroundColor: 'background.primary'
-                    , paddingBottom: 'xl'
                     , md: { paddingBottom: '100px' }
                 } )
             }
@@ -27,8 +27,9 @@ export default async function Home () {
                 className={
                     css( {
                         position: 'relative'
-                        , height: '100vw'
-                        , maxHeight: '420px'
+                        , zIndex: 1
+                        , height: '140vw'
+                        , maxHeight: '553px'
                         , width: '100%'
                         , overflow: 'hidden'
                         , sm: {
@@ -53,7 +54,7 @@ export default async function Home () {
                     className={
                         css( {
                             objectFit: 'cover'
-                            , objectPosition: 'center center'
+                            , objectPosition: '60% center'
                             , md: { objectPosition: 'center top' }
                             , '3xl': { objectPosition: 'center 20%' }
                         } )
@@ -68,7 +69,13 @@ export default async function Home () {
                             , width: '100%'
                             , height: '100%'
                             , background: 'linear-gradient(to right, rgba(0,0,0,0.75), rgba(0,0,0,0))'
-                            , md: { width: '70%' }
+                            , borderBottomLeftRadius: '20px'
+                            , borderBottomRightRadius: '20px'
+                            , md: {
+                                width: '70%'
+                                , borderBottomLeftRadius: '0'
+                                , borderBottomRightRadius: '0'
+                            }
                         } )
                     }
                 />
@@ -81,20 +88,28 @@ export default async function Home () {
                             , paddingRight: '6%'
                             , display: 'flex'
                             , flexDirection: 'column'
-                            , justifyContent: 'center'
+                            , justifyContent: 'flex-end'
+                            , paddingBottom: '80px'
+                            , sm: {
+                                justifyContent: 'center'
+                                , paddingBottom: '0'
+                            }
                         } )
                     }
                 >
                     <h1
                         className={
                             css( {
-                                fontSize: '3xl'
+                                fontSize: '42px'
                                 , fontWeight: 'black'
-                                , lineHeight: 'tight'
+                                , lineHeight: '0.95'
                                 , color: 'text.inverse'
                                 , textTransform: 'uppercase'
-                                , maxWidth: '750px'
-                                , sm: { fontSize: '4xl' }
+                                , maxWidth: '330px'
+                                , sm: {
+                                    fontSize: '4xl'
+                                    , maxWidth: '750px'
+                                }
                                 , md: { fontSize: '5xl' }
                                 , lg: { fontSize: '6xl' }
                             } )
@@ -113,13 +128,16 @@ export default async function Home () {
                     <p
                         className={
                             css( {
-                                fontSize: 'md'
+                                fontSize: '13px'
                                 , fontWeight: 'bold'
-                                , lineHeight: 'normal'
+                                , lineHeight: '1.2'
                                 , color: 'text.inverse'
-                                , maxWidth: '583px'
+                                , maxWidth: '238px'
                                 , marginTop: 'md'
-                                , sm: { fontSize: 'lg' }
+                                , sm: {
+                                    fontSize: 'lg'
+                                    , maxWidth: '583px'
+                                }
                                 , md: {
                                     fontSize: 'xl'
                                     , marginTop: 'xl'
@@ -157,7 +175,15 @@ export default async function Home () {
                                     className={
                                         css( {
                                             width: '100%'
-                                            , sm: { width: '197px' }
+                                            , height: '45px'
+                                            , fontSize: '12px'
+                                            , borderRadius: '20px'
+                                            , sm: {
+                                                width: '197px'
+                                                , height: '51px'
+                                                , fontSize: 'base'
+                                                , borderRadius: 'md'
+                                            }
                                         } )
                                     }
                                 >
@@ -174,7 +200,15 @@ export default async function Home () {
                                     className={
                                         css( {
                                             width: '100%'
-                                            , sm: { width: '197px' }
+                                            , height: '45px'
+                                            , fontSize: '12px'
+                                            , borderRadius: '20px'
+                                            , sm: {
+                                                width: '197px'
+                                                , height: '51px'
+                                                , fontSize: 'base'
+                                                , borderRadius: 'md'
+                                            }
                                         } )
                                     }
                                 >
@@ -189,9 +223,12 @@ export default async function Home () {
             <section
                 className={
                     css( {
-                        position: 'relative'
-                        , marginTop: 'xl'
-                        , md: { marginTop: '91px' }
+                        display: 'none'
+                        , md: {
+                            display: 'block'
+                            , position: 'relative'
+                            , marginTop: '91px'
+                        }
                     } )
                 }
             >
@@ -199,22 +236,17 @@ export default async function Home () {
                     className={
                         css( {
                             position: 'relative'
-                            , width: '100%'
+                            , width: '93%'
                             , height: 'auto'
                             , backgroundColor: 'background.dark'
-                            , borderRadius: '0'
+                            , borderTopRightRadius: 'md'
+                            , borderBottomRightRadius: 'md'
                             , display: 'flex'
                             , flexDirection: 'column'
                             , justifyContent: 'center'
                             , paddingLeft: '7%'
-                            , paddingRight: '7%'
+                            , paddingRight: '6%'
                             , paddingY: 'xl'
-                            , md: {
-                                width: '93%'
-                                , borderTopRightRadius: 'md'
-                                , borderBottomRightRadius: 'md'
-                                , paddingRight: '6%'
-                            }
                             , xl: {
                                 height: '287px'
                                 , paddingRight: 'calc(7% + 300px)'
@@ -226,11 +258,10 @@ export default async function Home () {
                     <h2
                         className={
                             css( {
-                                fontSize: '2xl'
+                                fontSize: '3xl'
                                 , fontWeight: 'black'
                                 , lineHeight: 'tight'
                                 , color: 'text.inverse'
-                                , md: { fontSize: '3xl' }
                             } )
                         }
                     >
@@ -256,11 +287,10 @@ export default async function Home () {
                         <blockquote
                             className={
                                 css( {
-                                    fontSize: 'sm'
+                                    fontSize: 'md'
                                     , fontWeight: 'normal'
                                     , lineHeight: 'relaxed'
                                     , color: 'text.inverse'
-                                    , md: { fontSize: 'md' }
                                     , lg: {
                                         width: '638px'
                                         , flexShrink: 0
@@ -281,12 +311,11 @@ export default async function Home () {
                         <div
                             className={
                                 css( {
-                                    fontSize: 'sm'
+                                    fontSize: 'md'
                                     , fontWeight: 'normal'
                                     , lineHeight: 'normal'
                                     , color: 'text.inverse'
                                     , whiteSpace: 'pre-line'
-                                    , md: { fontSize: 'md' }
                                     , lg: {
                                         width: '252px'
                                         , flexShrink: 0
@@ -338,129 +367,110 @@ export default async function Home () {
 
             {
                 home.additionalTestimonials?.[ 0 ] && (
-                    <section
-                        className={
-                            css( {
-                                position: 'relative'
-                                , display: 'flex'
-                                , flexDirection: 'column-reverse'
-                                , marginTop: 'xl'
-                                , gap: 'lg'
-                                , md: {
-                                    flexDirection: 'row'
-                                    , marginTop: '100px'
-                                    , gap: 'xl'
-                                }
-                            } )
-                        }
-                    >
-                        <div
+                    <>
+                        <MobileTestimonials
+                            primaryTestimonial={ home.primaryTestimonial }
+                            additionalTestimonial={ home.additionalTestimonials[ 0 ] }
+                        />
+                        <section
                             className={
                                 css( {
-                                    paddingX: '7%'
+                                    display: 'none'
                                     , md: {
+                                        position: 'relative'
+                                        , display: 'flex'
+                                        , flexDirection: 'row'
+                                        , marginTop: '100px'
+                                        , gap: 'xl'
+                                    }
+                                } )
+                            }
+                        >
+                            <div
+                                className={
+                                    css( {
                                         width: '457px'
                                         , paddingLeft: '7%'
                                         , paddingRight: '0'
                                         , flexShrink: 0
-                                    }
-                                } )
-                            }
-                        >
-                            <div className={ css( { lineHeight: 'tight' } ) }>
-                                <p
-                                    className={
-                                        css( {
-                                            fontSize: 'xl'
-                                            , fontWeight: 'black'
-                                            , color: 'text.primary'
-                                            , md: { fontSize: '2xl' }
-                                        } )
-                                    }
-                                >
-                                    { home.additionalTestimonials[ 0 ].personName }
-                                </p>
-                                {
-                                    home.additionalTestimonials[ 0 ].personPositionTitle && (
-                                        <p
-                                            className={
-                                                css( {
-                                                    fontSize: 'sm'
-                                                    , fontWeight: 'medium'
-                                                    , color: 'text.primary'
-                                                    , lineHeight: 'list'
-                                                    , md: { fontSize: 'md' }
-                                                } )
-                                            }
-                                        >
-                                            { home.additionalTestimonials[ 0 ].personPositionTitle }
-                                        </p>
-                                    )
-                                }
-                                {
-                                    home.additionalTestimonials[ 0 ].personOrganizationName && (
-                                        <p
-                                            className={
-                                                css( {
-                                                    fontSize: 'sm'
-                                                    , fontWeight: 'medium'
-                                                    , color: 'text.primary'
-                                                    , lineHeight: 'tight'
-                                                    , md: { fontSize: 'md' }
-                                                } )
-                                            }
-                                        >
-                                            { home.additionalTestimonials[ 0 ].personOrganizationName }
-                                        </p>
-                                    )
-                                }
-                            </div>
-                            <p
-                                className={
-                                    css( {
-                                        fontSize: 'md'
-                                        , fontWeight: 'normal'
-                                        , lineHeight: 'normal'
-                                        , color: 'text.primary'
-                                        , marginTop: 'md'
-                                        , md: { fontSize: 'lg' }
                                     } )
                                 }
                             >
-                                &ldquo;
-                                { home.additionalTestimonials[ 0 ].content }
-                                &rdquo;
-                            </p>
-                        </div>
-                        <div
-                            className={
-                                css( {
-                                    position: 'relative'
-                                    , width: '100%'
-                                    , height: '200px'
-                                    , overflow: 'hidden'
-                                    , md: {
-                                        flex: 1
-                                        , height: '260px'
-                                        , borderTopLeftRadius: 'md'
-                                        , borderBottomLeftRadius: 'md'
+                                <div className={ css( { lineHeight: 'tight' } ) }>
+                                    <p
+                                        className={
+                                            css( {
+                                                fontSize: '2xl'
+                                                , fontWeight: 'black'
+                                                , color: 'text.primary'
+                                            } )
+                                        }
+                                    >
+                                        { home.additionalTestimonials[ 0 ].personName }
+                                    </p>
+                                    <p
+                                        className={
+                                            css( {
+                                                fontSize: 'md'
+                                                , fontWeight: 'medium'
+                                                , color: 'text.primary'
+                                            } )
+                                        }
+                                    >
+                                        { home.additionalTestimonials[ 0 ].personPositionTitle }
+                                    </p>
+                                    <p
+                                        className={
+                                            css( {
+                                                fontSize: 'md'
+                                                , fontWeight: 'medium'
+                                                , color: 'text.primary'
+                                            } )
+                                        }
+                                    >
+                                        { home.additionalTestimonials[ 0 ].personOrganizationName }
+                                    </p>
+                                </div>
+                                <p
+                                    className={
+                                        css( {
+                                            fontSize: 'lg'
+                                            , fontWeight: 'normal'
+                                            , color: 'text.primary'
+                                            , marginTop: 'md'
+                                        } )
                                     }
-                                } )
-                            }
-                        >
-                            <CmsImage
-                                image={ home.additionalTestimonials[ 0 ].image }
-                                fallbackAlt={ home.additionalTestimonials[ 0 ].personName }
+                                >
+                                    &ldquo;
+                                    { home.additionalTestimonials[ 0 ].content }
+                                    &rdquo;
+                                </p>
+                            </div>
+                            <div
                                 className={
                                     css( {
-                                        objectFit: 'cover'
-                                        , objectPosition: 'center 70%'
-                                        , md: { objectPosition: 'right 70%' }
+                                        position: 'relative'
+                                        , flex: 1
+                                        , height: '260px'
+                                        , overflow: 'hidden'
+                                        , borderTopLeftRadius: 'md'
+                                        , borderBottomLeftRadius: 'md'
                                     } )
                                 }
-                            />
-                        </div>
-                    </section>
+                            >
+                                <CmsImage
+                                    image={ home.additionalTestimonials[ 0 ].image }
+                                    fallbackAlt={ home.additionalTestimonials[ 0 ].personName }
+                                    className={
+                                        css( {
+                                            objectFit: 'cover'
+                                            , objectPosition: 'right 70%'
+                                        } )
+                                    }
+                                />
+                            </div>
+                        </section>
+                    </>
                 )
             }
 
@@ -471,7 +481,7 @@ export default async function Home () {
                         , width: '100%'
                         , marginTop: 'xl'
                         , display: 'flex'
-                        , flexDirection: 'column'
+                        , flexDirection: 'column-reverse'
                         , md: {
                             flexDirection: 'row'
                             , marginTop: '100px'
@@ -484,8 +494,9 @@ export default async function Home () {
                         css( {
                             position: 'relative'
                             , width: '100%'
-                            , height: '300px'
+                            , height: '308px'
                             , overflow: 'hidden'
+                            , marginTop: 'lg'
                             , md: {
                                 width: '46%'
                                 , height: 'auto'
@@ -493,6 +504,7 @@ export default async function Home () {
                                 , borderTopRightRadius: 'md'
                                 , borderBottomRightRadius: 'md'
                                 , flexShrink: 0
+                                , marginTop: '0'
                             }
                         } )
                     }
@@ -506,7 +518,6 @@ export default async function Home () {
                     className={
                         css( {
                             paddingX: '7%'
-                            , paddingTop: 'lg'
                             , md: {
                                 flex: 1
                                 , paddingLeft: 'xl'
