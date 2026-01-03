@@ -408,28 +408,38 @@ export default async function Home () {
                                     >
                                         { home.additionalTestimonials[ 0 ].personName }
                                     </p>
-                                    <p
-                                        className={
-                                            css( {
-                                                fontSize: 'md'
-                                                , fontWeight: 'medium'
-                                                , color: 'text.primary'
-                                            } )
-                                        }
-                                    >
-                                        { home.additionalTestimonials[ 0 ].personPositionTitle }
-                                    </p>
-                                    <p
-                                        className={
-                                            css( {
-                                                fontSize: 'md'
-                                                , fontWeight: 'medium'
-                                                , color: 'text.primary'
-                                            } )
-                                        }
-                                    >
-                                        { home.additionalTestimonials[ 0 ].personOrganizationName }
-                                    </p>
+                                    {
+                                        home.additionalTestimonials[ 0 ].personPositionTitle && (
+                                            <p
+                                                className={
+                                                    css( {
+                                                        fontSize: 'md'
+                                                        , fontWeight: 'medium'
+                                                        , color: 'text.primary'
+                                                        , lineHeight: 'list'
+                                                    } )
+                                                }
+                                            >
+                                                { home.additionalTestimonials[ 0 ].personPositionTitle }
+                                            </p>
+                                        )
+                                    }
+                                    {
+                                        home.additionalTestimonials[ 0 ].personOrganizationName && (
+                                            <p
+                                                className={
+                                                    css( {
+                                                        fontSize: 'md'
+                                                        , fontWeight: 'medium'
+                                                        , color: 'text.primary'
+                                                        , lineHeight: 'tight'
+                                                    } )
+                                                }
+                                            >
+                                                { home.additionalTestimonials[ 0 ].personOrganizationName }
+                                            </p>
+                                        )
+                                    }
                                 </div>
                                 <p
                                     className={
@@ -451,7 +461,7 @@ export default async function Home () {
                                     css( {
                                         position: 'relative'
                                         , flex: 1
-                                        , height: '260px'
+                                        , minHeight: '200px'
                                         , overflow: 'hidden'
                                         , borderTopLeftRadius: 'md'
                                         , borderBottomLeftRadius: 'md'
@@ -464,7 +474,7 @@ export default async function Home () {
                                     className={
                                         css( {
                                             objectFit: 'cover'
-                                            , objectPosition: 'right 70%'
+                                            , objectPosition: 'center center'
                                         } )
                                     }
                                 />
@@ -512,6 +522,14 @@ export default async function Home () {
                     <CmsImage
                         image={ home.bioImage }
                         fallbackAlt='Scott Dupre'
+                        className={
+                            css( {
+                                objectFit: 'cover'
+                                , objectPosition: 'center'
+                                , md: { objectPosition: 'center 30%' }
+                                , lg: { objectPosition: 'center' }
+                            } )
+                        }
                     />
                 </div>
                 <div
