@@ -184,6 +184,7 @@ export default async function Home () {
                                                 , fontSize: 'base'
                                                 , borderRadius: 'md'
                                             }
+                                            , md: { display: 'none' }
                                         } )
                                     }
                                 >
@@ -255,35 +256,7 @@ export default async function Home () {
                         } )
                     }
                 >
-                    <h2
-                        className={
-                            css( {
-                                fontSize: '3xl'
-                                , fontWeight: 'black'
-                                , lineHeight: 'tight'
-                                , color: 'text.inverse'
-                            } )
-                        }
-                    >
-                        What People Say
-                    </h2>
-                    <div
-                        className={
-                            css( {
-                                display: 'flex'
-                                , flexDirection: 'column'
-                                , marginTop: 'md'
-                                , gap: 'md'
-                                , alignItems: 'flex-start'
-                                , lg: {
-                                    flexDirection: 'row'
-                                    , marginTop: 'lg'
-                                    , gap: 'xl'
-                                }
-                                , xl: { gap: '68px' }
-                            } )
-                        }
-                    >
+                    <div>
                         <blockquote
                             className={
                                 css( {
@@ -291,16 +264,7 @@ export default async function Home () {
                                     , fontWeight: 'normal'
                                     , lineHeight: 'relaxed'
                                     , color: 'text.inverse'
-                                    , lg: {
-                                        width: '638px'
-                                        , flexShrink: 0
-                                        , lineHeight: '19px'
-                                    }
-                                    , xl: {
-                                        width: 'auto'
-                                        , flex: 1
-                                        , flexShrink: 1
-                                    }
+                                    , lg: { lineHeight: '19px' }
                                 } )
                             }
                         >
@@ -315,16 +279,7 @@ export default async function Home () {
                                     , fontWeight: 'normal'
                                     , lineHeight: 'normal'
                                     , color: 'text.inverse'
-                                    , whiteSpace: 'pre-line'
-                                    , lg: {
-                                        width: '252px'
-                                        , flexShrink: 0
-                                    }
-                                    , xl: {
-                                        width: 'auto'
-                                        , minWidth: '180px'
-                                        , flexShrink: 1
-                                    }
+                                    , marginTop: 'md'
                                 } )
                             }
                         >
@@ -396,6 +351,19 @@ export default async function Home () {
                                     } )
                                 }
                             >
+                                <h2
+                                    className={
+                                        css( {
+                                            fontSize: '3xl'
+                                            , fontWeight: 'black'
+                                            , lineHeight: 'tight'
+                                            , color: 'text.primary'
+                                            , marginBottom: 'md'
+                                        } )
+                                    }
+                                >
+                                    What People Say
+                                </h2>
                                 <div className={ css( { lineHeight: 'tight' } ) }>
                                     <p
                                         className={

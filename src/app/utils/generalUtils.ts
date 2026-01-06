@@ -161,21 +161,29 @@ export type GroupedAudioTrack = {
 }
 
 export const groupSectionsByAudio = ( sections: ShowSection[] ): GroupedAudioTrack[] => {
-    const sectionsWithAudio = sections.filter( section => section.audioFile?.url );
+    const sectionsWithAudio = sections.filter( section => section.audioFile?.id );
 
-    const audioGroups = new Map<string, ShowSection[]>();
+    const idGroups = new Map<number, ShowSection[]>();
 
     sectionsWithAudio.forEach( ( section, index ) => {
-        const audioUrl = section.audioFile!.url;
-        const existing = audioGroups.get( audioUrl ) || [];
+        const audioId = section.audioFile!.id;
+        const existing = idGroups.get( audioId ) || [];
 
-        audioGroups.set( audioUrl, [ ...existing, {
+        idGroups.set( audioId, [ ...existing, {
             ...section
             , partNumber: section.partNumber ?? index + 1
         } ] );
     } );
 
-    return Array.from( audioGroups.entries() ).map( ( [ audioUrl, groupedSections ] ) => {
+    const nameGroups = new Map<string, ShowSection[]>();
+
+    Array.from( idGroups.values() ).forEach( group => {
+        const audioName = group[ 0 ].audioFile!.name;
+        const existing = nameGroups.get( audioName ) || [];
+        nameGroups.set( audioName, [ ...existing, ...group ] );
+    } );
+
+    return Array.from( nameGroups.values() ).map( groupedSections => {
         const partNumbers = groupedSections
             .map( s => s.partNumber! )
             .sort( ( a, b ) => a - b );
@@ -192,7 +200,7 @@ export const groupSectionsByAudio = ( sections: ShowSection[] ): GroupedAudioTra
             id: groupedSections[ 0 ].id
             , partLabel
             , trackName
-            , audioUrl
+            , audioUrl: groupedSections[ 0 ].audioFile!.url
         };
     } );
 };

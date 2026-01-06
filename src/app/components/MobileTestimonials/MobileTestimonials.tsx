@@ -136,6 +136,7 @@ export const MobileTestimonials = ( {
                     , borderBottomLeftRadius: 'md'
                     , borderBottomRightRadius: 'md'
                     , marginTop: '-30px'
+                    , marginBottom: 'xl'
                     , md: { display: 'none' }
                 } )
             }
@@ -162,7 +163,7 @@ export const MobileTestimonials = ( {
                     css( {
                         position: 'absolute'
                         , inset: 0
-                        , background: 'linear-gradient(180deg, #F5F5F5 48%, rgba(245,245,245,0.7) 60%, rgba(245,245,245,0.3) 75%, rgba(245,245,245,0) 90%)'
+                        , background: 'linear-gradient(180deg, #F5F5F5 55%, rgba(245,245,245,0.7) 67%, rgba(245,245,245,0.3) 80%, rgba(245,245,245,0) 93%)'
                         , borderBottomLeftRadius: 'md'
                         , borderBottomRightRadius: 'md'
                     } )
@@ -180,12 +181,27 @@ export const MobileTestimonials = ( {
                     } )
                 }
             >
+                <blockquote
+                    className={
+                        css( {
+                            fontSize: 'md'
+                            , fontWeight: 'normal'
+                            , lineHeight: 'normal'
+                            , color: 'text.primary'
+                        } )
+                    }
+                >
+                    &ldquo;
+                    { additionalTestimonial.content }
+                    &rdquo;
+                </blockquote>
                 <p
                     className={
                         css( {
                             fontSize: 'xl'
                             , fontWeight: 'black'
                             , color: 'text.primary'
+                            , marginTop: 'md'
                         } )
                     }
                 >
@@ -204,21 +220,6 @@ export const MobileTestimonials = ( {
                     { ' | ' }
                     { additionalTestimonial.personOrganizationName }
                 </p>
-                <blockquote
-                    className={
-                        css( {
-                            fontSize: 'md'
-                            , fontWeight: 'normal'
-                            , lineHeight: 'normal'
-                            , color: 'text.primary'
-                            , marginTop: 'md'
-                        } )
-                    }
-                >
-                    &ldquo;
-                    { additionalTestimonial.content }
-                    &rdquo;
-                </blockquote>
             </div>
         </div>
     </>
