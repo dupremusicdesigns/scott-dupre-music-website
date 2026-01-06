@@ -134,9 +134,11 @@ export default async function Home () {
                                 , color: 'text.inverse'
                                 , maxWidth: '238px'
                                 , marginTop: 'md'
+                                , marginBottom: 'lg'
                                 , sm: {
                                     fontSize: 'lg'
                                     , maxWidth: '583px'
+                                    , marginBottom: '0'
                                 }
                                 , md: {
                                     fontSize: 'xl'
@@ -166,32 +168,6 @@ export default async function Home () {
                             } )
                         }
                     >
-                        {
-                            home.actionButtonPrimary?.slug && (
-                                <LinkButton
-                                    href={ home.actionButtonPrimary.slug }
-                                    variant='secondary'
-                                    size='md'
-                                    className={
-                                        css( {
-                                            width: '100%'
-                                            , height: '45px'
-                                            , fontSize: '12px'
-                                            , borderRadius: '20px'
-                                            , sm: {
-                                                width: '197px'
-                                                , height: '51px'
-                                                , fontSize: 'base'
-                                                , borderRadius: 'md'
-                                            }
-                                            , md: { display: 'none' }
-                                        } )
-                                    }
-                                >
-                                    { home.actionButtonPrimary.text }
-                                </LinkButton>
-                            )
-                        }
                         {
                             home.actionButtonSecondary?.slug && (
                                 <LinkButton
