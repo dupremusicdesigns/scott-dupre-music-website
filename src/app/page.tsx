@@ -210,6 +210,7 @@ export default async function Home () {
                                                 , fontSize: 'base'
                                                 , borderRadius: 'md'
                                             }
+                                            , md: { width: '410px' }
                                         } )
                                     }
                                 >
