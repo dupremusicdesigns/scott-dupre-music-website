@@ -35,6 +35,7 @@ const BuildYourOwnShowPage = async () => {
                         , paddingX: '7%'
                         , paddingTop: 'xl'
                         , md: { paddingTop: '2xl' }
+                        , '2xl': { maxWidth: '1600px' }
                     } )
                 }
             >
@@ -79,6 +80,7 @@ const BuildYourOwnShowPage = async () => {
                         , paddingX: '7%'
                         , marginTop: 'xl'
                         , md: { marginTop: '3xl' }
+                        , '2xl': { maxWidth: '1600px' }
                     } )
                 }
             >
@@ -143,13 +145,12 @@ const BuildYourOwnShowPage = async () => {
             <section
                 className={
                     css( {
-                        marginTop: 'xl'
+                        maxWidth: '1440px'
+                        , marginX: 'auto'
+                        , marginTop: 'xl'
                         , paddingX: '7%'
                         , md: { marginTop: '3xl' }
-                        , '3xl': {
-                            maxWidth: '1440px'
-                            , marginX: 'auto'
-                        }
+                        , '2xl': { maxWidth: '1600px' }
                     } )
                 }
             >
@@ -254,6 +255,7 @@ const BuildYourOwnShowPage = async () => {
                             maxWidth: '1440px'
                             , marginX: 'auto'
                             , paddingX: '7%'
+                            , '2xl': { maxWidth: '1600px' }
                         } )
                     }
                 >
