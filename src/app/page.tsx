@@ -3,6 +3,7 @@ import { flex } from '../../styled-system/patterns';
 import { LinkButton } from './components/LinkButton/LinkButton';
 import { CmsImage } from './components/CmsImage/CmsImage';
 import { MobileTestimonials } from './components/MobileTestimonials/MobileTestimonials';
+import { TestimonialCarousel } from './components/TestimonialCarousel/TestimonialCarousel';
 import { getHome } from './api/home';
 
 export default async function Home () {
@@ -158,6 +159,7 @@ export default async function Home () {
                         className={
                             flex( {
                                 flexDirection: 'column'
+                                , alignItems: 'flex-start'
                                 , gap: 'sm'
                                 , marginTop: 'lg'
                                 , sm: {
@@ -169,28 +171,28 @@ export default async function Home () {
                         }
                     >
                         {
-                            home.actionButtonSecondary?.slug && (
+                            home.actionButtonPrimary?.slug && (
                                 <LinkButton
-                                    href={ home.actionButtonSecondary.slug }
-                                    variant='outline'
+                                    href={ home.actionButtonPrimary.slug }
+                                    variant='white'
                                     size='md'
                                     className={
                                         css( {
-                                            width: '100%'
+                                            width: '70%'
                                             , height: '45px'
                                             , fontSize: '12px'
                                             , borderRadius: '20px'
                                             , sm: {
-                                                width: '197px'
+                                                width: 'auto'
+                                                , minWidth: '500px'
                                                 , height: '51px'
                                                 , fontSize: 'base'
                                                 , borderRadius: 'md'
                                             }
-                                            , md: { width: '410px' }
                                         } )
                                     }
                                 >
-                                    { home.actionButtonSecondary.text }
+                                    { home.actionButtonPrimary.text }
                                 </LinkButton>
                             )
                         }
@@ -237,11 +239,10 @@ export default async function Home () {
                         <blockquote
                             className={
                                 css( {
-                                    fontSize: 'md'
+                                    fontSize: '32px'
                                     , fontWeight: 'normal'
                                     , lineHeight: 'relaxed'
                                     , color: 'text.inverse'
-                                    , lg: { lineHeight: '19px' }
                                 } )
                             }
                         >
@@ -298,133 +299,13 @@ export default async function Home () {
             </section>
 
             {
-                home.additionalTestimonials?.[ 0 ] && (
+                home.additionalTestimonials?.length > 0 && (
                     <>
                         <MobileTestimonials
                             primaryTestimonial={ home.primaryTestimonial }
-                            additionalTestimonial={ home.additionalTestimonials[ 0 ] }
+                            additionalTestimonials={ home.additionalTestimonials }
                         />
-                        <section
-                            className={
-                                css( {
-                                    display: 'none'
-                                    , md: {
-                                        position: 'relative'
-                                        , display: 'flex'
-                                        , flexDirection: 'row'
-                                        , marginTop: '100px'
-                                        , gap: 'xl'
-                                    }
-                                } )
-                            }
-                        >
-                            <div
-                                className={
-                                    css( {
-                                        width: '457px'
-                                        , paddingLeft: '7%'
-                                        , paddingRight: '0'
-                                        , flexShrink: 0
-                                    } )
-                                }
-                            >
-                                <h2
-                                    className={
-                                        css( {
-                                            fontSize: '3xl'
-                                            , fontWeight: 'black'
-                                            , lineHeight: 'tight'
-                                            , color: 'text.primary'
-                                            , marginBottom: 'md'
-                                        } )
-                                    }
-                                >
-                                    What People Say
-                                </h2>
-                                <div className={ css( { lineHeight: 'tight' } ) }>
-                                    <p
-                                        className={
-                                            css( {
-                                                fontSize: '2xl'
-                                                , fontWeight: 'black'
-                                                , color: 'text.primary'
-                                            } )
-                                        }
-                                    >
-                                        { home.additionalTestimonials[ 0 ].personName }
-                                    </p>
-                                    {
-                                        home.additionalTestimonials[ 0 ].personPositionTitle && (
-                                            <p
-                                                className={
-                                                    css( {
-                                                        fontSize: 'md'
-                                                        , fontWeight: 'medium'
-                                                        , color: 'text.primary'
-                                                        , lineHeight: 'list'
-                                                    } )
-                                                }
-                                            >
-                                                { home.additionalTestimonials[ 0 ].personPositionTitle }
-                                            </p>
-                                        )
-                                    }
-                                    {
-                                        home.additionalTestimonials[ 0 ].personOrganizationName && (
-                                            <p
-                                                className={
-                                                    css( {
-                                                        fontSize: 'md'
-                                                        , fontWeight: 'medium'
-                                                        , color: 'text.primary'
-                                                        , lineHeight: 'tight'
-                                                    } )
-                                                }
-                                            >
-                                                { home.additionalTestimonials[ 0 ].personOrganizationName }
-                                            </p>
-                                        )
-                                    }
-                                </div>
-                                <p
-                                    className={
-                                        css( {
-                                            fontSize: 'lg'
-                                            , fontWeight: 'normal'
-                                            , color: 'text.primary'
-                                            , marginTop: 'md'
-                                        } )
-                                    }
-                                >
-                                    &ldquo;
-                                    { home.additionalTestimonials[ 0 ].content }
-                                    &rdquo;
-                                </p>
-                            </div>
-                            <div
-                                className={
-                                    css( {
-                                        position: 'relative'
-                                        , flex: 1
-                                        , minHeight: '200px'
-                                        , overflow: 'hidden'
-                                        , borderTopLeftRadius: 'md'
-                                        , borderBottomLeftRadius: 'md'
-                                    } )
-                                }
-                            >
-                                <CmsImage
-                                    image={ home.additionalTestimonials[ 0 ].image }
-                                    fallbackAlt={ home.additionalTestimonials[ 0 ].personName }
-                                    className={
-                                        css( {
-                                            objectFit: 'cover'
-                                            , objectPosition: 'center center'
-                                        } )
-                                    }
-                                />
-                            </div>
-                        </section>
+                        <TestimonialCarousel testimonials={ home.additionalTestimonials } />
                     </>
                 )
             }

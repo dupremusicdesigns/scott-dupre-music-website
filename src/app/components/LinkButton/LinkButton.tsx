@@ -6,7 +6,7 @@ import { buttonStyles } from '../Button/buttonStyles';
 
 type LinkButtonProps = {
     href: string;
-    variant?: 'primary' | 'secondary' | 'outline' | 'outlineDark';
+    variant?: 'primary' | 'secondary' | 'outline' | 'outlineDark' | 'white';
     size?: 'sm' | 'md' | 'lg' | 'footer';
     rounded?: 'sm' | 'md';
     className?: string;

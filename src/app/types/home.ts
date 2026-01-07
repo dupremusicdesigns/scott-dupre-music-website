@@ -17,7 +17,6 @@ export type Home = {
     bio: string | null;
     bioImage: StrapiImage;
     actionButtonPrimary: ActionButton | null;
-    actionButtonSecondary: ActionButton | null;
 }
 
 export type HomeResponse = SingleTypeResponse<Home>;

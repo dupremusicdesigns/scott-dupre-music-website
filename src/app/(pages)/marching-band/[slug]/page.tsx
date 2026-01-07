@@ -431,7 +431,40 @@ export default async function MarchingShowPage ( { params }: PageProps ) {
                                                     } )
                                                 }
                                             >
-                                                { collaborator.collaboratorName }
+                                                {
+                                                    collaborator.websiteUrl ? (
+                                                        <a
+                                                            href={ collaborator.websiteUrl }
+                                                            target='_blank'
+                                                            rel='noopener noreferrer'
+                                                            className={
+                                                                css( {
+                                                                    textDecoration: 'underline'
+                                                                    , _hover: { opacity: 0.7 }
+                                                                } )
+                                                            }
+                                                        >
+                                                            { collaborator.collaboratorName }
+                                                        </a>
+                                                    ) : (
+                                                        collaborator.collaboratorName
+                                                    )
+                                                }
+                                                {
+                                                    collaborator.role && (
+                                                        <span
+                                                            className={
+                                                                css( {
+                                                                    fontWeight: 'normal'
+                                                                    , color: 'text.secondary'
+                                                                } )
+                                                            }
+                                                        >
+                                                            { ': ' }
+                                                            { collaborator.role }
+                                                        </span>
+                                                    )
+                                                }
                                             </p>
                                         ) )
                                     }

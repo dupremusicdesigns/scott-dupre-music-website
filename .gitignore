@@ -43,5 +43,9 @@ next-env.d.ts
 ## Panda
 styled-system
 styled-system-studio
+
 # Local Netlify folder
 .netlify
+
+# Cached CMS assets
+public/cms-assets

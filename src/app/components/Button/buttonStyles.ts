@@ -77,6 +77,17 @@ export const buttonStyles = cva( {
                     transform: 'scale(0.98)'
                 }
             }
+            , white: {
+                backgroundColor: 'white'
+                , color: 'text.primary'
+                , border: '2px solid white'
+                , _hover: {
+                    backgroundColor: 'gray.100'
+                }
+                , _active: {
+                    transform: 'scale(0.98)'
+                }
+            }
         }
         , size: {
             sm: {

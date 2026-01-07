@@ -3,10 +3,11 @@ import {
     , AUTH_HEADERS
 } from '../constants/apiConstants';
 import { makeApiCall } from '../utils/apiUtils';
+import { cacheImage } from '../utils/assetCache';
 import { HomeResponse } from '../types';
 
 export const getHome = async (): Promise<HomeResponse> => {
-    return makeApiCall<HomeResponse, unknown, Record<string, string>>( {
+    const response = await makeApiCall<HomeResponse, unknown, Record<string, string>>( {
         url: `${ CMS_URL }/home`
         , queryParams: {
             'populate[0]': 'heroImage'
@@ -14,8 +15,29 @@ export const getHome = async (): Promise<HomeResponse> => {
             , 'populate[2]': 'primaryTestimonial.image'
             , 'populate[3]': 'additionalTestimonials.image'
             , 'populate[4]': 'actionButtonPrimary'
-            , 'populate[5]': 'actionButtonSecondary'
         }
         , options: AUTH_HEADERS
     } );
+
+    if ( response.data ) {
+        response.data.heroImage = await cacheImage( response.data.heroImage );
+        response.data.bioImage = await cacheImage( response.data.bioImage );
+
+        if ( response.data.primaryTestimonial ) {
+            response.data.primaryTestimonial.image = await cacheImage(
+                response.data.primaryTestimonial.image
+            );
+        }
+
+        if ( response.data.additionalTestimonials ) {
+            response.data.additionalTestimonials = await Promise.all(
+                response.data.additionalTestimonials.map( async testimonial => ( {
+                    ...testimonial
+                    , image: await cacheImage( testimonial.image )
+                } ) )
+            );
+        }
+    }
+
+    return response;
 };
