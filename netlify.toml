@@ -1,7 +1,3 @@
 [build]
-  command = "npm run build:full"
+  command = "next build --turbopack"
   publish = "out"
-
-[build.environment]
-  ENABLE_ASSET_CACHE = "true"
-  USE_CACHED_URLS = "true"
