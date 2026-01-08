@@ -21,3 +21,7 @@ export type {
     , Article
     , ArticlesResponse
 } from './articles';
+export type {
+    BuildYourOwnShow
+    , BuildYourOwnShowResponse
+} from './buildYourOwnShow';

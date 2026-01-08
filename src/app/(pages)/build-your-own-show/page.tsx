@@ -4,6 +4,7 @@ import { BuildYourOwnShowForm } from '../../components/build-your-own-show/Build
 import { CategorySectionList } from '../../components/build-your-own-show/CategorySectionList';
 import { CategoryListsWrapper } from '../../components/build-your-own-show/CategoryListsWrapper';
 import { getMarchingShows } from '../../api/marchingShows';
+import { getBuildYourOwnShow } from '../../api/buildYourOwnShow';
 import { groupShowsBySection } from '../../utils/generalUtils';
 
 const additionalInfo = [
@@ -15,8 +16,12 @@ const additionalInfo = [
 ];
 
 const BuildYourOwnShowPage = async () => {
-    const { data: shows } = await getMarchingShows();
+    const [ { data: shows }, { data: pageData } ] = await Promise.all( [
+        getMarchingShows()
+        , getBuildYourOwnShow()
+    ] );
     const categorizedSections = groupShowsBySection( shows );
+    const asideImage = pageData?.asideImage;
 
     return (
         <main
@@ -221,8 +226,8 @@ const BuildYourOwnShowPage = async () => {
                         }
                     >
                         <Image
-                            src='/gradient-4.png'
-                            alt='Colorful gradient'
+                            src={ asideImage?.url || '/gradient-4.png' }
+                            alt={ asideImage?.alternativeText || 'Colorful gradient' }
                             fill
                             sizes='50vw'
                             className={
