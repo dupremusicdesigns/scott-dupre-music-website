@@ -1,0 +1,7 @@
+[build]
+  command = "npm run build:full"
+  publish = "out"
+
+[build.environment]
+  ENABLE_ASSET_CACHE = "true"
+  USE_CACHED_URLS = "true"
