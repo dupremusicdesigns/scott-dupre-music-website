@@ -5,6 +5,11 @@ import { FacebookIcon } from '../../components/icons/FacebookIcon/FacebookIcon';
 import { InstagramIcon } from '../../components/icons/InstagramIcon/InstagramIcon';
 import { ContactFormEmbed } from '../../components/contact/ContactFormEmbed/ContactFormEmbed';
 import { getGlobal } from '../../api/global';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Contact'
+};
 
 export default async function ContactPage () {
     const { data: global } = await getGlobal();

@@ -6,6 +6,11 @@ import { CategoryListsWrapper } from '../../components/build-your-own-show/Categ
 import { getMarchingShows } from '../../api/marchingShows';
 import { getBuildYourOwnShow } from '../../api/buildYourOwnShow';
 import { groupShowsBySection } from '../../utils/generalUtils';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Build Your Own Show'
+};
 
 const additionalInfo = [
     'All arrangements can be custom tailored to your students.'

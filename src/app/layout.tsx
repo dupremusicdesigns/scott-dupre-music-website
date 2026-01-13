@@ -10,9 +10,19 @@ const inter = Inter( {
     , subsets: [ 'latin' ]
 } );
 
+const siteUrl = 'https://www.dupremusicdesigns.com';
+
 export const metadata: Metadata = {
-    title: 'Scott Dupre | Arranger, Composer, Orchestrator'
-    , description: ''
+    metadataBase: new URL( siteUrl )
+    , title: {
+        default: 'Scott Dupre | Arranger & Composer'
+        , template: '%s | Dupre Music Designs'
+    }
+    , description: 'Dupre Music Designs provides quality music arrangements, original compositions and music book edits that are custom tailored to your organization.'
+    , openGraph: {
+        type: 'website'
+        , siteName: 'Dupre Music Designs'
+    }
 };
 
 export default function RootLayout ( {

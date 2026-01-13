@@ -2,6 +2,11 @@ import { css } from '../../../../styled-system/css';
 import { LinkButton } from '../../components/LinkButton/LinkButton';
 import { CmsImage } from '../../components/CmsImage/CmsImage';
 import { getAbout } from '../../api/about';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'About'
+};
 
 export default async function AboutPage () {
     const { data: about } = await getAbout();

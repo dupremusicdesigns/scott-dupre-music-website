@@ -3,6 +3,11 @@ import { ServiceCard } from '../../components/services/ServiceCard/ServiceCard';
 import { ServicesContactButton } from '../../components/services/ServicesContactButton/ServicesContactButton';
 import { getServices } from '../../api/services';
 import { getServiceIcon } from '../../constants/serviceIcons';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Services'
+};
 
 export default async function ServicesPage () {
     const { data: services } = await getServices();

@@ -3,6 +3,11 @@ import { LinkButton } from '../../components/LinkButton/LinkButton';
 import { getMarchingShows } from '../../api/marchingShows';
 import { ShowsGrid } from '../../components/marching-shows/ShowsGrid';
 import { sortMarchingShows } from '../../utils/generalUtils';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Marching Band'
+};
 
 export default async function MarchingBandPage () {
     const { data: shows } = await getMarchingShows();
