@@ -432,23 +432,25 @@ export default async function MarchingShowPage ( { params }: PageProps ) {
                                                 }
                                             >
                                                 {
-                                                    collaborator.websiteUrl ? (
-                                                        <a
-                                                            href={ collaborator.websiteUrl }
-                                                            target='_blank'
-                                                            rel='noopener noreferrer'
-                                                            className={
-                                                                css( {
-                                                                    textDecoration: 'underline'
-                                                                    , _hover: { opacity: 0.7 }
-                                                                } )
-                                                            }
-                                                        >
-                                                            { collaborator.collaboratorName }
-                                                        </a>
-                                                    ) : (
-                                                        collaborator.collaboratorName
-                                                    )
+                                                    collaborator.websiteUrl
+                                                        ? (
+                                                            <a
+                                                                href={ collaborator.websiteUrl }
+                                                                target='_blank'
+                                                                rel='noopener noreferrer'
+                                                                className={
+                                                                    css( {
+                                                                        textDecoration: 'underline'
+                                                                        , _hover: { opacity: 0.7 }
+                                                                    } )
+                                                                }
+                                                            >
+                                                                { collaborator.collaboratorName }
+                                                            </a>
+                                                        )
+                                                        : (
+                                                            collaborator.collaboratorName
+                                                        )
                                                 }
                                                 {
                                                     collaborator.role && (
