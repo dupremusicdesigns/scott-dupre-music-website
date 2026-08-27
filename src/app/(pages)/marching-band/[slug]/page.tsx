@@ -524,6 +524,27 @@ export default async function MarchingShowPage ( { params }: PageProps ) {
                                     Request A Score
                                 </LinkButton>
                             </div>
+                            {
+                                show.audioReflectsPercussionSketch && (
+                                    <p
+                                        className={
+                                            css( {
+                                                maxWidth: '360px'
+                                                , marginTop: 'md'
+                                                , marginX: 'auto'
+                                                , color: 'text.muted'
+                                                , fontSize: 'sm'
+                                                , lineHeight: 'relaxed'
+                                                , textAlign: 'center'
+                                            } )
+                                        }
+                                    >
+                                        The audio for this show reflects
+                                        <br />
+                                        Scott Dupre&apos;s percussion sketch.
+                                    </p>
+                                )
+                            }
                         </div>
                     </div>
                 </div>
