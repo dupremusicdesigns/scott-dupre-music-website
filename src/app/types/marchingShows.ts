@@ -101,6 +101,7 @@ export type MarchingShow = {
     isNew?: boolean;
     year?: number;
     comingSoon?: boolean;
+    audioReflectsPercussionSketch?: boolean;
 }
 
 export type PaginationMeta = {
