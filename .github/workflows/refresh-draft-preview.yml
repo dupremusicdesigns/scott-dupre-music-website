@@ -1,0 +1,42 @@
+name: Refresh Strapi draft preview
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: read
+
+concurrency:
+  group: dupre-music-draft-preview-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    name: Refresh pull request preview
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Verify preview pull request is open
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          if [[ "$(gh api repos/$GITHUB_REPOSITORY/pulls/4 --jq .state)" != "open" ]]; then
+            echo "Draft preview pull request #4 is not open." >&2
+            exit 1
+          fi
+
+      - name: Check out preview branch
+        uses: actions/checkout@v7.0.1
+        with:
+          ref: feat/strapi-draft-preview
+          persist-credentials: true
+
+      - name: Request a fresh Netlify Deploy Preview
+        shell: bash
+        run: |
+          git config user.name "dupre-preview-bot"
+          git config user.email "dupre-preview-bot@users.noreply.github.com"
+          git commit --allow-empty -m "chore: refresh Strapi draft preview"
+          git push origin HEAD:refs/heads/feat/strapi-draft-preview
