@@ -38,5 +38,8 @@ jobs:
         run: |
           git config user.name "dupre-preview-bot"
           git config user.email "dupre-preview-bot@users.noreply.github.com"
-          git commit --allow-empty -m "chore: refresh Strapi draft preview"
+          mkdir -p public/preview-refreshes
+          printf '{"runId":"%s"}\n' "$GITHUB_RUN_ID" > "public/preview-refreshes/$GITHUB_RUN_ID.json"
+          git add "public/preview-refreshes/$GITHUB_RUN_ID.json"
+          git commit -m "chore: refresh Strapi draft preview"
           git push origin HEAD:refs/heads/feat/strapi-draft-preview
