@@ -23,6 +23,12 @@ export const metadata: Metadata = {
         type: 'website'
         , siteName: 'Dupre Music Designs'
     }
+    , robots: process.env.CMS_CONTENT_STATUS === 'draft'
+        ? {
+            index: false
+            , follow: false
+        }
+        : undefined
 };
 
 export default function RootLayout ( {
