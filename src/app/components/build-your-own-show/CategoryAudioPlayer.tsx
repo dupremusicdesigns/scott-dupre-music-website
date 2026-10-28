@@ -10,6 +10,7 @@ import { Button } from '@base-ui/react';
 import { css } from '../../../../styled-system/css';
 import { useAudio } from '../../context/AudioContext';
 import { useAudioListeners } from '../../hooks/useAudioListeners';
+import { formatTimestampRange } from '../../utils/generalUtils';
 import { PlayIcon } from '../icons/PlayIcon/PlayIcon';
 import { PauseIcon } from '../icons/PauseIcon/PauseIcon';
 
@@ -30,6 +31,8 @@ export const CategoryAudioPlayer = ( {
     const containerRef = useRef<HTMLDivElement>( null );
     const progressRef = useRef<HTMLDivElement>( null );
     const [ isPlaying, setIsPlaying ] = useState( false );
+    const [ currentTime, setCurrentTime ] = useState( 0 );
+    const [ duration, setDuration ] = useState( 0 );
 
     const {
         playAudio
@@ -48,33 +51,33 @@ export const CategoryAudioPlayer = ( {
         };
     }, [ trackId, registerAudio, unregisterAudio ] );
 
-    useEffect( () => {
-        const audio = audioRef.current;
-        const progressBar = progressRef.current;
-
-        if ( !audio || !progressBar ) return;
-
-        const controller = new AbortController();
-
-        audio.addEventListener( 'timeupdate', () => {
-            if ( audio.duration ) {
-                const progress = ( audio.currentTime / audio.duration ) * 100;
-
-                progressBar.style.width = `${ progress }%`;
-            }
-        }, { signal: controller.signal } );
-
-        return () => controller.abort();
-    }, [] );
-
     const handlePlay = () => setIsPlaying( true );
     const handlePause = () => setIsPlaying( false );
     const handleEnded = () => {
         setIsPlaying( false );
+        setCurrentTime( 0 );
+        if ( audioRef.current ) {
+            audioRef.current.currentTime = 0;
+        }
         if ( progressRef.current ) {
             progressRef.current.style.width = '0%';
         }
         playNext( trackId );
+    };
+
+    const handleTimeUpdate = () => {
+        const audio = audioRef.current;
+        const progressBar = progressRef.current;
+
+        if ( !audio ) return;
+
+        setCurrentTime( Math.floor( audio.currentTime ) );
+
+        if ( progressBar && audio.duration ) {
+            const progress = ( audio.currentTime / audio.duration ) * 100;
+
+            progressBar.style.width = `${ progress }%`;
+        }
     };
 
     useAudioListeners( {
@@ -82,6 +85,8 @@ export const CategoryAudioPlayer = ( {
         , onPlay: handlePlay
         , onPause: handlePause
         , onEnded: handleEnded
+        , onTimeUpdate: handleTimeUpdate
+        , onDurationChange: setDuration
     } );
 
     const togglePlay = ( e: MouseEvent ) => {
@@ -106,12 +111,15 @@ export const CategoryAudioPlayer = ( {
 
         if ( !isNaN( newTime ) ) {
             audioRef.current.currentTime = newTime;
+            setCurrentTime( Math.floor( newTime ) );
 
             if ( !isPlaying ) {
                 playAudio( audioRef.current );
             }
         }
     };
+
+    const timestampRange = formatTimestampRange( currentTime, duration );
 
     return (
         <div
@@ -177,6 +185,7 @@ export const CategoryAudioPlayer = ( {
                 <audio
                     ref={ audioRef }
                     src={ audioUrl }
+                    preload='metadata'
                 />
                 {
                     isPlaying
@@ -230,26 +239,42 @@ export const CategoryAudioPlayer = ( {
                 >
                     { sectionName }
                 </span>
-                {
-                    composer && (
-                        <span
-                            title={ composer }
-                            className={
-                                css( {
-                                    fontSize: 'xs'
-                                    , fontWeight: 'medium'
-                                    , fontStyle: 'italic'
-                                    , color: 'text.secondary'
-                                    , overflow: 'hidden'
-                                    , textOverflow: 'ellipsis'
-                                    , whiteSpace: 'nowrap'
-                                } )
-                            }
-                        >
-                            { composer }
-                        </span>
-                    )
-                }
+                <span
+                    title={
+                        composer
+                            ? `${ composer } | ${ timestampRange }`
+                            : timestampRange
+                    }
+                    className={
+                        css( {
+                            fontSize: 'xs'
+                            , fontWeight: 'medium'
+                            , color: 'text.secondary'
+                            , overflow: 'hidden'
+                            , textOverflow: 'ellipsis'
+                            , whiteSpace: 'nowrap'
+                        } )
+                    }
+                >
+                    {
+                        composer && (
+                            <span
+                                className={
+                                    css( {
+                                        fontStyle: 'italic'
+                                    } )
+                                }
+                            >
+                                { composer }
+                            </span>
+                        )
+                    }
+                    {
+                        composer
+                            ? ` | ${ timestampRange }`
+                            : timestampRange
+                    }
+                </span>
             </div>
         </div>
     );

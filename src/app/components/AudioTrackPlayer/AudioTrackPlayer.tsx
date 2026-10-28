@@ -11,6 +11,7 @@ import { css } from '../../../../styled-system/css';
 import { colors } from '../../theme/colors';
 import { useAudio } from '../../context/AudioContext';
 import { useAudioListeners } from '../../hooks/useAudioListeners';
+import { formatTimestampRange } from '../../utils/generalUtils';
 import { PlayIcon } from '../icons/PlayIcon/PlayIcon';
 import { PauseIcon } from '../icons/PauseIcon/PauseIcon';
 
@@ -30,6 +31,8 @@ export const AudioTrackPlayer = ( {
     const audioRef = useRef<HTMLAudioElement>( null );
     const containerRef = useRef<HTMLDivElement>( null );
     const [ isPlaying, setIsPlaying ] = useState( false );
+    const [ currentTime, setCurrentTime ] = useState( 0 );
+    const [ duration, setDuration ] = useState( 0 );
 
     const {
         playAudio
@@ -48,35 +51,35 @@ export const AudioTrackPlayer = ( {
         };
     }, [ trackId, registerAudio, unregisterAudio ] );
 
-    useEffect( () => {
-        const audio = audioRef.current;
-        const container = containerRef.current;
-
-        if ( !audio || !container ) return;
-
-        const controller = new AbortController();
-
-        audio.addEventListener( 'timeupdate', () => {
-            if ( audio.duration ) {
-                const progress = ( audio.currentTime / audio.duration ) * 100;
-
-                container.style.background = progress > 0
-                    ? `linear-gradient(to right, ${ colors.gray200 } ${ progress }%, transparent ${ progress }%)`
-                    : 'transparent';
-            }
-        }, { signal: controller.signal } );
-
-        return () => controller.abort();
-    }, [] );
-
     const handlePlay = () => setIsPlaying( true );
     const handlePause = () => setIsPlaying( false );
     const handleEnded = () => {
         setIsPlaying( false );
+        setCurrentTime( 0 );
+        if ( audioRef.current ) {
+            audioRef.current.currentTime = 0;
+        }
         if ( containerRef.current ) {
             containerRef.current.style.background = 'transparent';
         }
         playNext( trackId );
+    };
+
+    const handleTimeUpdate = () => {
+        const audio = audioRef.current;
+        const container = containerRef.current;
+
+        if ( !audio ) return;
+
+        setCurrentTime( Math.floor( audio.currentTime ) );
+
+        if ( container && audio.duration ) {
+            const progress = ( audio.currentTime / audio.duration ) * 100;
+
+            container.style.background = progress > 0
+                ? `linear-gradient(to right, ${ colors.gray200 } ${ progress }%, transparent ${ progress }%)`
+                : 'transparent';
+        }
     };
 
     useAudioListeners( {
@@ -84,6 +87,8 @@ export const AudioTrackPlayer = ( {
         , onPlay: handlePlay
         , onPause: handlePause
         , onEnded: handleEnded
+        , onTimeUpdate: handleTimeUpdate
+        , onDurationChange: setDuration
     } );
 
     const togglePlay = ( e: MouseEvent ) => {
@@ -108,6 +113,7 @@ export const AudioTrackPlayer = ( {
 
         if ( !isNaN( newTime ) ) {
             audioRef.current.currentTime = newTime;
+            setCurrentTime( Math.floor( newTime ) );
 
             if ( !isPlaying ) {
                 playAudio( audioRef.current );
@@ -146,6 +152,7 @@ export const AudioTrackPlayer = ( {
             <audio
                 ref={ audioRef }
                 src={ audioUrl }
+                preload='metadata'
             />
             <Button
                 onClick={ togglePlay }
@@ -229,6 +236,16 @@ export const AudioTrackPlayer = ( {
                     }
                 >
                     { trackName }
+                </span>
+                <span
+                    className={
+                        css( {
+                            fontSize: 'xs'
+                            , color: 'text.secondary'
+                        } )
+                    }
+                >
+                    { formatTimestampRange( currentTime, duration ) }
                 </span>
             </div>
         </div>
