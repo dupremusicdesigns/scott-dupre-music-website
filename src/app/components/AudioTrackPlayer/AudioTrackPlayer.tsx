@@ -73,8 +73,10 @@ export const AudioTrackPlayer = ( {
 
         setCurrentTime( Math.floor( audio.currentTime ) );
 
-        if ( container && audio.duration ) {
-            const progress = ( audio.currentTime / audio.duration ) * 100;
+        if ( container ) {
+            const progress = audio.duration
+                ? ( audio.currentTime / audio.duration ) * 100
+                : 0;
 
             container.style.background = progress > 0
                 ? `linear-gradient(to right, ${ colors.gray200 } ${ progress }%, transparent ${ progress }%)`

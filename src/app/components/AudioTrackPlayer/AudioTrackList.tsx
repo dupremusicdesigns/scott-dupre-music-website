@@ -46,7 +46,7 @@ export const AudioTrackList = ( { tracks }: AudioTrackListProps ) => {
                 {
                     tracks.map( track => (
                         <AudioTrackPlayer
-                            key={ track.id }
+                            key={ `${ track.id }-${ track.audioUrl }` }
                             trackId={ `track-${ track.id }` }
                             partLabel={ track.partLabel }
                             trackName={ track.trackName }

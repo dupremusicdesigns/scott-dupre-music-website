@@ -73,8 +73,10 @@ export const CategoryAudioPlayer = ( {
 
         setCurrentTime( Math.floor( audio.currentTime ) );
 
-        if ( progressBar && audio.duration ) {
-            const progress = ( audio.currentTime / audio.duration ) * 100;
+        if ( progressBar ) {
+            const progress = audio.duration
+                ? ( audio.currentTime / audio.duration ) * 100
+                : 0;
 
             progressBar.style.width = `${ progress }%`;
         }

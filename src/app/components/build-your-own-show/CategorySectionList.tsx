@@ -128,7 +128,7 @@ export const CategorySectionList = ( {
                             ? (
                                 itemsWithAudio.map( ( item, index ) => (
                                     <CategoryAudioPlayer
-                                        key={ `${ item.sectionName }-${ index }` }
+                                        key={ `${ item.sectionName }-${ item.audioUrl }-${ index }` }
                                         trackId={ `${ title }-${ index }` }
                                         sectionName={ item.sectionName }
                                         composer={ item.composer }

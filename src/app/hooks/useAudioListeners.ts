@@ -1,5 +1,6 @@
 import {
     useEffect
+    , useRef
     , RefObject
 } from 'react';
 
@@ -20,6 +21,24 @@ export const useAudioListeners = ( {
     , onTimeUpdate
     , onDurationChange
 }: UseAudioListenersOptions ) => {
+    const callbacksRef = useRef<Omit<UseAudioListenersOptions, 'audioRef'>>( {
+        onPlay
+        , onPause
+        , onEnded
+        , onTimeUpdate
+        , onDurationChange
+    } );
+
+    useEffect( () => {
+        callbacksRef.current = {
+            onPlay
+            , onPause
+            , onEnded
+            , onTimeUpdate
+            , onDurationChange
+        };
+    } );
+
     useEffect( () => {
         const audio = audioRef.current;
 
@@ -28,42 +47,41 @@ export const useAudioListeners = ( {
         const controller = new AbortController();
         const { signal } = controller;
 
+        const handlePlay = () => callbacksRef.current.onPlay?.();
+        const handlePause = () => callbacksRef.current.onPause?.();
+        const handleEnded = () => callbacksRef.current.onEnded?.();
+        const handleTimeUpdate = () => callbacksRef.current.onTimeUpdate?.();
         const handleDurationChange = () => {
-            if ( onDurationChange && Number.isFinite( audio.duration ) ) {
-                onDurationChange( audio.duration );
-            }
+            callbacksRef.current.onDurationChange?.(
+                Number.isFinite( audio.duration ) ? audio.duration : 0
+            );
+        };
+        const handleEmptied = () => {
+            callbacksRef.current.onPause?.();
+            handleTimeUpdate();
+            handleDurationChange();
         };
 
         if ( audio.readyState >= 1 ) {
             handleDurationChange();
         }
 
-        if ( onPlay ) audio.addEventListener( 'play', onPlay, { signal } );
-        if ( onPause ) audio.addEventListener( 'pause', onPause, { signal } );
-        if ( onEnded ) audio.addEventListener( 'ended', onEnded, { signal } );
-        if ( onTimeUpdate ) {
-            audio.addEventListener( 'timeupdate', onTimeUpdate, { signal } );
-        }
-        if ( onDurationChange ) {
-            audio.addEventListener(
-                'loadedmetadata'
-                , handleDurationChange
-                , { signal }
-            );
-            audio.addEventListener(
-                'durationchange'
-                , handleDurationChange
-                , { signal }
-            );
-        }
+        audio.addEventListener( 'play', handlePlay, { signal } );
+        audio.addEventListener( 'pause', handlePause, { signal } );
+        audio.addEventListener( 'ended', handleEnded, { signal } );
+        audio.addEventListener( 'timeupdate', handleTimeUpdate, { signal } );
+        audio.addEventListener( 'emptied', handleEmptied, { signal } );
+        audio.addEventListener(
+            'loadedmetadata'
+            , handleDurationChange
+            , { signal }
+        );
+        audio.addEventListener(
+            'durationchange'
+            , handleDurationChange
+            , { signal }
+        );
 
         return () => controller.abort();
-    }, [
-        audioRef
-        , onPlay
-        , onPause
-        , onEnded
-        , onTimeUpdate
-        , onDurationChange
-    ] );
+    }, [ audioRef ] );
 };
