@@ -205,6 +205,12 @@ export const groupSectionsByAudio = ( sections: ShowSection[] ): GroupedAudioTra
     } );
 };
 
+/**
+ * Formats a duration in seconds as an "M:SS" timestamp string.
+ *
+ * @param seconds - The time in seconds to format.
+ * @returns The formatted "M:SS" timestamp string, or "0:00" if invalid.
+ */
 export const formatTimestamp = ( seconds: number ): string => {
     if ( !Number.isFinite( seconds ) || seconds < 0 ) {
         return '0:00';
@@ -217,6 +223,13 @@ export const formatTimestamp = ( seconds: number ): string => {
     return `${ minutes }:${ String( remainingSeconds ).padStart( 2, '0' ) }`;
 };
 
+/**
+ * Formats a start/current and total duration in seconds as a timestamp range.
+ *
+ * @param currentSeconds - The current playback time in seconds.
+ * @param durationSeconds - The total track duration in seconds.
+ * @returns A formatted range string such as "0:00 - 1:45".
+ */
 export const formatTimestampRange = (
     currentSeconds: number
     , durationSeconds: number

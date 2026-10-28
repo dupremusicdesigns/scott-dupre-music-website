@@ -13,6 +13,34 @@ type UseAudioListenersOptions = {
     onDurationChange?: ( duration: number ) => void;
 }
 
+/**
+ * Hook that attaches event listeners to an HTMLAudioElement.
+ *
+ * This hook manages the lifecycle of event listeners for 'play', 'pause', 'ended',
+ * 'timeupdate', 'emptied', 'loadedmetadata', and 'durationchange' events on a provided
+ * audio reference. It automatically adds listeners when the component mounts and cleans
+ * them up when the component unmounts.
+ *
+ * @param options - The configuration object for the audio listeners.
+ * @param options.audioRef - A React RefObject pointing to the HTMLAudioElement.
+ * @param options.onPlay - Optional callback function to execute when the 'play' event fires.
+ * @param options.onPause - Optional callback function to execute when the 'pause' event fires.
+ * @param options.onEnded - Optional callback function to execute when the 'ended' event fires.
+ * @param options.onTimeUpdate - Optional callback function to execute when the 'timeupdate' event fires.
+ * @param options.onDurationChange - Optional callback function to execute when the audio duration is loaded or changes.
+ *
+ * @example
+ * ```tsx
+ * const audioRef = useRef<HTMLAudioElement>(null);
+ *
+ * useAudioListeners({
+ *   audioRef,
+ *   onPlay: () => console.log('Audio started'),
+ *   onPause: () => console.log('Audio paused'),
+ *   onEnded: () => console.log('Audio finished')
+ * });
+ * ```
+ */
 export const useAudioListeners = ( {
     audioRef
     , onPlay
