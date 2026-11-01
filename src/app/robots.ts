@@ -6,6 +6,15 @@ export const dynamic = 'force-static';
 export default function robots (): MetadataRoute.Robots {
     const baseUrl = 'https://www.dupremusicdesigns.com';
 
+    if ( process.env.CMS_CONTENT_STATUS === 'draft' ) {
+        return {
+            rules: {
+                userAgent: '*'
+                , disallow: '/'
+            }
+        };
+    }
+
     return {
         rules: [
             {

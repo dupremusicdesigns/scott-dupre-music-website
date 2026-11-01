@@ -1,3 +1,7 @@
 [build]
   command = "next build --turbopack"
   publish = "out"
+  ignore = 'test "$CONTEXT" != "deploy-preview"'
+
+[context.deploy-preview.environment]
+  CMS_CONTENT_STATUS = "draft"

@@ -1,4 +1,5 @@
 import { QueryParams } from '../types/queryParamsTypes';
+import { CMS_URL } from '../constants/apiConstants';
 import { isObject } from './generalUtils';
 
 export type MakeApiCallParams<
@@ -53,7 +54,13 @@ export const makeApiCall = async <
         , options
     }: MakeApiCallParams<TData, TPayload, TQueryParams>
 ): Promise<TData> => {
-    const fullUrl = formatUrlWithQueryParams( url, queryParams );
+    const fullUrl = new URL( formatUrlWithQueryParams( url, queryParams ) );
+
+    // Draft content is requested only by the separate preview build.
+    if ( method === 'GET' && url.startsWith( `${ CMS_URL }/` )
+        && process.env.CMS_CONTENT_STATUS === 'draft' ) {
+        fullUrl.searchParams.set( 'status', 'draft' );
+    }
 
     const response = await fetch( fullUrl, {
         method

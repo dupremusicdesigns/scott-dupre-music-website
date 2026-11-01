@@ -51,7 +51,6 @@ export const getMarchingShows = async (): Promise<MarchingShowsResponse> => {
 
     const {
         pageCount
-        , total
     } = firstPage.meta.pagination;
 
     let allData = firstPage.data;
@@ -66,14 +65,16 @@ export const getMarchingShows = async (): Promise<MarchingShowsResponse> => {
         ];
     }
 
-    const cachedData = await Promise.all( allData.map( cacheShowAssets ) );
+    // A new draft can be saved before it has a title, but detail URLs need one.
+    const titledShows = allData.filter( show => show.showTitle?.trim() );
+    const cachedData = await Promise.all( titledShows.map( cacheShowAssets ) );
 
     return {
         data: cachedData
         , meta: {
             pagination: {
                 ...firstPage.meta.pagination
-                , total
+                , total: cachedData.length
                 , pageCount: 1
                 , pageSize: cachedData.length
             }
