@@ -6,7 +6,7 @@
   QUOTE_API_ORIGIN = "https://dmdadmin.netlify.app"
 
 [context.deploy-preview.environment]
-  QUOTE_API_ORIGIN = "https://pr-19--dmdadmin.netlify.app"
+  QUOTE_API_ORIGIN = "https://pr-20--dmdadmin.netlify.app"
 
 [[headers]]
   for = "/quote"
