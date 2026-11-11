@@ -13,6 +13,8 @@ export default function robots (): MetadataRoute.Robots {
                 , allow: '/'
                 , disallow: [
                     '/api/'
+                    , '/quote/'
+                    , '/quote-api/'
                     , '/_next/'
                     , '/cms-assets/'
                 ]
