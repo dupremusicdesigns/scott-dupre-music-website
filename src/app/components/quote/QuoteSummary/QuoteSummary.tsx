@@ -54,7 +54,6 @@ export const QuoteSummary = ( {
 
     return (
         <aside
-            aria-live='polite'
             className={
                 css( {
                     padding: 'md'
@@ -126,6 +125,7 @@ export const QuoteSummary = ( {
                     Total
                 </span>
                 <strong
+                    aria-live='polite'
                     className={
                         css( {
                             fontSize: '3xl'

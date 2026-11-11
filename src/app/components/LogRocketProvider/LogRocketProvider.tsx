@@ -12,7 +12,7 @@ export const LogRocketProvider = () => {
     const started = useRef( false );
 
     useEffect( () => {
-        if ( started.current || pathname.startsWith( '/quote' ) ) {
+        if ( started.current || pathname === '/quote' || pathname.startsWith( '/quote/' ) ) {
             return;
         }
 

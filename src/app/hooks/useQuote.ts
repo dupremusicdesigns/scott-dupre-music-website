@@ -37,6 +37,7 @@ export const useQuote = () => {
     const [ busy, setBusy ] = useState( false );
     const tokenRef = useRef( '' );
     const grantRef = useRef( '' );
+    const inFlightRef = useRef( false );
 
     const load = useCallback( async () => {
         const result = await fetchQuote( tokenRef.current, grantRef.current );
@@ -49,6 +50,8 @@ export const useQuote = () => {
 
             return;
         }
+
+        setPinFailure( result.failure.kind === 'unauthorized' ? { kind: 'unauthorized' } : null );
 
         if ( result.failure.kind === 'network' ) {
             setPhase( { name: 'failed' } );
@@ -82,6 +85,11 @@ export const useQuote = () => {
     }, [ load ] );
 
     const submitPin = useCallback( async ( pin: string ) => {
+        if ( inFlightRef.current ) {
+            return;
+        }
+
+        inFlightRef.current = true;
         setBusy( true );
         setPinFailure( null );
 
@@ -97,10 +105,16 @@ export const useQuote = () => {
             setPinFailure( result.failure );
         }
 
+        inFlightRef.current = false;
         setBusy( false );
     }, [ load ] );
 
     const submitAcceptance = useCallback( async ( input: QuoteAcceptanceInput ) => {
+        if ( inFlightRef.current ) {
+            return;
+        }
+
+        inFlightRef.current = true;
         setBusy( true );
         setAcceptFailure( null );
 
@@ -114,13 +128,17 @@ export const useQuote = () => {
         } else if ( result.failure.kind === 'unauthorized' ) {
             clearGrant( tokenRef.current );
             grantRef.current = '';
+            setPinFailure( { kind: 'unauthorized' } );
             setPhase( { name: 'pin' } );
+        } else if ( result.failure.kind === 'not-found' ) {
+            setPhase( { name: 'missing' } );
         } else if ( result.failure.kind === 'not-open' ) {
             await load();
         } else {
             setAcceptFailure( result.failure );
         }
 
+        inFlightRef.current = false;
         setBusy( false );
     }, [ load ] );
 

@@ -1,6 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import {
+    useEffect
+    , useState
+} from 'react';
 import { css } from '../../../../../styled-system/css';
 import { Button } from '../../Button/Button';
 import { QUOTE_PIN_LENGTH } from '../../../constants/quoteConstants';
@@ -28,6 +31,10 @@ const describeFailure = ( failure: QuoteFailure | null ): string => {
             : `That PIN is not right. You have ${ failure.attemptsLeft } tries left.`;
     }
 
+    if ( failure.kind === 'unauthorized' ) {
+        return 'Your session ended. Please enter your PIN again.';
+    }
+
     if ( failure.kind === 'locked' ) {
         const minutes = Math.max( 1, Math.ceil( failure.retryAfterSeconds / 60 ) );
 
@@ -43,8 +50,19 @@ export const QuotePinForm = ( {
     , onSubmit
 }: QuotePinFormProps ) => {
     const [ pin, setPin ] = useState( '' );
-    const locked = failure?.kind === 'locked';
+    const [ clearedFailure, setClearedFailure ] = useState<typeof failure>( null );
+    const locked = failure?.kind === 'locked' && clearedFailure !== failure;
     const message = describeFailure( failure );
+
+    useEffect( () => {
+        if ( failure?.kind !== 'locked' ) {
+            return;
+        }
+
+        const timer = window.setTimeout( () => setClearedFailure( failure ), failure.retryAfterSeconds * 1000 );
+
+        return () => window.clearTimeout( timer );
+    }, [ failure ] );
 
     return (
         <section
@@ -135,6 +153,11 @@ export const QuotePinForm = ( {
                                 , borderRadius: 'sm'
                                 , outline: 'none'
                                 , _focus: { borderColor: 'border.dark' }
+                                , _focusVisible: {
+                                    outline: '2px solid'
+                                    , outlineColor: 'brand.black'
+                                    , outlineOffset: '2px'
+                                }
                                 , _disabled: { opacity: 0.5 }
                             } )
                         }

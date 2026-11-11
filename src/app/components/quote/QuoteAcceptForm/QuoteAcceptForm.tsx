@@ -117,7 +117,7 @@ export const QuoteAcceptForm = ( {
                             , height: '18px'
                             , marginTop: '2px'
                             , flexShrink: 0
-                            , accentColor: 'black'
+                            , accentColor: 'brand.black'
                         } )
                     }
                 />

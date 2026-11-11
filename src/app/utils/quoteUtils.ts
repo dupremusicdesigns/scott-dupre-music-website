@@ -12,7 +12,15 @@ type StoredGrant = {
 export const getQuoteToken = ( pathname: string ): string => {
     const [ , base, token ] = pathname.split( '/' );
 
-    return `/${ base }` === QUOTE_BASE_PATH && token ? decodeURIComponent( token ) : '';
+    if ( `/${ base }` !== QUOTE_BASE_PATH || !token ) {
+        return '';
+    }
+
+    try {
+        return decodeURIComponent( token );
+    } catch {
+        return '';
+    }
 };
 
 export const formatMoney = ( value: number ): string => {

@@ -32,6 +32,11 @@ export const fieldInputStyles = css( {
     , borderRadius: 'sm'
     , outline: 'none'
     , _focus: { borderColor: 'border.dark' }
+    , _focusVisible: {
+        outline: '2px solid'
+        , outlineColor: 'brand.black'
+        , outlineOffset: '2px'
+    }
 } );
 
 export const errorTextStyles = css( {
