@@ -27,8 +27,8 @@ const sample: LeadInquiry = {
 };
 
 const files = [
-    [ 'client-confirmation.html', buildClientConfirmation( sample, 'dupremusicdesigns@gmail.com' ) ]
-    , [ 'scott-notification.html', buildScottNotification( sample, 'dupremusicdesigns@gmail.com' ) ]
+    [ 'client-confirmation.html', buildClientConfirmation( sample, 'scott@example.com' ) ]
+    , [ 'scott-notification.html', buildScottNotification( sample, 'scott@example.com' ) ]
 ] as const;
 
 mkdirSync( outputDirectory, { recursive: true } );
