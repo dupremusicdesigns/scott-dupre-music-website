@@ -85,7 +85,7 @@ export const QuoteExtras = ( {
                                     , padding: '16px'
                                     , border: '2px solid'
                                     , borderColor: option.included ? 'border.default' : selected ? 'border.dark' : 'gray.300'
-                                    , boxShadow: selected && !option.included ? 'inset 0 0 0 1px #000' : 'none'
+                                    , boxShadow: selected && !option.included ? 'inset 0 0 0 1px {colors.brand.black}' : 'none'
                                     , borderRadius: '16px'
                                     , backgroundColor: option.included ? 'background.secondary' : 'background.primary'
                                     , cursor: interactive ? 'pointer' : 'default'

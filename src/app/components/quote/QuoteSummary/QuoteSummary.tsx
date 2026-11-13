@@ -62,7 +62,7 @@ export const QuoteSummary = ( {
                     , border: '2px solid'
                     , borderColor: 'border.dark'
                     , borderRadius: 'md'
-                    , '@media (min-width: 861px)': {
+                    , md: {
                         position: 'sticky'
                         , top: '20px'
                     }

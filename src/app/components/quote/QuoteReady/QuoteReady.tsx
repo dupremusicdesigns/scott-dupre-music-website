@@ -61,9 +61,10 @@ export const QuoteReady = ( {
                                 , fontWeight: 'extrabold'
                                 , letterSpacing: '0.08em'
                                 , textTransform: 'uppercase'
-                                , color: '#8a5a00'
-                                , backgroundColor: '#fcf3e0'
-                                , borderBottom: '2px solid #8a5a00'
+                                , color: 'warning.text'
+                                , backgroundColor: 'warning.background'
+                                , borderBottom: '2px solid'
+                                , borderColor: 'warning.text'
                             } )
                         }
                     >
@@ -92,7 +93,7 @@ export const QuoteReady = ( {
                             display: 'grid'
                             , gap: '32px'
                             , alignItems: 'start'
-                            , '@media (min-width: 861px)': {
+                            , md: {
                                 gridTemplateColumns: 'minmax(0, 1fr) 340px'
                                 , gap: '44px'
                             }
