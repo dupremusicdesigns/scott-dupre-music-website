@@ -6,7 +6,7 @@ import {
 import type { LeadInquiry } from '../netlify/lib/leadInquiry';
 import { sendEmail } from '../netlify/lib/sendEmail';
 
-config( { path: '.env.local' } );
+config( { path: [ '.env.local', '.env' ] } );
 
 const recipient = process.argv[ 2 ] ?? process.env.TEST_EMAIL_TO;
 
