@@ -68,7 +68,7 @@ export const QuoteReady = ( {
                             } )
                         }
                     >
-                        Preview · nothing here is saved or sent · accepting is turned off
+                        Admin preview
                     </p>
                 )
             }

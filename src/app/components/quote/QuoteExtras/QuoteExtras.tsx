@@ -25,7 +25,7 @@ const describeOutcome = (
             return 'Added';
         }
 
-        return selected ? 'Scott will follow up' : 'Not added';
+        return selected ? 'I will follow up' : 'Not added';
     }
 
     return selected ? 'Selected' : 'Not selected';

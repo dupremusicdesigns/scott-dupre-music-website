@@ -28,12 +28,12 @@ const describeAcceptance = ( quote: QuoteView ): string => {
         const first = quote.accepted ? quote.accepted.by.split( ' ' )[ 0 ] : '';
         const date = quote.accepted ? formatQuoteDate( quote.accepted.date ) : '';
 
-        return `Thanks${ first ? `, ${ first }` : '' }. Scott has your acceptance from ${ date } and will confirm shortly.`;
+        return `Thanks${ first ? `, ${ first }` : '' }. I have your acceptance from ${ date } and will confirm shortly.`;
     }
 
     return quote.kind === 'Clinic'
-        ? 'Scott confirmed your clinic. See you there.'
-        : 'Scott confirmed your quote. The agreement comes next.';
+        ? 'I confirmed your clinic. See you there.'
+        : 'I confirmed your quote. The agreement comes next.';
 };
 
 export const QuoteSummary = ( {

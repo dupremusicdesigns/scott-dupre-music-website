@@ -125,7 +125,7 @@ export const QuoteAcceptForm = ( {
                     I accept this quote on behalf of
                     { ' ' }
                     { quote.school }
-                    . Scott will confirm
+                    . I will confirm
                     { quote.kind === 'Clinic' ? ' the clinic.' : ' and send the agreement.' }
                 </span>
             </label>

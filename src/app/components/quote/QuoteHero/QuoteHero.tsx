@@ -29,7 +29,7 @@ const describeStatus = ( quote: QuoteView ): string => {
     }
 
     return quote.status === 'Approved'
-        ? 'Thank you. Scott has confirmed your quote.'
+        ? 'Thank you. I have confirmed your quote.'
         : 'Thank you. Here is the quote as accepted.';
 };
 

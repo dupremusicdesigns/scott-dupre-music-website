@@ -49,7 +49,7 @@ export const QuoteExperience = ( { heroImageUrl }: QuoteExperienceProps ) => {
             {
                 phase.name === 'missing' && (
                     <QuoteMessage title='Quote not found'>
-                        This link is not valid anymore. Please contact Scott for a new one.
+                        This link is not valid anymore. Please contact me for a new one.
                     </QuoteMessage>
                 )
             }

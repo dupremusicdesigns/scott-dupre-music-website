@@ -38,7 +38,7 @@ const describeFailure = ( failure: QuoteFailure | null ): string => {
     if ( failure.kind === 'locked' ) {
         const minutes = Math.max( 1, Math.ceil( failure.retryAfterSeconds / 60 ) );
 
-        return `Too many tries. Please wait ${ minutes } ${ minutes === 1 ? 'minute' : 'minutes' } and try again, or ask Scott for a new PIN.`;
+        return `Too many tries. Please wait ${ minutes } ${ minutes === 1 ? 'minute' : 'minutes' } and try again, or ask me for a new PIN.`;
     }
 
     return 'Something went wrong. Please try again.';
@@ -101,7 +101,7 @@ export const QuotePinForm = ( {
                     } )
                 }
             >
-                Enter the 6-digit PIN Scott sent you with this link.
+                Enter the 6-digit PIN I sent you with this link.
             </p>
             <form
                 onSubmit={
