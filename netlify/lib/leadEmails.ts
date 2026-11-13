@@ -63,7 +63,7 @@ export const buildClientConfirmation = (
 ): OutgoingEmail => {
     const name = firstName( values.name );
     const body = [
-        renderParagraph( 'Scott Dupre has your message and will reply to you personally as soon as he can. Here is a copy of what you sent.' )
+        renderParagraph( 'I have your message and will reply to you personally as soon as I can. Here is a copy of what you sent.' )
         , spacer( 28 )
         , renderDetails( buildDetails( values, false ) )
         , ...( values.message
@@ -73,7 +73,7 @@ export const buildClientConfirmation = (
             ]
             : [] )
         , spacer( 28 )
-        , renderParagraph( 'Need to add something? Just reply to this email and it goes straight to Scott.' )
+        , renderParagraph( 'Need to add something? Just reply to this email and it goes straight to me.' )
         , spacer( 28 )
         , `${ renderButton( 'Listen to previous work', `${ SITE_URL }/marching-band`, true ) }${ renderButton( 'Build your own show', `${ SITE_URL }/build-your-own-show`, false ) }`
     ].join( '' );
@@ -84,14 +84,14 @@ export const buildClientConfirmation = (
         , subject: `Thanks for reaching out, ${ name }`
         , html: renderEmailShell( {
             title: 'We got your message'
-            , preheader: 'Scott has your message and will reply soon.'
+            , preheader: 'I have your message and will reply soon.'
             , heading: `Thank you, ${ name }.`
             , body
         } )
         , text: buildText( [
             `Hi ${ name },`
             , ''
-            , 'Scott Dupre has your message and will reply to you personally as soon as he can. Here is a copy of what you sent.'
+            , 'I have your message and will reply to you personally as soon as I can. Here is a copy of what you sent.'
             , ''
             , `Name: ${ values.name }`
             , `School / Organization: ${ values.school }`
@@ -99,7 +99,7 @@ export const buildClientConfirmation = (
             , `Services: ${ values.service }`
             , ...( values.message ? [ '', values.message ] : [] )
             , ''
-            , 'Need to add something? Just reply to this email and it goes straight to Scott.'
+            , 'Need to add something? Just reply to this email and it goes straight to me.'
             , ''
             , 'Scott Dupre, Arranger & Composer'
             , SITE_URL

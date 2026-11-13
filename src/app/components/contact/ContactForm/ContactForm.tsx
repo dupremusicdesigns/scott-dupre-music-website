@@ -73,7 +73,7 @@ export const ContactForm = () => {
                         } )
                     }
                 >
-                    Your message is on its way to Scott. Check your email for a confirmation.
+                    Your message is on its way to me. Check your email for a confirmation.
                 </p>
             </div>
         );
