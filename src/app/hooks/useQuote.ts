@@ -18,6 +18,7 @@ import type {
 } from '../types';
 import {
     clearGrant
+    , consumePreviewGrant
     , getQuoteToken
     , readStoredGrant
     , storeGrant
@@ -73,6 +74,7 @@ export const useQuote = () => {
             return;
         }
 
+        consumePreviewGrant( tokenRef.current );
         grantRef.current = readStoredGrant( tokenRef.current );
 
         if ( grantRef.current ) {

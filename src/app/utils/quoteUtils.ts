@@ -1,6 +1,8 @@
 import {
     QUOTE_BASE_PATH
     , QUOTE_GRANT_STORAGE_PREFIX
+    , QUOTE_PREVIEW_GRANT_MS
+    , QUOTE_PREVIEW_HASH_KEY
 } from '../constants/quoteConstants';
 import type { QuoteView } from '../types';
 
@@ -88,4 +90,19 @@ export const clearGrant = ( token: string ): void => {
     } catch {
         return;
     }
+};
+
+export const consumePreviewGrant = ( token: string ): void => {
+    const hash = new URLSearchParams( window.location.hash.slice( 1 ) );
+    const grant = hash.get( QUOTE_PREVIEW_HASH_KEY );
+
+    if ( !grant ) {
+        return;
+    }
+
+    storeGrant( token, {
+        grant
+        , expiresAt: Date.now() + QUOTE_PREVIEW_GRANT_MS
+    } );
+    window.history.replaceState( null, '', `${ window.location.pathname }${ window.location.search }` );
 };

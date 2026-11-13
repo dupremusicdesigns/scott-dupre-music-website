@@ -28,6 +28,7 @@ export const QuoteReady = ( {
 }: QuoteReadyProps ) => {
     const [ selectedIds, setSelectedIds ] = useState<ReadonlySet<string>>( new Set() );
     const editable = quote.status === 'Sent';
+    const preview = quote.preview === true;
     const toggle = ( optionId: string ) => {
         setSelectedIds( current => {
             const next = new Set( current );
@@ -54,6 +55,27 @@ export const QuoteReady = ( {
                 } )
             }
         >
+            {
+                preview && (
+                    <p
+                        role='status'
+                        className={
+                            css( {
+                                marginTop: 'md'
+                                , padding: 'sm'
+                                , textAlign: 'center'
+                                , fontSize: 'sm'
+                                , fontWeight: 'bold'
+                                , color: 'text.inverse'
+                                , backgroundColor: 'brand.black'
+                                , borderRadius: 'sm'
+                            } )
+                        }
+                    >
+                        Preview of what the school sees. Nothing here is saved or sent.
+                    </p>
+                )
+            }
             <QuoteHero quote={ quote } />
             <div
                 className={
@@ -92,17 +114,21 @@ export const QuoteReady = ( {
                     selectedIds={ selectedIds }
                     editable={ editable }
                 >
-                    <QuoteAcceptForm
-                        quote={ quote }
-                        busy={ busy }
-                        failure={ failure }
-                        onSubmit={
-                            details => onAccept( {
-                                ...details
-                                , addOnIds: [ ...selectedIds ]
-                            } )
-                        }
-                    />
+                    {
+                        !preview && (
+                            <QuoteAcceptForm
+                                quote={ quote }
+                                busy={ busy }
+                                failure={ failure }
+                                onSubmit={
+                                    details => onAccept( {
+                                        ...details
+                                        , addOnIds: [ ...selectedIds ]
+                                    } )
+                                }
+                            />
+                        )
+                    }
                 </QuoteSummary>
             </div>
         </div>

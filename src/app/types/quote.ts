@@ -47,6 +47,7 @@ export type QuoteView = {
         name: string;
         email: string;
     };
+    preview?: boolean;
 };
 
 export type QuoteAcceptanceInput = {
