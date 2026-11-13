@@ -2,6 +2,9 @@
   command = "next build --turbopack && npx jiti scripts/write-redirects.ts"
   publish = "out"
 
+[functions]
+  directory = "netlify/functions"
+
 [build.environment]
   QUOTE_API_ORIGIN = "https://dmdadmin.netlify.app"
 

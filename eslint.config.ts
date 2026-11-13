@@ -423,7 +423,7 @@ const eslintConfig: Linter.Config[] = [
             'max-lines': [ 'off' ]
         }
     }, {
-        files: [ 'src/app/**/page.tsx', 'src/app/**/layout.tsx', 'src/app/**/loading.tsx', 'src/app/**/error.tsx', 'src/app/**/not-found.tsx' ]
+        files: [ 'netlify/functions/**/*.ts', 'src/app/**/page.tsx', 'src/app/**/layout.tsx', 'src/app/**/loading.tsx', 'src/app/**/error.tsx', 'src/app/**/not-found.tsx' ]
         , rules: {
             'import/no-default-export': 'off'
         }
