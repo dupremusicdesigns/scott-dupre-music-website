@@ -57,7 +57,8 @@ export const QuoteBanner = ( {
                 css( {
                     position: 'absolute'
                     , inset: 0
-                    , background: 'linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0.75))'
+                    , background: 'linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.75))'
+                    , md: { background: 'linear-gradient(to right, rgba(0,0,0,0.85), rgba(0,0,0,0.5) 50%, rgba(0,0,0,0) 78%)' }
                 } )
             }
         />

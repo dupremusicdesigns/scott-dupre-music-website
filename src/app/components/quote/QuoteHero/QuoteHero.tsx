@@ -37,7 +37,7 @@ export const QuoteHero = ( { quote }: QuoteHeroProps ) => (
     <header
         className={
             css( {
-                textAlign: 'center'
+                maxWidth: '620px'
             } )
         }
     >
@@ -77,7 +77,6 @@ export const QuoteHero = ( { quote }: QuoteHeroProps ) => (
             className={
                 css( {
                     maxWidth: '56ch'
-                    , marginX: 'auto'
                     , marginTop: 'sm'
                     , fontSize: 'md'
                     , fontWeight: 'medium'
