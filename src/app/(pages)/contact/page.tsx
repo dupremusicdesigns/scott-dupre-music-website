@@ -3,7 +3,7 @@ import { css } from '../../../../styled-system/css';
 import { flex } from '../../../../styled-system/patterns';
 import { FacebookIcon } from '../../components/icons/FacebookIcon/FacebookIcon';
 import { InstagramIcon } from '../../components/icons/InstagramIcon/InstagramIcon';
-import { ContactFormEmbed } from '../../components/contact/ContactFormEmbed/ContactFormEmbed';
+import { ContactForm } from '../../components/contact/ContactForm/ContactForm';
 import { getGlobal } from '../../api/global';
 import type { Metadata } from 'next';
 
@@ -228,7 +228,7 @@ export default async function ContactPage () {
                             } )
                         }
                     >
-                        <ContactFormEmbed />
+                        <ContactForm />
                     </div>
                 </section>
             </div>

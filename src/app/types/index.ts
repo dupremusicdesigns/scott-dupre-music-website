@@ -25,3 +25,24 @@ export type {
     BuildYourOwnShow
     , BuildYourOwnShowResponse
 } from './buildYourOwnShow';
+export type {
+    QuoteStatus
+    , QuoteItem
+    , QuoteOption
+    , QuoteClinic
+    , QuoteView
+    , QuoteAcceptanceInput
+    , QuoteFailure
+    , QuoteApiResult
+    , QuoteUnlockResponse
+} from './quote';
+export type {
+    ContactFailure
+    , ContactFormField
+    , ContactFormValues
+    , ContactSubmitResult
+    , LeadFailure
+    , LeadSubmitResult
+    , ShowFormField
+    , ShowFormValues
+} from './contact';

@@ -11,14 +11,18 @@
     "build:full": "npm run precache && npm run build",
     "start": "next start",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "local": "next build --turbopack && npx jiti scripts/local-server.ts",
+    "local:serve": "npx jiti scripts/local-server.ts"
   },
   "dependencies": {
     "@base-ui/react": "^1.0.0",
+    "@netlify/blobs": "^11.1.9",
     "@pandacss/dev": "^1.11.1",
     "dotenv": "^17.2.3",
     "logrocket": "^11.0.0",
     "next": "^16.3.2",
+    "nodemailer": "^10.5.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-markdown": "^10.1.0"
@@ -40,6 +44,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.3",
     "@types/node": "^25",
+    "@types/nodemailer": "^8.0.2",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.4",
     "@typescript-eslint/eslint-plugin": "^8.50.0",

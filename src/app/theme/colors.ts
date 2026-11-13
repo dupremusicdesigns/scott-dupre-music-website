@@ -25,4 +25,7 @@ export const colors = {
     , overlayTransparent: 'rgba(0, 0, 0, 0)'
 
     , dark: '#151414'
+
+    , warningText: '#8A5A00'
+    , warningBackground: '#FCF3E0'
 } as const;

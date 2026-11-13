@@ -51,6 +51,10 @@ const theme: ExtendableTheme = {
                     , dark: { value: colors.black }
                     , light: { value: colors.white }
                 }
+                , warning: {
+                    text: { value: colors.warningText }
+                    , background: { value: colors.warningBackground }
+                }
                 , overlay: {
                     light: { value: colors.overlayLight }
                     , medium: { value: colors.overlayMedium }
