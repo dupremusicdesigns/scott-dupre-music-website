@@ -6,6 +6,7 @@ import { CONTACT_SERVICE_OPTIONS } from '../../../constants/contactConstants';
 import { useContactForm } from '../../../hooks/useContactForm';
 import type { ContactFormField as ContactFormFieldName } from '../../../types';
 import { Button } from '../../Button/Button';
+import { Select } from '../../Select/Select';
 import { ContactFormField } from '../ContactFormField/ContactFormField';
 import {
     contactControlStyles
@@ -165,27 +166,15 @@ export const ContactForm = () => {
                 label='What services are you interested in?'
                 error={ fieldError( 'service' ) }
             >
-                <select
+                <Select
                     name='service'
-                    required
+                    label='What services are you interested in?'
                     value={ values.service }
-                    onChange={ event => setValue( 'service', event.target.value ) }
-                    className={ contactControlStyles }
-                >
-                    <option value=''>
-                        -- Select --
-                    </option>
-                    {
-                        CONTACT_SERVICE_OPTIONS.map( option => (
-                            <option
-                                key={ option }
-                                value={ option }
-                            >
-                                { option }
-                            </option>
-                        ) )
-                    }
-                </select>
+                    options={ CONTACT_SERVICE_OPTIONS }
+                    placeholder='-- Select --'
+                    invalid={ Boolean( fieldError( 'service' ) ) }
+                    onValueChange={ value => setValue( 'service', value ) }
+                />
             </ContactFormField>
             <ContactFormField
                 label='Additional information'
