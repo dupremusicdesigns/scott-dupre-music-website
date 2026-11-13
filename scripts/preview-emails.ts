@@ -12,6 +12,11 @@ import {
     , buildScottNotification
 } from '../netlify/lib/leadEmails';
 import type { LeadInquiry } from '../netlify/lib/leadInquiry';
+import {
+    buildShowClientConfirmation
+    , buildShowScottNotification
+} from '../netlify/lib/showEmails';
+import type { ShowInquiry } from '../netlify/lib/showInquiry';
 
 const outputDirectory = resolve( process.argv[ 2 ] ?? '.email-preview' );
 const logoSource = `data:image/png;base64,${ EMAIL_LOGO_BASE64 }`;
@@ -26,9 +31,23 @@ const sample: LeadInquiry = {
     , message: 'We are planning our 2027 marching show and love the Nimitz arrangements.\n\nCould we talk about a custom show for about 90 members, and what the timeline would look like?'
 };
 
+const showSample: ShowInquiry = {
+    name: 'Dana Whitfield'
+    , school: 'Cedar Ridge High School'
+    , email: 'dana.whitfield@cedarridge.example'
+    , movement1: 'Nimitz Intro'
+    , movement2: 'Welcome to the Jungle'
+    , movement3: 'Dream On'
+    , extra: 'A short postlude'
+    , vision: 'We want a show that builds from a quiet opening into a big, emotional finish for our 90 members.'
+    , contactTime: 'Weekday afternoons'
+};
+
 const files = [
     [ 'client-confirmation.html', buildClientConfirmation( sample, 'scott@example.com' ) ]
     , [ 'scott-notification.html', buildScottNotification( sample, 'scott@example.com' ) ]
+    , [ 'show-client-confirmation.html', buildShowClientConfirmation( showSample, 'scott@example.com' ) ]
+    , [ 'show-scott-notification.html', buildShowScottNotification( showSample, 'scott@example.com' ) ]
 ] as const;
 
 mkdirSync( outputDirectory, { recursive: true } );

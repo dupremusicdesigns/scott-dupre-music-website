@@ -6,6 +6,9 @@ import type {
     ContactFormField
     , ContactFormValues
     , ContactSubmitResult
+    , LeadSubmitResult
+    , ShowFormField
+    , ShowFormValues
 } from '../types';
 
 type ErrorBody = {
@@ -14,7 +17,7 @@ type ErrorBody = {
     message?: string;
 };
 
-const fields: ContactFormField[] = [
+const contactFields: ContactFormField[] = [
     'name'
     , 'school'
     , 'location'
@@ -24,11 +27,25 @@ const fields: ContactFormField[] = [
     , 'message'
 ];
 
-export const submitContactForm = async (
-    values: ContactFormValues
+const showFields: ShowFormField[] = [
+    'name'
+    , 'school'
+    , 'email'
+    , 'movement1'
+    , 'movement2'
+    , 'movement3'
+    , 'extra'
+    , 'vision'
+    , 'contactTime'
+];
+
+const submitLead = async <Field extends string>(
+    kind: 'contact' | 'show'
+    , values: Record<Field, string>
+    , fields: readonly Field[]
     , website: string
     , elapsed: number
-): Promise<ContactSubmitResult> => {
+): Promise<LeadSubmitResult<Field>> => {
     try {
         const response = await fetch( LEAD_API_PATH, {
             method: 'POST'
@@ -40,6 +57,7 @@ export const submitContactForm = async (
             }
             , body: JSON.stringify( {
                 ...values
+                , kind
                 , website
                 , elapsed
             } )
@@ -76,4 +94,20 @@ export const submitContactForm = async (
             , failure: { kind: 'failed' }
         };
     }
+};
+
+export const submitContactForm = (
+    values: ContactFormValues
+    , website: string
+    , elapsed: number
+): Promise<ContactSubmitResult> => {
+    return submitLead( 'contact', values, contactFields, website, elapsed );
+};
+
+export const submitShowForm = (
+    values: ShowFormValues
+    , website: string
+    , elapsed: number
+): Promise<LeadSubmitResult<ShowFormField>> => {
+    return submitLead( 'show', values, showFields, website, elapsed );
 };

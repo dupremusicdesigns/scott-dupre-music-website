@@ -2,7 +2,10 @@
 
 import type { FormEvent } from 'react';
 import { css } from '../../../../../styled-system/css';
-import { CONTACT_SERVICE_OPTIONS } from '../../../constants/contactConstants';
+import {
+    CONTACT_SERVICE_OPTIONS
+    , LEAD_FAILURE_TEXT
+} from '../../../constants/contactConstants';
 import { useContactForm } from '../../../hooks/useContactForm';
 import type { ContactFormField as ContactFormFieldName } from '../../../types';
 import { Button } from '../../Button/Button';
@@ -13,12 +16,6 @@ import {
     , contactErrorStyles
     , contactTrapStyles
 } from '../contactFormStyles';
-
-const failureText = {
-    throttled: 'You have sent several messages already. Please try again tomorrow, or email me directly.'
-    , unavailable: 'The form is not taking messages right now. Please email me directly instead.'
-    , failed: 'Sorry, that did not go through. Please try again, or email me directly.'
-};
 
 export const ContactForm = () => {
     const {
@@ -212,7 +209,7 @@ export const ContactForm = () => {
                         role='alert'
                         className={ contactErrorStyles }
                     >
-                        { failureText[ failure.kind ] }
+                        { LEAD_FAILURE_TEXT[ failure.kind ] }
                     </p>
                 )
             }

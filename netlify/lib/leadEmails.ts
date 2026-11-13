@@ -13,13 +13,13 @@ import {
 
 const CONFIRMATION_MESSAGE_LIMIT = 600;
 
-const clip = ( text: string ): string => {
+export const clip = ( text: string ): string => {
     return text.length > CONFIRMATION_MESSAGE_LIMIT
         ? `${ text.slice( 0, CONFIRMATION_MESSAGE_LIMIT ).trimEnd() }...`
         : text;
 };
 
-const firstName = ( name: string ): string => name.split( /\s+/ )[ 0 ] || name;
+export const firstName = ( name: string ): string => name.split( /\s+/ )[ 0 ] || name;
 
 const buildDetails = ( values: LeadInquiry, includeContact: boolean ): EmailDetail[] => {
     return [
@@ -58,7 +58,7 @@ const buildDetails = ( values: LeadInquiry, includeContact: boolean ): EmailDeta
     ];
 };
 
-const buildText = ( lines: string[] ): string => {
+export const buildText = ( lines: string[] ): string => {
     return lines
         .filter( ( line, index, all ) => line !== '' || all[ index - 1 ] !== '' )
         .join( '\n' )

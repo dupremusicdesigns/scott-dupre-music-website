@@ -41,4 +41,8 @@ export type {
     , ContactFormField
     , ContactFormValues
     , ContactSubmitResult
+    , LeadFailure
+    , LeadSubmitResult
+    , ShowFormField
+    , ShowFormValues
 } from './contact';

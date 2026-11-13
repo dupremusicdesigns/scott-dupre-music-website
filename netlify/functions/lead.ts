@@ -9,7 +9,15 @@ import {
 import { parseLeadInquiry } from '../lib/leadInquiry';
 import { claimSlot } from '../lib/leadLimits';
 import { createNetlifyCounterStore } from '../lib/netlifyCounterStore';
-import { sendEmail } from '../lib/sendEmail';
+import {
+    sendEmail
+    , type OutgoingEmail
+} from '../lib/sendEmail';
+import {
+    buildShowClientConfirmation
+    , buildShowScottNotification
+} from '../lib/showEmails';
+import { parseShowInquiry } from '../lib/showInquiry';
 
 const JSON_HEADERS = {
     'Content-Type': 'application/json'
@@ -37,6 +45,45 @@ const readJsonObject = async ( request: Request ): Promise<Record<string, unknow
     }
 };
 
+type Parsed =
+    | {
+        ok: true;
+        email: string;
+        notification: ( to: string ) => OutgoingEmail;
+        confirmation: ( replyTo: string ) => OutgoingEmail;
+    }
+    | {
+        ok: false;
+        field: string;
+        error: string;
+    };
+
+const parseBody = ( body: Record<string, unknown> ): Parsed => {
+    if ( body.kind === 'show' ) {
+        const parsed = parseShowInquiry( body );
+
+        return parsed.ok
+            ? {
+                ok: true
+                , email: parsed.values.email
+                , notification: to => buildShowScottNotification( parsed.values, to )
+                , confirmation: replyTo => buildShowClientConfirmation( parsed.values, replyTo )
+            }
+            : parsed;
+    }
+
+    const parsed = parseLeadInquiry( body );
+
+    return parsed.ok
+        ? {
+            ok: true
+            , email: parsed.values.email
+            , notification: to => buildScottNotification( parsed.values, to )
+            , confirmation: replyTo => buildClientConfirmation( parsed.values, replyTo )
+        }
+        : parsed;
+};
+
 const handler = async ( request: Request ): Promise<Response> => {
     const contentType = request.headers.get( 'Content-Type' ) ?? '';
 
@@ -62,7 +109,7 @@ const handler = async ( request: Request ): Promise<Response> => {
         return reply( { ok: true } );
     }
 
-    const parsed = parseLeadInquiry( body );
+    const parsed = parseBody( body );
 
     if ( !parsed.ok ) {
         return reply( {
@@ -81,7 +128,7 @@ const handler = async ( request: Request ): Promise<Response> => {
     }
 
     try {
-        const slot = await claimSlot( createNetlifyCounterStore(), parsed.values.email );
+        const slot = await claimSlot( createNetlifyCounterStore(), parsed.email );
 
         if ( slot === 'email-limit' ) {
             return reply( { error: 'throttled' }, 429 );
@@ -94,7 +141,7 @@ const handler = async ( request: Request ): Promise<Response> => {
         console.error( 'lead: could not check the daily limits', error );
     }
 
-    const notification = await sendEmail( buildScottNotification( parsed.values, scottEmail ) );
+    const notification = await sendEmail( parsed.notification( scottEmail ) );
 
     if ( notification !== 'sent' ) {
         console.error( `lead: notification email ${ notification }` );
@@ -102,7 +149,7 @@ const handler = async ( request: Request ): Promise<Response> => {
         return reply( { error: 'failed' }, 500 );
     }
 
-    const confirmation = await sendEmail( buildClientConfirmation( parsed.values, scottEmail ) );
+    const confirmation = await sendEmail( parsed.confirmation( scottEmail ) );
 
     if ( confirmation !== 'sent' ) {
         console.error( `lead: confirmation email ${ confirmation }` );
