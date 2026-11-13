@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { QuoteExperience } from '../../../components/quote/QuoteExperience/QuoteExperience';
-import { HeroBanner } from '../../../components/HeroBanner/HeroBanner';
+import { getHome } from '../../../api/home';
 import { QUOTE_PLACEHOLDER_TOKEN } from '../../../constants/quoteConstants';
 
 export const dynamicParams = false;
@@ -16,11 +16,8 @@ export const metadata: Metadata = {
 
 export const generateStaticParams = () => [ { token: QUOTE_PLACEHOLDER_TOKEN } ];
 
-export default function QuotePage () {
-    return (
-        <>
-            <HeroBanner />
-            <QuoteExperience />
-        </>
-    );
+export default async function QuotePage () {
+    const { data: home } = await getHome();
+
+    return <QuoteExperience heroImageUrl={ home?.heroImage?.url ?? null } />;
 }

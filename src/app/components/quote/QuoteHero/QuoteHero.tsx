@@ -38,7 +38,6 @@ export const QuoteHero = ( { quote }: QuoteHeroProps ) => (
         className={
             css( {
                 textAlign: 'center'
-                , paddingTop: 'xl'
             } )
         }
     >
@@ -49,7 +48,7 @@ export const QuoteHero = ( { quote }: QuoteHeroProps ) => (
                     , fontWeight: 'extrabold'
                     , textTransform: 'uppercase'
                     , letterSpacing: 'tight'
-                    , color: 'text.secondary'
+                    , color: 'text.inverse'
                 } )
             }
         >
@@ -63,7 +62,7 @@ export const QuoteHero = ( { quote }: QuoteHeroProps ) => (
                     , fontWeight: 'black'
                     , lineHeight: 'tight'
                     , textTransform: 'uppercase'
-                    , color: 'text.primary'
+                    , color: 'text.inverse'
                     , textWrap: 'balance'
                     , sm: { fontSize: '4xl' }
                     , md: { fontSize: '5xl' }
@@ -82,7 +81,7 @@ export const QuoteHero = ( { quote }: QuoteHeroProps ) => (
                     , marginTop: 'sm'
                     , fontSize: 'md'
                     , fontWeight: 'medium'
-                    , color: 'text.primary'
+                    , color: 'text.inverse'
                     , sm: { fontSize: 'lg' }
                 } )
             }

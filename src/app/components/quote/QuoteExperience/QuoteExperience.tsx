@@ -2,11 +2,16 @@
 
 import { css } from '../../../../../styled-system/css';
 import { useQuote } from '../../../hooks/useQuote';
+import { QuoteBanner } from '../QuoteBanner/QuoteBanner';
 import { QuoteMessage } from '../QuoteMessage/QuoteMessage';
 import { QuotePinForm } from '../QuotePinForm/QuotePinForm';
 import { QuoteReady } from '../QuoteReady/QuoteReady';
 
-export const QuoteExperience = () => {
+type QuoteExperienceProps = {
+    heroImageUrl: string | null;
+}
+
+export const QuoteExperience = ( { heroImageUrl }: QuoteExperienceProps ) => {
     const {
         phase
         , pinFailure
@@ -26,6 +31,14 @@ export const QuoteExperience = () => {
                 } )
             }
         >
+            {
+                phase.name !== 'ready' && (
+                    <QuoteBanner
+                        imageUrl={ heroImageUrl }
+                        compact
+                    />
+                )
+            }
             {
                 phase.name === 'loading' && (
                     <QuoteMessage title='One moment'>
@@ -60,6 +73,7 @@ export const QuoteExperience = () => {
                 phase.name === 'ready' && (
                     <QuoteReady
                         quote={ phase.quote }
+                        heroImageUrl={ heroImageUrl }
                         busy={ busy }
                         failure={ acceptFailure }
                         onAccept={ submitAcceptance }
