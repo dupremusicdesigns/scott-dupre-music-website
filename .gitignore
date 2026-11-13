@@ -50,3 +50,4 @@ styled-system-studio
 # Cached CMS assets
 public/cms-assets
 .email-preview
+.email-outbox
