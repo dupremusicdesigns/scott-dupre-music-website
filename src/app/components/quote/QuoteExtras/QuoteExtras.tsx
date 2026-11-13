@@ -42,11 +42,23 @@ export const QuoteExtras = ( {
         <h2 className={ sectionHeadingStyles }>
             Add to your season
         </h2>
+        <p
+            className={
+                css( {
+                    marginTop: '-4px'
+                    , marginBottom: '14px'
+                    , fontSize: 'base'
+                    , color: 'text.secondary'
+                } )
+            }
+        >
+            Each is an additional charge, invoiced in full after delivery. None are part of the show price.
+        </p>
         <div
             className={
                 css( {
                     display: 'grid'
-                    , gap: 'sm'
+                    , gap: '12px'
                 } )
             }
         >
@@ -56,6 +68,9 @@ export const QuoteExtras = ( {
                         ? selectedIds.has( option.id )
                         : status === 'Approved' ? option.approved === true : option.selected;
                     const interactive = editable && !option.included;
+                    const pillText = interactive
+                        ? selected ? 'Added ✓' : 'Add'
+                        : describeOutcome( option, status, selected );
 
                     return (
                         <label
@@ -63,17 +78,24 @@ export const QuoteExtras = ( {
                             className={
                                 css( {
                                     display: 'grid'
-                                    , gridTemplateColumns: editable ? 'auto minmax(0, 1fr) auto' : 'minmax(0, 1fr) auto'
-                                    , alignItems: 'start'
-                                    , columnGap: 'sm'
+                                    , gridTemplateColumns: 'minmax(0, 1fr) auto'
+                                    , columnGap: '18px'
                                     , rowGap: '4px'
-                                    , padding: 'sm'
+                                    , position: 'relative'
+                                    , padding: '16px'
                                     , border: '2px solid'
-                                    , borderColor: selected ? 'border.dark' : 'border.default'
-                                    , borderRadius: 'sm'
+                                    , borderColor: option.included ? 'border.default' : selected ? 'border.dark' : 'gray.300'
+                                    , boxShadow: selected && !option.included ? 'inset 0 0 0 1px #000' : 'none'
+                                    , borderRadius: '16px'
                                     , backgroundColor: option.included ? 'background.secondary' : 'background.primary'
                                     , cursor: interactive ? 'pointer' : 'default'
                                     , _hover: interactive ? { borderColor: 'border.dark' } : {}
+                                    , '&:has(input:focus-visible)': {
+                                        outline: '2px solid'
+                                        , outlineColor: 'brand.black'
+                                        , outlineOffset: '3px'
+                                    }
+                                    , sm: { padding: '18px 20px' }
                                 } )
                             }
                         >
@@ -86,10 +108,9 @@ export const QuoteExtras = ( {
                                         onChange={ () => onToggle( option.id ) }
                                         className={
                                             css( {
-                                                width: '20px'
-                                                , height: '20px'
-                                                , marginTop: '2px'
-                                                , accentColor: 'brand.black'
+                                                position: 'absolute'
+                                                , opacity: 0
+                                                , pointerEvents: 'none'
                                             } )
                                         }
                                     />
@@ -98,8 +119,9 @@ export const QuoteExtras = ( {
                             <strong
                                 className={
                                     css( {
-                                        fontSize: 'md'
+                                        fontSize: 'lg'
                                         , fontWeight: 'black'
+                                        , letterSpacing: '0.02em'
                                         , textTransform: 'uppercase'
                                         , color: 'text.primary'
                                     } )
@@ -110,9 +132,10 @@ export const QuoteExtras = ( {
                             <strong
                                 className={
                                     css( {
-                                        fontSize: 'md'
+                                        fontSize: 'lg'
                                         , fontWeight: 'black'
                                         , whiteSpace: 'nowrap'
+                                        , textAlign: 'right'
                                         , color: 'text.primary'
                                     } )
                                 }
@@ -122,8 +145,7 @@ export const QuoteExtras = ( {
                             <span
                                 className={
                                     css( {
-                                        gridColumn: editable ? '2 / -1' : '1 / -1'
-                                        , fontSize: 'base'
+                                        fontSize: 'base'
                                         , color: 'text.secondary'
                                     } )
                                 }
@@ -134,22 +156,30 @@ export const QuoteExtras = ( {
                                         : option.description || 'Additional service, invoiced after delivery.'
                                 }
                             </span>
-                            {
-                                !editable && (
-                                    <span
-                                        className={
-                                            css( {
-                                                gridColumn: '1 / -1'
-                                                , fontSize: 'base'
-                                                , fontWeight: 'bold'
-                                                , color: 'text.primary'
-                                            } )
-                                        }
-                                    >
-                                        { describeOutcome( option, status, selected ) }
-                                    </span>
-                                )
-                            }
+                            <span
+                                className={
+                                    css( {
+                                        gridColumn: 2
+                                        , gridRow: 2
+                                        , justifySelf: 'end'
+                                        , alignSelf: 'end'
+                                        , paddingX: '14px'
+                                        , paddingY: '5px'
+                                        , fontSize: '11.5px'
+                                        , fontWeight: 'black'
+                                        , letterSpacing: '0.08em'
+                                        , textTransform: 'uppercase'
+                                        , whiteSpace: 'nowrap'
+                                        , border: '2px solid'
+                                        , borderColor: option.included || ( !selected && !interactive ) ? 'gray.300' : 'border.dark'
+                                        , borderRadius: 'lg'
+                                        , color: selected && !option.included ? 'text.inverse' : option.included ? 'text.secondary' : 'text.primary'
+                                        , backgroundColor: selected && !option.included ? 'brand.black' : 'transparent'
+                                    } )
+                                }
+                            >
+                                { pillText }
+                            </span>
                         </label>
                     );
                 } )

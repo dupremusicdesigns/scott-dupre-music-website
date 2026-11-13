@@ -48,49 +48,54 @@ export const QuoteReady = ( {
 
     return (
         <>
+            {
+                preview && (
+                    <p
+                        role='status'
+                        className={
+                            css( {
+                                paddingX: '16px'
+                                , paddingY: '6px'
+                                , textAlign: 'center'
+                                , fontSize: '12px'
+                                , fontWeight: 'extrabold'
+                                , letterSpacing: '0.08em'
+                                , textTransform: 'uppercase'
+                                , color: '#8a5a00'
+                                , backgroundColor: '#fcf3e0'
+                                , borderBottom: '2px solid #8a5a00'
+                            } )
+                        }
+                    >
+                        Preview · nothing here is saved or sent · accepting is turned off
+                    </p>
+                )
+            }
             <QuoteBanner imageUrl={ heroImageUrl }>
                 <QuoteHero quote={ quote } />
             </QuoteBanner>
             <div
                 className={
                     css( {
-                        maxWidth: '1120px'
+                        maxWidth: '1080px'
                         , marginX: 'auto'
-                        , paddingX: 'md'
-                        , paddingBottom: '2xl'
-                        , md: { paddingX: '7%' }
+                        , paddingX: '16px'
+                        , paddingTop: '44px'
+                        , paddingBottom: '64px'
+                        , sm: { paddingX: '28px' }
                     } )
                 }
             >
-                {
-                    preview && (
-                        <p
-                            role='status'
-                            className={
-                                css( {
-                                    marginTop: 'md'
-                                    , padding: 'sm'
-                                    , textAlign: 'center'
-                                    , fontSize: 'sm'
-                                    , fontWeight: 'bold'
-                                    , color: 'text.inverse'
-                                    , backgroundColor: 'brand.black'
-                                    , borderRadius: 'sm'
-                                } )
-                            }
-                        >
-                            Preview of what the school sees. Nothing here is saved or sent.
-                        </p>
-                    )
-                }
                 <div
                     className={
                         css( {
                             display: 'grid'
-                            , gap: 'lg'
-                            , marginTop: 'xl'
+                            , gap: '32px'
                             , alignItems: 'start'
-                            , md: { gridTemplateColumns: 'minmax(0, 1fr) 340px' }
+                            , '@media (min-width: 861px)': {
+                                gridTemplateColumns: 'minmax(0, 1fr) 340px'
+                                , gap: '44px'
+                            }
                         } )
                     }
                 >
@@ -98,7 +103,7 @@ export const QuoteReady = ( {
                         className={
                             css( {
                                 display: 'grid'
-                                , gap: 'lg'
+                                , gap: '40px'
                             } )
                         }
                     >

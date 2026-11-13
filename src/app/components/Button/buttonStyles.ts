@@ -116,6 +116,7 @@ export const buttonStyles = cva( {
         , rounded: {
             sm: { borderRadius: 'sm' }
             , md: { borderRadius: 'md' }
+            , lg: { borderRadius: 'lg' }
         }
         , fullWidth: {
             true: { width: '100%' }

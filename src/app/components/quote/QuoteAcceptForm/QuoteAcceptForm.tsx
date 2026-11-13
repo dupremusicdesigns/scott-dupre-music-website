@@ -100,7 +100,7 @@ export const QuoteAcceptForm = ( {
                         display: 'flex'
                         , alignItems: 'flex-start'
                         , gap: 'xs'
-                        , fontSize: 'base'
+                        , fontSize: '13.5px'
                         , color: 'text.primary'
                         , cursor: 'pointer'
                     } )
@@ -139,9 +139,9 @@ export const QuoteAcceptForm = ( {
                 type='submit'
                 variant='primary'
                 size='lg'
-                rounded='sm'
+                rounded='lg'
                 fullWidth
-                disabled={ busy }
+                disabled={ busy || !agreed || name.trim().length < 2 }
             >
                 { busy ? 'Sending' : 'Accept quote' }
             </Button>

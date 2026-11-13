@@ -15,14 +15,12 @@ const describeItem = ( quote: QuoteView, index: number ): string => {
         const date = quote.clinic.date ? ` · ${ formatQuoteDate( quote.clinic.date ) }` : '';
         const unit = quote.clinic.hours === 1 ? 'hour' : 'hours';
 
-        return `Your clinic${ date } · ${ quote.clinic.hours } ${ unit } at ${ formatMoney( quote.clinic.rate ) }/hr`;
+        return `${ date } · ${ quote.clinic.hours } ${ unit } at ${ formatMoney( quote.clinic.rate ) }/hr`;
     }
 
-    const detail = index === 0
+    return index === 0
         ? ` · ${ quote.show.product }${ quote.show.type === 'Resale' ? ` · ${ quote.show.resaleScope }` : '' }`
         : '';
-
-    return `Your show${ detail }`;
 };
 
 export const QuoteItems = ( { quote }: QuoteItemsProps ) => (
@@ -42,7 +40,7 @@ export const QuoteItems = ( { quote }: QuoteItemsProps ) => (
                             , gridTemplateColumns: 'minmax(0, 1fr) auto'
                             , columnGap: 'sm'
                             , rowGap: '4px'
-                            , paddingY: 'sm'
+                            , paddingY: '16px'
                             , borderBottom: '1px solid'
                             , borderColor: 'border.default'
                         } )
@@ -51,9 +49,8 @@ export const QuoteItems = ( { quote }: QuoteItemsProps ) => (
                     <strong
                         className={
                             css( {
-                                fontSize: 'md'
-                                , fontWeight: 'black'
-                                , textTransform: 'uppercase'
+                                fontSize: 'lg'
+                                , fontWeight: 'extrabold'
                                 , color: 'text.primary'
                             } )
                         }
@@ -63,7 +60,7 @@ export const QuoteItems = ( { quote }: QuoteItemsProps ) => (
                     <strong
                         className={
                             css( {
-                                fontSize: 'md'
+                                fontSize: 'lg'
                                 , fontWeight: 'black'
                                 , whiteSpace: 'nowrap'
                                 , color: 'text.primary'
@@ -81,6 +78,18 @@ export const QuoteItems = ( { quote }: QuoteItemsProps ) => (
                             } )
                         }
                     >
+                        <span
+                            className={
+                                css( {
+                                    fontSize: 'xs'
+                                    , fontWeight: 'black'
+                                    , letterSpacing: '0.08em'
+                                    , textTransform: 'uppercase'
+                                } )
+                            }
+                        >
+                            { `● Your ${ quote.kind === 'Clinic' ? 'clinic' : 'show' }` }
+                        </span>
                         { describeItem( quote, index ) }
                     </span>
                 </div>
@@ -93,8 +102,8 @@ export const QuoteItems = ( { quote }: QuoteItemsProps ) => (
                         css( {
                             display: 'flex'
                             , flexWrap: 'wrap'
-                            , gap: 'xs'
-                            , marginTop: 'sm'
+                            , gap: '6px'
+                            , marginTop: '8px'
                             , listStyle: 'none'
                             , padding: '0'
                         } )
@@ -106,12 +115,12 @@ export const QuoteItems = ( { quote }: QuoteItemsProps ) => (
                                 key={ `${ movement }-${ index }` }
                                 className={
                                     css( {
-                                        paddingX: 'sm'
-                                        , paddingY: '4px'
-                                        , fontSize: 'base'
+                                        paddingX: '10px'
+                                        , paddingY: '2px'
+                                        , fontSize: 'sm'
                                         , fontWeight: 'bold'
-                                        , border: '2px solid'
-                                        , borderColor: 'border.dark'
+                                        , border: '1.5px solid'
+                                        , borderColor: 'gray.300'
                                         , borderRadius: 'lg'
                                     } )
                                 }

@@ -8,7 +8,7 @@ import { buttonStyles } from './buttonStyles';
 export type ButtonProps = {
     variant?: 'primary' | 'secondary' | 'outline' | 'outlineDark';
     size?: 'sm' | 'md' | 'lg' | 'footer';
-    rounded?: 'sm' | 'md';
+    rounded?: 'sm' | 'md' | 'lg';
     fullWidth?: boolean;
     className?: string;
     children?: React.ReactNode;

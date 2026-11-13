@@ -5,7 +5,7 @@ import {
     , formatMoney
     , formatQuoteDate
 } from '../../../utils/quoteUtils';
-import { sectionHeadingStyles } from '../quoteStyles';
+import { summaryHeadingStyles } from '../quoteStyles';
 
 type QuoteSummaryProps = {
     quote: QuoteView;
@@ -17,9 +17,9 @@ type QuoteSummaryProps = {
 const lineStyles = css( {
     display: 'flex'
     , justifyContent: 'space-between'
-    , gap: 'sm'
-    , paddingY: '6px'
-    , fontSize: 'base'
+    , gap: '14px'
+    , paddingY: '5px'
+    , fontSize: '14.5px'
     , color: 'text.primary'
 } );
 
@@ -50,24 +50,26 @@ export const QuoteSummary = ( {
                 .map( option => option.id )
     );
     const total = editable ? calculateQuoteTotal( quote, selectedIds ) : quote.total;
+    const showAmount = quote.items.reduce( ( sum, item ) => sum + item.amount, 0 );
+    const depositAmount = Math.round( showAmount * ( quote.depositPercent ?? 0 ) ) / 100;
     const addedOptions = quote.options.filter( option => shownIds.has( option.id ) && !option.included );
 
     return (
         <aside
             className={
                 css( {
-                    padding: 'md'
+                    padding: '22px'
                     , border: '2px solid'
                     , borderColor: 'border.dark'
                     , borderRadius: 'md'
-                    , md: {
+                    , '@media (min-width: 861px)': {
                         position: 'sticky'
-                        , top: 'md'
+                        , top: '20px'
                     }
                 } )
             }
         >
-            <h2 className={ sectionHeadingStyles }>
+            <h2 className={ summaryHeadingStyles }>
                 Summary
             </h2>
             {
@@ -106,9 +108,9 @@ export const QuoteSummary = ( {
                         display: 'flex'
                         , justifyContent: 'space-between'
                         , alignItems: 'baseline'
-                        , marginTop: 'xs'
-                        , paddingTop: 'sm'
-                        , borderTop: '2px solid'
+                        , marginTop: '10px'
+                        , paddingTop: '12px'
+                        , borderTop: '4px solid'
                         , borderColor: 'border.dark'
                     } )
                 }
@@ -116,8 +118,9 @@ export const QuoteSummary = ( {
                 <span
                     className={
                         css( {
-                            fontSize: 'base'
+                            fontSize: '12px'
                             , fontWeight: 'black'
+                            , letterSpacing: '0.1em'
                             , textTransform: 'uppercase'
                         } )
                     }
@@ -128,9 +131,10 @@ export const QuoteSummary = ( {
                     aria-live='polite'
                     className={
                         css( {
-                            fontSize: '3xl'
+                            fontSize: '34px'
                             , fontWeight: 'black'
-                            , lineHeight: 'tight'
+                            , letterSpacing: '-0.02em'
+                            , lineHeight: 'normal'
                         } )
                     }
                 >
@@ -141,8 +145,9 @@ export const QuoteSummary = ( {
                 className={
                     css( {
                         display: 'grid'
-                        , gap: 'xs'
-                        , marginTop: 'sm'
+                        , gap: '6px'
+                        , marginTop: '8px'
+                        , marginBottom: '18px'
                         , fontSize: 'sm'
                         , color: 'text.secondary'
                     } )
@@ -163,7 +168,9 @@ export const QuoteSummary = ( {
                                             A
                                             { ' ' }
                                             { quote.depositPercent }
-                                            % deposit is due at signing, and the balance at final delivery.
+                                            % deposit (
+                                            { formatMoney( depositAmount ) }
+                                            ) is due at signing, and the balance at final delivery.
                                         </p>
                                     )
                                 }
