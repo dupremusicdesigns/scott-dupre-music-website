@@ -4,13 +4,17 @@ import {
 } from 'fs';
 import { resolve } from 'path';
 import {
+    EMAIL_LOGO_BASE64
+    , EMAIL_LOGO_CID
+} from '../netlify/lib/emailLogo';
+import {
     buildClientConfirmation
     , buildScottNotification
 } from '../netlify/lib/leadEmails';
 import type { LeadInquiry } from '../netlify/lib/leadInquiry';
 
 const outputDirectory = resolve( process.argv[ 2 ] ?? '.email-preview' );
-const logoPath = `file://${ resolve( 'public/email-logo.png' ) }`;
+const logoSource = `data:image/png;base64,${ EMAIL_LOGO_BASE64 }`;
 
 const sample: LeadInquiry = {
     name: 'Dana Whitfield'
@@ -32,7 +36,7 @@ mkdirSync( outputDirectory, { recursive: true } );
 for ( const [ name, email ] of files ) {
     writeFileSync(
         resolve( outputDirectory, name )
-        , email.html.replace( /src="[^"]*\/email-logo\.png"/, `src="${ logoPath }"` )
+        , email.html.replace( `cid:${ EMAIL_LOGO_CID }`, logoSource )
     );
 }
 

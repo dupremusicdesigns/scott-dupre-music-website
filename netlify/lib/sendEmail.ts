@@ -1,4 +1,8 @@
 import { createTransport } from 'nodemailer';
+import {
+    EMAIL_LOGO_BASE64
+    , EMAIL_LOGO_CID
+} from './emailLogo';
 
 export type OutgoingEmail = {
     to: string;
@@ -30,6 +34,11 @@ const sendWithResend = async (
                 , subject: message.subject
                 , text: message.text
                 , html: message.html
+                , attachments: [ {
+                    filename: 'logo.png'
+                    , content: EMAIL_LOGO_BASE64
+                    , content_id: EMAIL_LOGO_CID
+                } ]
                 , ...( message.replyTo ? { reply_to: message.replyTo } : {} )
             } )
             , signal: AbortSignal.timeout( 8000 )
@@ -66,6 +75,12 @@ const sendWithGmail = async (
             , subject: message.subject
             , text: message.text
             , html: message.html
+            , attachments: [ {
+                filename: 'logo.png'
+                , content: Buffer.from( EMAIL_LOGO_BASE64, 'base64' )
+                , contentType: 'image/png'
+                , cid: EMAIL_LOGO_CID
+            } ]
             , ...( message.replyTo ? { replyTo: message.replyTo } : {} )
         } );
 

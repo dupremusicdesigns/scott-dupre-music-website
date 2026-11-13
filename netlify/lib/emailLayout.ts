@@ -1,3 +1,5 @@
+import { EMAIL_LOGO_CID } from './emailLogo';
+
 export const SITE_URL = ( process.env.SITE_URL || 'https://dupremusicdesigns.com' ).replace( /\/+$/, '' );
 
 const FONT = 'Inter, -apple-system, BlinkMacSystemFont, \'Segoe UI\', Helvetica, Arial, sans-serif';
@@ -76,14 +78,14 @@ export const renderEmailShell = ( {
 <meta name="supported-color-schemes" content="light only">
 <title>${ escapeHtml( title ) }</title>
 </head>
-<body style="margin:0;padding:0;background-color:#F5F5F5;">
+<body style="margin:0;padding:0;background-color:#FFFFFF;">
 <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;">${ escapeHtml( preheader ) }</div>
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#F5F5F5;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#FFFFFF;">
 <tr><td align="center" style="padding:24px 12px;">
 <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="width:100%;max-width:600px;">
 <tr><td style="background-color:#FFFFFF;border-radius:20px 20px 0 0;padding:24px 32px;border-bottom:3px solid #000000;">
 <table role="presentation" cellpadding="0" cellspacing="0"><tr>
-<td style="padding-right:12px;"><a href="${ SITE_URL }" style="text-decoration:none;"><img src="${ SITE_URL }/email-logo.png" width="41" height="43" alt="Dupre Music Designs" style="display:block;border:0;"></a></td>
+<td style="padding-right:12px;"><a href="${ SITE_URL }" style="text-decoration:none;"><img src="cid:${ EMAIL_LOGO_CID }" width="41" height="43" alt="Dupre Music Designs" style="display:block;border:0;"></a></td>
 <td style="font-family:${ FONT };"><div style="font-size:16px;font-weight:900;letter-spacing:0.02em;text-transform:uppercase;color:#000000;">Scott Dupre</div><div style="font-size:11px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:#000000;">Arranger &amp; Composer</div></td>
 </tr></table>
 </td></tr>
