@@ -27,6 +27,7 @@ const fields: ContactFormField[] = [
 export const submitContactForm = async (
     values: ContactFormValues
     , website: string
+    , elapsed: number
 ): Promise<ContactSubmitResult> => {
     try {
         const response = await fetch( LEAD_API_PATH, {
@@ -40,6 +41,7 @@ export const submitContactForm = async (
             , body: JSON.stringify( {
                 ...values
                 , website
+                , elapsed
             } )
         } );
 
@@ -62,7 +64,11 @@ export const submitContactForm = async (
 
         return {
             ok: false
-            , failure: { kind: body.error === 'throttled' ? 'throttled' : 'failed' }
+            , failure: {
+                kind: body.error === 'throttled' || body.error === 'unavailable'
+                    ? body.error
+                    : 'failed'
+            }
         };
     } catch {
         return {

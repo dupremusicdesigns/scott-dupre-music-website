@@ -21,13 +21,25 @@ export type LeadInquiryParse =
         error: string;
     };
 
+import {
+    containsLink
+    , normalizeLine
+    , normalizeMessage
+} from './leadGuards';
+
 const EMAIL_SHAPE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-const readText = ( source: Record<string, unknown>, key: string ): string => {
+const readText = (
+    source: Record<string, unknown>
+    , key: string
+    , normalize: ( text: string ) => string = normalizeLine
+): string => {
     const value = source[ key ];
 
-    return typeof value === 'string' ? value.trim() : '';
+    return typeof value === 'string' ? normalize( value ) : '';
 };
+
+const LINK_ERROR = 'Please leave links out of the form. Reply to the confirmation email if you want to share one.';
 
 export const parseLeadInquiry = ( source: Record<string, unknown> ): LeadInquiryParse => {
     const values: LeadInquiry = {
@@ -37,8 +49,19 @@ export const parseLeadInquiry = ( source: Record<string, unknown> ): LeadInquiry
         , email: readText( source, 'email' )
         , phone: readText( source, 'phone' )
         , service: readText( source, 'service' )
-        , message: readText( source, 'message' )
+        , message: readText( source, 'message', normalizeMessage )
     };
+
+    const linkField = ( [ 'name', 'school', 'location', 'phone', 'service', 'message' ] as const )
+        .find( field => containsLink( values[ field ] ) );
+
+    if ( linkField ) {
+        return {
+            ok: false
+            , field: linkField
+            , error: LINK_ERROR
+        };
+    }
 
     if ( !values.name || values.name.length > 200 ) {
         return {

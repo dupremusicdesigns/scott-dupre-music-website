@@ -11,6 +11,14 @@ import {
     , type EmailDetail
 } from './emailLayout';
 
+const CONFIRMATION_MESSAGE_LIMIT = 600;
+
+const clip = ( text: string ): string => {
+    return text.length > CONFIRMATION_MESSAGE_LIMIT
+        ? `${ text.slice( 0, CONFIRMATION_MESSAGE_LIMIT ).trimEnd() }...`
+        : text;
+};
+
 const firstName = ( name: string ): string => name.split( /\s+/ )[ 0 ] || name;
 
 const buildDetails = ( values: LeadInquiry, includeContact: boolean ): EmailDetail[] => {
@@ -69,7 +77,7 @@ export const buildClientConfirmation = (
         , ...( values.message
             ? [
                 spacer( 28 )
-                , renderMessageBlock( 'Your message', values.message )
+                , renderMessageBlock( 'Your message', clip( values.message ) )
             ]
             : [] )
         , spacer( 28 )
@@ -97,7 +105,7 @@ export const buildClientConfirmation = (
             , `School / Organization: ${ values.school }`
             , `Location: ${ values.location }`
             , `Services: ${ values.service }`
-            , ...( values.message ? [ '', values.message ] : [] )
+            , ...( values.message ? [ '', clip( values.message ) ] : [] )
             , ''
             , 'Need to add something? Just reply to this email and it goes straight to me.'
             , ''

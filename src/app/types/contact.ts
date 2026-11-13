@@ -17,6 +17,7 @@ export type ContactFailure =
         message: string;
     }
     | { kind: 'throttled' }
+    | { kind: 'unavailable' }
     | { kind: 'failed' };
 
 export type ContactSubmitResult =

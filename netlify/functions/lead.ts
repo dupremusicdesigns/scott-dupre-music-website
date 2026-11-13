@@ -2,7 +2,13 @@ import {
     buildClientConfirmation
     , buildScottNotification
 } from '../lib/leadEmails';
+import {
+    filledTooFast
+    , isSameOrigin
+} from '../lib/leadGuards';
 import { parseLeadInquiry } from '../lib/leadInquiry';
+import { claimSlot } from '../lib/leadLimits';
+import { createNetlifyCounterStore } from '../lib/netlifyCounterStore';
 import { sendEmail } from '../lib/sendEmail';
 
 const JSON_HEADERS = {
@@ -38,6 +44,10 @@ const handler = async ( request: Request ): Promise<Response> => {
         return reply( { error: 'invalid' }, 400 );
     }
 
+    if ( !isSameOrigin( request ) ) {
+        return reply( { error: 'invalid' }, 403 );
+    }
+
     const body = await readJsonObject( request );
 
     if ( !body ) {
@@ -45,6 +55,10 @@ const handler = async ( request: Request ): Promise<Response> => {
     }
 
     if ( typeof body.website === 'string' && body.website.trim() ) {
+        return reply( { ok: true } );
+    }
+
+    if ( filledTooFast( body.elapsed ) ) {
         return reply( { ok: true } );
     }
 
@@ -64,6 +78,20 @@ const handler = async ( request: Request ): Promise<Response> => {
         console.error( 'lead: LEAD_NOTIFY_EMAIL is not set' );
 
         return reply( { error: 'failed' }, 500 );
+    }
+
+    try {
+        const slot = await claimSlot( createNetlifyCounterStore(), parsed.values.email );
+
+        if ( slot === 'email-limit' ) {
+            return reply( { error: 'throttled' }, 429 );
+        }
+
+        if ( slot === 'total-limit' ) {
+            return reply( { error: 'unavailable' }, 503 );
+        }
+    } catch ( error ) {
+        console.error( 'lead: could not check the daily limits', error );
     }
 
     const notification = await sendEmail( buildScottNotification( parsed.values, scottEmail ) );

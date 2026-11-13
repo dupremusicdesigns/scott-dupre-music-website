@@ -15,7 +15,8 @@ import {
 } from '../contactFormStyles';
 
 const failureText = {
-    throttled: 'You have sent several messages already. Please wait a bit before sending another.'
+    throttled: 'You have sent several messages already. Please try again tomorrow, or email me directly.'
+    , unavailable: 'The form is not taking messages right now. Please email me directly instead.'
     , failed: 'Sorry, that did not go through. Please try again, or email me directly.'
 };
 

@@ -29,6 +29,7 @@ export const useContactForm = () => {
     const [ busy, setBusy ] = useState( false );
     const [ sent, setSent ] = useState( false );
     const inFlight = useRef( false );
+    const [ openedAt ] = useState( () => Date.now() );
 
     const setValue = useCallback( ( field: ContactFormField, value: string ) => {
         setValues( current => ( {
@@ -46,7 +47,7 @@ export const useContactForm = () => {
         setBusy( true );
         setFailure( null );
 
-        const result = await submitContactForm( values, website );
+        const result = await submitContactForm( values, website, Date.now() - openedAt );
 
         if ( result.ok ) {
             setSent( true );
@@ -56,7 +57,7 @@ export const useContactForm = () => {
 
         inFlight.current = false;
         setBusy( false );
-    }, [ values, website ] );
+    }, [ values, website, openedAt ] );
 
     return {
         values
