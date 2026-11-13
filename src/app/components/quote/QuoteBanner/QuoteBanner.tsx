@@ -44,8 +44,8 @@ export const QuoteBanner = ( {
                     className={
                         css( {
                             objectFit: 'cover'
-                            , objectPosition: '60% center'
-                            , md: { objectPosition: 'center 30%' }
+                            , objectPosition: '60% top'
+                            , md: { objectPosition: 'center top' }
                         } )
                     }
                 />
