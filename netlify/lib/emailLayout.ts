@@ -82,18 +82,18 @@ export const renderEmailShell = ( {
 <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;">${ escapeHtml( preheader ) }</div>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#FFFFFF;">
 <tr><td align="center" style="padding:24px 12px;">
-<table role="presentation" width="600" cellpadding="0" cellspacing="0" style="width:100%;max-width:600px;">
-<tr><td style="background-color:#FFFFFF;border-radius:20px 20px 0 0;padding:24px 32px;border-bottom:3px solid #000000;">
+<table role="presentation" width="680" cellpadding="0" cellspacing="0" style="width:100%;max-width:680px;border:1px solid #000000;border-radius:20px;border-collapse:separate;border-spacing:0;">
+<tr><td style="background-color:#FFFFFF;border-radius:19px 19px 0 0;padding:24px 40px;border-bottom:3px solid #000000;">
 <table role="presentation" cellpadding="0" cellspacing="0"><tr>
 <td style="padding-right:12px;"><a href="${ SITE_URL }" style="text-decoration:none;"><img src="cid:${ EMAIL_LOGO_CID }" width="41" height="43" alt="Dupre Music Designs" style="display:block;border:0;"></a></td>
 <td style="font-family:${ FONT };"><div style="font-size:16px;font-weight:900;letter-spacing:0.02em;text-transform:uppercase;color:#000000;">Scott Dupre</div><div style="font-size:11px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:#000000;">Arranger &amp; Composer</div></td>
 </tr></table>
 </td></tr>
-<tr><td style="background-color:#FFFFFF;padding:40px 32px 40px 32px;">
+<tr><td style="background-color:#FFFFFF;padding:40px 40px 44px 40px;">
 <h1 style="margin:0 0 24px 0;font-family:${ FONT };font-size:40px;font-weight:900;line-height:1;letter-spacing:0.01em;text-transform:uppercase;color:#000000;">${ escapeHtml( heading ) }</h1>
 ${ body }
 </td></tr>
-<tr><td style="background-color:#151414;border-radius:0 0 20px 20px;padding:32px;">
+<tr><td style="background-color:#151414;border-radius:0 0 19px 19px;padding:32px 40px;">
 <div style="font-family:${ FONT };font-size:28px;font-weight:900;line-height:1;letter-spacing:0.01em;text-transform:uppercase;color:#FFFFFF;">Scott Dupre</div>
 <div style="font-family:${ FONT };font-size:14px;font-weight:500;letter-spacing:0.02em;text-transform:uppercase;color:#FFFFFF;padding-top:6px;">Arranger &amp; Composer</div>
 ${ spacer( 20 ) }
