@@ -113,7 +113,7 @@ export const buildScottNotification = (
 ): OutgoingEmail => {
     const name = firstName( values.name );
     const body = [
-        renderParagraph( `${ values.name } from ${ values.school } sent an inquiry through your website.` )
+        renderParagraph( `${ values.name } from ${ values.school } sent a lead through your website.` )
         , spacer( 28 )
         , renderDetails( buildDetails( values, true ) )
         , ...( values.message
@@ -131,15 +131,15 @@ export const buildScottNotification = (
     return {
         to
         , replyTo: values.email
-        , subject: `New inquiry: ${ values.school }`
+        , subject: `LEAD: ${ values.school }`
         , html: renderEmailShell( {
-            title: 'New inquiry'
+            title: 'New lead'
             , preheader: `${ values.name } from ${ values.school } (${ values.location }) is interested in ${ values.service }.`
-            , heading: 'New inquiry'
+            , heading: 'New lead'
             , body
         } )
         , text: buildText( [
-            `${ values.name } from ${ values.school } sent an inquiry through your website.`
+            `${ values.name } from ${ values.school } sent a lead through your website.`
             , ''
             , `Name: ${ values.name }`
             , `School / Organization: ${ values.school }`
