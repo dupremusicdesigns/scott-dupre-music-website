@@ -18,7 +18,7 @@ export const LogRocketProvider = () => {
 
         if ( process.env.NODE_ENV === 'production' ) {
             started.current = true;
-            LogRocket.init( 'dupre-music-designs/dmd-website' );
+            LogRocket.init( 'dupre-music-designs/dmd-website', { dom: { inputSanitizer: true } } );
         }
     }, [ pathname ] );
 

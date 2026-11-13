@@ -36,3 +36,9 @@ export type {
     , QuoteApiResult
     , QuoteUnlockResponse
 } from './quote';
+export type {
+    ContactFailure
+    , ContactFormField
+    , ContactFormValues
+    , ContactSubmitResult
+} from './contact';

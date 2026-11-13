@@ -11,7 +11,10 @@ if ( !quoteApiOrigin && process.env.NETLIFY ) {
 
 const rules = [
     ...( quoteApiOrigin
-        ? [ `/quote-api/*  ${ quoteApiOrigin }/api/public/quotes/:splat  200!` ]
+        ? [
+            `/quote-api/*  ${ quoteApiOrigin }/api/public/quotes/:splat  200!`
+            , `/lead-api  ${ quoteApiOrigin }/api/public/leads  200!`
+        ]
         : [] )
     , '/quote/*  /quote/view.html  200'
 ];
