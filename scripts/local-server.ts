@@ -75,6 +75,12 @@ createServer( ( request, response ) => {
         return;
     }
 
+    if ( url.pathname.startsWith( '/questionnaire-api/' ) ) {
+        proxyToAdmin( request, response, `${ url.pathname.replace( '/questionnaire-api/', '/api/public/questionnaires/' ) }${ url.search }` );
+
+        return;
+    }
+
     if ( url.pathname === '/lead-api' && request.method === 'POST' ) {
         proxyToAdmin( request, response, '/api/public/leads' );
 
@@ -85,6 +91,10 @@ createServer( ( request, response ) => {
 
     if ( /^\/quote\/[^/]+$/.test( url.pathname ) && !existsSync( target ) ) {
         target = join( OUTPUT, 'quote/view.html' );
+    }
+
+    if ( /^\/questionnaire\/[^/]+$/.test( url.pathname ) && !existsSync( target ) ) {
+        target = join( OUTPUT, 'questionnaire/view.html' );
     }
 
     if ( existsSync( target ) && statSync( target ).isFile() ) {

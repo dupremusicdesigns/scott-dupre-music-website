@@ -16,7 +16,11 @@ const rules = [
     , ...( quoteApiOrigin
         ? [ `/lead-api  ${ quoteApiOrigin }/api/public/leads  200!` ]
         : [] )
+    , ...( quoteApiOrigin
+        ? [ `/questionnaire-api/*  ${ quoteApiOrigin }/api/public/questionnaires/:splat  200!` ]
+        : [] )
     , '/quote/*  /quote/view.html  200'
+    , '/questionnaire/*  /questionnaire/view.html  200'
 ];
 
 mkdirSync( 'out', { recursive: true } );

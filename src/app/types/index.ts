@@ -46,3 +46,8 @@ export type {
     , ShowFormField
     , ShowFormValues
 } from './contact';
+export type {
+    QuestionnaireView
+    , QuestionnaireFailure
+    , QuestionnaireApiResult
+} from './questionnaire';
