@@ -31,12 +31,12 @@ export const buttonStyles = cva( {
                 backgroundColor: 'button.primary'
                 , color: 'button.primaryText'
                 , border: '2px solid transparent'
-                , _hover: {
+                , '&:hover:not(:disabled)': {
                     backgroundColor: 'button.primaryHover'
                     , borderColor: 'border.dark'
                     , color: 'text.primary'
                 }
-                , _active: {
+                , '&:active:not(:disabled)': {
                     transform: 'scale(0.98)'
                 }
             }
@@ -44,12 +44,12 @@ export const buttonStyles = cva( {
                 backgroundColor: 'button.secondary'
                 , color: 'button.secondaryText'
                 , border: '2px solid transparent'
-                , _hover: {
+                , '&:hover:not(:disabled)': {
                     backgroundColor: 'button.outlineHover'
                     , borderColor: 'border.light'
                     , color: 'text.inverse'
                 }
-                , _active: {
+                , '&:active:not(:disabled)': {
                     transform: 'scale(0.98)'
                 }
             }
@@ -58,10 +58,10 @@ export const buttonStyles = cva( {
                 , color: 'button.outlineText'
                 , border: '2px solid'
                 , borderColor: 'button.outlineBorder'
-                , _hover: {
+                , '&:hover:not(:disabled)': {
                     backgroundColor: 'button.outlineHover'
                 }
-                , _active: {
+                , '&:active:not(:disabled)': {
                     transform: 'scale(0.98)'
                 }
             }
@@ -70,10 +70,10 @@ export const buttonStyles = cva( {
                 , color: 'text.primary'
                 , border: '2px solid'
                 , borderColor: 'border.dark'
-                , _hover: {
+                , '&:hover:not(:disabled)': {
                     backgroundColor: 'button.primaryHover'
                 }
-                , _active: {
+                , '&:active:not(:disabled)': {
                     transform: 'scale(0.98)'
                 }
             }
@@ -81,10 +81,10 @@ export const buttonStyles = cva( {
                 backgroundColor: 'white'
                 , color: 'text.primary'
                 , border: '2px solid white'
-                , _hover: {
+                , '&:hover:not(:disabled)': {
                     backgroundColor: 'gray.100'
                 }
-                , _active: {
+                , '&:active:not(:disabled)': {
                     transform: 'scale(0.98)'
                 }
             }
