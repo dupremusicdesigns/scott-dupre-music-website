@@ -48,7 +48,7 @@ const numberStyles = css( {
 } );
 
 const columnHeadingStyles = css( {
-    fontSize: '11px'
+    fontSize: '10px'
     , fontWeight: 'black'
     , letterSpacing: '0.08em'
     , textTransform: 'uppercase'
@@ -130,10 +130,10 @@ export const QuestionnaireForm = ( {
                     className={
                         css( {
                             display: 'grid'
-                            , gridTemplateColumns: 'minmax(0, 1fr) 84px 84px'
+                            , gridTemplateColumns: 'minmax(0, 1fr) 68px 68px'
                             , gap: '8px'
                             , alignItems: 'center'
-                            , sm: { gridTemplateColumns: 'minmax(0, 1fr) 110px 110px' }
+                            , sm: { gridTemplateColumns: 'minmax(0, 1fr) 76px 76px' }
                         } )
                     }
                 >
