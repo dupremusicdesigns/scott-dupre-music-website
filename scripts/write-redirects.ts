@@ -13,6 +13,9 @@ const rules = [
     ...( quoteApiOrigin
         ? [ `/quote-api/*  ${ quoteApiOrigin }/api/public/quotes/:splat  200!` ]
         : [] )
+    , ...( quoteApiOrigin
+        ? [ `/lead-api  ${ quoteApiOrigin }/api/public/leads  200!` ]
+        : [] )
     , '/quote/*  /quote/view.html  200'
 ];
 

@@ -22,9 +22,6 @@ const PORT = Number( process.env.LOCAL_SITE_PORT ?? 3001 );
 const ADMIN = new URL( process.env.LOCAL_ADMIN_ORIGIN ?? 'http://localhost:44100' );
 const OUTPUT = resolve( 'out' );
 
-process.env.EMAIL_OUTBOX_DIR ??= resolve( '.email-outbox' );
-process.env.LEAD_NOTIFY_EMAIL ??= 'scott@example.test';
-
 const TYPES: Record<string, string> = {
     '.html': 'text/html; charset=utf-8'
     , '.js': 'text/javascript'
@@ -37,15 +34,6 @@ const TYPES: Record<string, string> = {
     , '.txt': 'text/plain'
     , '.ico': 'image/x-icon'
     , '.svg': 'image/svg+xml'
-};
-
-const readBody = ( request: IncomingMessage ): Promise<Buffer> => {
-    return new Promise( resolveBody => {
-        const chunks: Buffer[] = [];
-
-        request.on( 'data', ( chunk: Buffer ) => chunks.push( chunk ) );
-        request.on( 'end', () => resolveBody( Buffer.concat( chunks ) ) );
-    } );
 };
 
 const sendFile = ( response: ServerResponse, file: string ) => {
@@ -78,27 +66,6 @@ const proxyToAdmin = ( request: IncomingMessage, response: ServerResponse, path:
     request.pipe( upstream );
 };
 
-const runLeadFunction = async ( request: IncomingMessage, response: ServerResponse ) => {
-    const { default: handler } = await import( '../netlify/functions/lead' );
-    const body = await readBody( request );
-    const headers = new Headers();
-
-    for ( const [ name, value ] of Object.entries( request.headers ) ) {
-        if ( typeof value === 'string' ) {
-            headers.set( name, value );
-        }
-    }
-
-    const result = await handler( new Request( `http://${ request.headers.host }/lead-api`, {
-        method: request.method
-        , headers
-        , body: request.method === 'POST' ? new Uint8Array( body ) : undefined
-    } ) );
-
-    response.writeHead( result.status, Object.fromEntries( result.headers ) );
-    response.end( Buffer.from( await result.arrayBuffer() ) );
-};
-
 createServer( ( request, response ) => {
     const url = new URL( request.url ?? '/', 'http://localhost' );
 
@@ -109,7 +76,7 @@ createServer( ( request, response ) => {
     }
 
     if ( url.pathname === '/lead-api' && request.method === 'POST' ) {
-        void runLeadFunction( request, response );
+        proxyToAdmin( request, response, '/api/public/leads' );
 
         return;
     }
@@ -135,5 +102,5 @@ createServer( ( request, response ) => {
     response.writeHead( 404 );
     response.end( 'Not found' );
 } ).listen( PORT, () => {
-    console.log( `Site on http://localhost:${ PORT }, admin at ${ ADMIN.origin }, emails saved to ${ process.env.EMAIL_OUTBOX_DIR }` );
+    console.log( `Site on http://localhost:${ PORT }, admin at ${ ADMIN.origin }, emails are saved by the admin app` );
 } );
