@@ -1,3 +1,4 @@
+import { QUOTE_PIN_LENGTH } from '../constants/quoteConstants';
 import {
     QUOTE_BASE_PATH
     , QUOTE_GRANT_STORAGE_PREFIX
@@ -49,6 +50,30 @@ export const formatQuoteDate = ( value: string ): string => {
 };
 
 export const normalizePin = ( value: string ): string => value.replace( /\D/g, '' );
+
+export const readPinFromHash = ( hash: string ): string => {
+    const pin = normalizePin( new URLSearchParams( hash.replace( /^#/, '' ) ).get( 'pin' ) ?? '' );
+
+    return pin.length === QUOTE_PIN_LENGTH ? pin : '';
+};
+
+export const removePinFromAddress = (): void => {
+    const hash = new URLSearchParams( window.location.hash.slice( 1 ) );
+
+    if ( !hash.has( 'pin' ) ) {
+        return;
+    }
+
+    hash.delete( 'pin' );
+
+    const rest = hash.toString();
+
+    window.history.replaceState(
+        null
+        , ''
+        , `${ window.location.pathname }${ window.location.search }${ rest ? `#${ rest }` : '' }`
+    );
+};
 
 export const calculateQuoteTotal = (
     quote: QuoteView
