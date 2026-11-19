@@ -2,9 +2,6 @@
   command = "next build --turbopack && npx jiti scripts/write-redirects.ts"
   publish = "out"
 
-[functions]
-  directory = "netlify/functions"
-
 [build.environment]
   QUOTE_API_ORIGIN = "https://dmdadmin.netlify.app"
 
@@ -20,6 +17,13 @@
 
 [[headers]]
   for = "/quote/*"
+  [headers.values]
+    Referrer-Policy = "no-referrer"
+    X-Robots-Tag = "noindex, nofollow"
+    Cache-Control = "no-store"
+
+[[headers]]
+  for = "/questionnaire/*"
   [headers.values]
     Referrer-Policy = "no-referrer"
     X-Robots-Tag = "noindex, nofollow"
