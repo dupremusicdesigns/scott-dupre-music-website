@@ -8,7 +8,11 @@ import { css } from '../../../../../styled-system/css';
 import { Button } from '../../Button/Button';
 import { QUOTE_PIN_LENGTH } from '../../../constants/quoteConstants';
 import type { QuoteFailure } from '../../../types';
-import { normalizePin } from '../../../utils/quoteUtils';
+import {
+    normalizePin
+    , readPinFromHash
+    , removePinFromAddress
+} from '../../../utils/quoteUtils';
 import {
     errorTextStyles
     , fieldLabelStyles
@@ -49,10 +53,12 @@ export const QuotePinForm = ( {
     , failure
     , onSubmit
 }: QuotePinFormProps ) => {
-    const [ pin, setPin ] = useState( '' );
+    const [ pin, setPin ] = useState( () => readPinFromHash( window.location.hash ) );
     const [ clearedFailure, setClearedFailure ] = useState<typeof failure>( null );
     const locked = failure?.kind === 'locked' && clearedFailure !== failure;
     const message = describeFailure( failure );
+
+    useEffect( removePinFromAddress, [] );
 
     useEffect( () => {
         if ( failure?.kind !== 'locked' ) {
